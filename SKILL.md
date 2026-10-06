@@ -69,7 +69,7 @@ For a request such as “先列出选项和题目，再列出有下划线的题�
    - `选项`
    - `题目`
    - `带下划线的题目`
-5. In annotated questions, mark only useful retrieval anchors. Use visible Unicode combining underlines; if the client does not display them reliably, use `【...】`. Do not use `<u>` after the user has reported it invisible. Prefer distinctive subjects, actions, objects, constraints, comparisons, causes/results, time markers, numbers, and polarity words. Do not mark generic function words or most of the sentence.
+5. In annotated questions, mark only useful retrieval anchors. Each marked span must contain **1–3 words**, preferably one distinctive word or one compact phrase. Split longer relations into multiple short spans; never mark a clause or sentence. Use visible Unicode combining underlines; if the client does not display them reliably, use `【...】`. Do not use `<u>` after the user has reported it invisible. Prefer distinctive subjects, actions, objects, constraints, comparisons, causes/results, time markers, numbers, and polarity words. Do not mark generic function words or most of the sentence.
 6. Treat marked anchors as a way to recall 3—5 candidate paragraphs, never as a direct answer selector. Verify subject, action/relation, object/result, and constraints before concluding.
 7. Do not reveal, imply, highlight, reorder, or otherwise mark the correct choice when the user asks for a no-answer exercise.
 
