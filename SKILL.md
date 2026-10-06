@@ -73,6 +73,7 @@ For a request such as “先列出选项和题目，再列出有标记的题目�
 6. Primary priority goes to the **minimum decisive relation**: the 1–3-word action, state, negation, causal, comparative, or change phrase without which the stem no longer states its testable claim. It is not merely any verb. Secondary priority is divided into three possible content roles: unique subject; object/result; key constraint such as time, number, place, direction, or scope. Mark only roles that actually distinguish the item. If no meaningful decisive relation exists, the most distinctive entity or fact may become primary. Do not mark generic function words or article-wide topic words.
 7. Treat marked anchors as a way to recall 3—5 candidate paragraphs, never as a direct answer selector. Verify subject, action/relation, object/result, and constraints before concluding.
 8. Do not reveal, imply, highlight, reorder, or otherwise mark the correct choice when the user asks for a no-answer exercise.
+9. After answers are revealed, if the user requests option-by-option correspondence, display paragraphs in their original letter order. Under each paragraph, show the marked source evidence and then its fully marked corresponding question. If no question maps to that paragraph, leave the `对应题目：` field blank; do not write “none” or invent a match.
 
 ---
 
