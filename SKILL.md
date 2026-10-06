@@ -1,10 +1,10 @@
 ---
 name: cet-skill
-description: Prepare learners for China's CET-4 and CET-6 with original practice, authorized local-corpus retrieval and analysis, feedback, drills, error diagnosis, and study plans. Use for CET-4/CET-6 preparation, exercises, scoring, correction, study planning, or querying a user-owned/authorized CET SQL corpus.
+description: Prepare learners for China's CET-4 and CET-6 with original practice, authorized local-corpus retrieval and analysis, feedback, drills, error diagnosis, and study plans. Use for CET-4/CET-6 preparation, exercises, scoring, correction, study planning, querying a user-owned/authorized CET SQL corpus, or running paragraph-matching marking, practice, answer verification, and option-first evidence mapping.
 license: MIT
 metadata:
   display_name: CET-4/CET-6 智能备考助手
-  version: "1.0.0"
+  version: "1.1.0"
   author: Liuxiangjian-ai
   repository: https://github.com/dayelianxisheng/cet-skill
 ---
@@ -57,6 +57,7 @@ Use this mode when the user explicitly asks to retrieve or analyze records from 
 - Preserve database order fields and original numbering.
 - Distinguish clearly between stored source text, annotations added by the assistant, and any answer-key verification.
 - For local-corpus paragraph-matching retrieval, drills, answer verification, or evidence-chain analysis, read and follow [references/paragraph-matching-local-corpus.md](references/paragraph-matching-local-corpus.md). This is the only fully developed local-corpus subtype for now; do not silently apply its workflow to banked cloze, careful reading, listening, writing, or translation.
+- Whenever producing user-visible paragraph-matching output, also read and follow [references/paragraph-matching-output-contract.md](references/paragraph-matching-output-contract.md). Treat that file as the authoritative rendering and interaction contract, and do not ask the user to repeat a format already defined there.
 
 ### Basic keyword-marking workflow
 
@@ -74,6 +75,7 @@ For a request such as “先列出选项和题目，再列出有标记的题目�
 7. Treat marked anchors as a way to recall 3—5 candidate paragraphs, never as a direct answer selector. Verify subject, action/relation, object/result, and constraints before concluding.
 8. Do not reveal, imply, highlight, reorder, or otherwise mark the correct choice when the user asks for a no-answer exercise.
 9. After answers are revealed, if the user requests option-by-option correspondence, display paragraphs in their original letter order. Under each paragraph, show the marked source evidence and then its fully marked corresponding question. If no question maps to that paragraph, leave the `对应题目：` field blank; do not write “none” or invent a match.
+10. Keep the selected paragraph-matching mode and rendering defaults for the rest of the session unless the user explicitly overrides them. Do not return to the generic CET opening question during an established paragraph-matching workflow.
 
 ---
 
@@ -88,7 +90,7 @@ Do not generate practice questions before the user specifies both:
 1. target level: CET-4 or CET-6;
 2. target section: writing, translation, reading, listening, or overall planning.
 
-Exception: if the user’s message already clearly provides the level and task, or directly identifies an authorized local-corpus exam, skip the opening question and proceed.
+Exception: if the user’s message already clearly provides the level and task, directly identifies an authorized local-corpus exam, or requests paragraph matching, skip the generic opening question. For paragraph matching, ask only for identifiers that are genuinely missing and required to resolve the exam, such as level, year, month, or set number.
 
 ---
 
@@ -126,6 +128,7 @@ Infer the mode from the user’s input when possible:
 - Chinese paragraph + “翻译/译文/帮我改” → Translation Mode;
 - answers like “1A 2C 3D” after a passage → Reading or Listening Feedback Mode;
 - “怎么准备/还有X天/目标分” → Study Plan Mode.
+- “长篇阅读/信息匹配/段落匹配/画线/标记/原文对应” with a local exam or corpus context → Authorized Local Corpus Mode using the paragraph-matching workflow and output contract.
 
 If the user asks for multiple sections, prioritize the section they named first, then propose a sequence.
 
@@ -392,6 +395,8 @@ When the user chooses Reading Mode but does not specify the reading subtype, ask
 
 Do not generate a generic reading exercise before the subtype is clear.
 
+This follow-up is only for generating a new reading exercise. Do not ask it when the user already requests paragraph matching or identifies a local-corpus exam.
+
 Recognize common names and route them as follows:
 
 - “选词填空”, “十五选十”, “15选10”, “banked cloze” → Banked Cloze;
@@ -484,6 +489,8 @@ For CET-6, avoid making the correct word obvious through one-word collocation al
 ### Paragraph Matching Rules: 长篇阅读 / 信息匹配
 
 Use when the user chooses 长篇阅读 / 信息匹配 / 段落匹配 / Paragraph Matching.
+
+The rules below govern newly generated simulations. They do not override Authorized Local Corpus Mode, which must preserve the database's actual paragraph labels, counts, question numbers, text, and output contract.
 
 #### Mandatory CET-style Task Instruction
 
