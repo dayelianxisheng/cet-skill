@@ -244,6 +244,8 @@ def select_anchor_tokens(row, idf, common, version):
         return select_anchor_spans(row, idf, common, max_spans=2)[1]
     if version == "v14":
         return select_anchor_spans(row, idf, common, max_spans=3)[1]
+    if version == "v15":
+        return select_anchor_spans(row, idf, common, max_spans=1)[1]
     raw = tokens(row["stem"])
     topic = common[(row["year"], row["month"], row["set"])]
     candidates = []
@@ -570,7 +572,7 @@ def grouped_cross_validation(rows):
     groups = [passage_group(row) for row in rows]
     unique_groups = len(set(groups))
     splitter = GroupKFold(n_splits=min(6, unique_groups))
-    cached = {"v1": [], "v2": [], "v11": [], "v12": [], "v13": [], "v14": []}
+    cached = {"v1": [], "v2": [], "v11": [], "v12": [], "v13": [], "v14": [], "v15": []}
     for fold, (train_idx, valid_idx) in enumerate(splitter.split(rows, groups=groups), 1):
         train_rows = [rows[i] for i in train_idx]
         valid_rows = [rows[i] for i in valid_idx]
@@ -578,13 +580,13 @@ def grouped_cross_validation(rows):
         common = exam_common(rows)
         surface = SurfaceIndex(train_rows)
         for row in valid_rows:
-            for anchor_version in ("v1", "v2", "v11", "v12", "v13", "v14"):
+            for anchor_version in ("v1", "v2", "v11", "v12", "v13", "v14", "v15"):
                 query = select_anchor_tokens(row, idf, common, anchor_version)
                 cached[anchor_version].append((row["answer"], local_candidate_features(row, query, surface)))
         print(f"CV_FOLD={fold} train={len(train_rows)} validation={len(valid_rows)}")
 
     grid = itertools.product(
-        ("v1", "v2", "v11", "v12", "v13", "v14"),
+        ("v1", "v2", "v11", "v12", "v13", "v14", "v15"),
         (0.0, 4.0, 8.0),
         (4.0, 8.0, 12.0, 16.0),
         (0.50, 0.65, 0.80),
@@ -620,7 +622,7 @@ def grouped_cross_validation(rows):
             f"CV top1={pct(top1)} top3={pct(top3)} top5={pct(top5)} "
             f"params={params}"
         )
-    for anchor_version in ("v1", "v2", "v11", "v12", "v13", "v14"):
+    for anchor_version in ("v1", "v2", "v11", "v12", "v13", "v14", "v15"):
         best = next(result for result in results if result[3][0] == anchor_version)
         top1, top3, top5, params = best
         print(
@@ -744,8 +746,29 @@ def main():
         print(f"ANCHOR_COUNTS={dict(sorted(counts.items()))}")
         print(f"FORMAT_VIOLATIONS={len(violations)}")
         return 0 if not violations else 2
+    if "--v15" in sys.argv:
+        violations = []
+        for row in rows:
+            spans, _ = select_anchor_spans(row, idf, common, max_spans=1)
+            if len(spans) != 1:
+                violations.append((row["id"], "anchor_count", len(spans)))
+            for phrase in spans:
+                count = len(TOKEN_RE.findall(phrase))
+                if not 1 <= count <= 3:
+                    violations.append((row["id"], phrase, count))
+        for name, split in (("train", train), ("validation", valid), ("test", test)):
+            result = evaluate(split, idf, common, "v15", cv_surface, True, True)
+            print(
+                f"v15 {name} top1={pct(result['top1'])} "
+                f"top3={pct(result['top3'])} top5={pct(result['top5'])} n={result['n']}"
+            )
+        print(f"FORMAT_VIOLATIONS={len(violations)}")
+        for row in [r for r in rows if r["year"] == 2026 and r["month"] == 6 and r["set"] == 1]:
+            spans, _ = select_anchor_spans(row, idf, common, max_spans=1)
+            print(f"EXAMPLE qid={row['id']} primary={spans[0] if spans else ''}")
+        return 0 if not violations else 2
     selected = None
-    for version in ("v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v12", "v13", "v14"):
+    for version in ("v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v12", "v13", "v14", "v15"):
         base_version = "v2" if version == "v3" else version
         scorer = semantic if version == "v3" else None
         if version == "v5":
@@ -789,6 +812,11 @@ def main():
             use_local_rank = True
         if version == "v14":
             base_version = "v14"
+            scorer = cv_surface
+            use_full_stem = True
+            use_local_rank = True
+        if version == "v15":
+            base_version = "v15"
             scorer = cv_surface
             use_full_stem = True
             use_local_rank = True
@@ -852,6 +880,11 @@ def main():
         use_local_rank = True
     if version == "v14":
         base_version = "v14"
+        scorer = cv_surface
+        use_full_stem = True
+        use_local_rank = True
+    if version == "v15":
+        base_version = "v15"
         scorer = cv_surface
         use_full_stem = True
         use_local_rank = True
