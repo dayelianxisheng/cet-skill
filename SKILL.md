@@ -4,7 +4,7 @@ description: Prepare learners for China's CET-4 and CET-6 with original practice
 license: MIT
 metadata:
   display_name: CET-4/CET-6 智能备考助手
-  version: "1.1.0"
+  version: "1.2.0"
   author: Liuxiangjian-ai
   repository: https://github.com/dayelianxisheng/cet-skill
 ---
@@ -70,11 +70,11 @@ For a request such as “先列出选项和题目，再列出有标记的题目�
    - `选项`
    - `题目`
    - `带两级优先标记的题目`
-5. Use exactly two priority levels. Mark the single highest-priority core action or relation with `【...】`. Mark lower-priority supporting information with a visible Unicode underline (U+0332), never HTML `<u>`. Lower-priority information may include up to three separate spans: the unique subject, the object/result, and a key constraint. Each span must contain **1–3 words**. A question therefore normally has one primary span plus one to three secondary spans, for two to four spans total. Never mark a clause or sentence.
-6. Primary priority goes to the **minimum decisive relation**: the 1–3-word action, state, negation, causal, comparative, or change phrase without which the stem no longer states its testable claim. It is not merely any verb. Secondary priority is divided into three possible content roles: unique subject; object/result; key constraint such as time, number, place, direction, or scope. Mark only roles that actually distinguish the item. If no meaningful decisive relation exists, the most distinctive entity or fact may become primary. Do not mark generic function words or article-wide topic words.
-7. Treat marked anchors as a way to recall 3—5 candidate paragraphs, never as a direct answer selector. Verify subject, action/relation, object/result, and constraints before concluding.
+5. Use exactly two functional levels. Mark one highest-priority **hard locator** with `【...】`: a 1–3-word subject, proper name, number/time expression, quoted term, or rare concrete noun phrase that is likely to survive in the passage as the same or a near-same surface form. Mark semantic verification clues with a visible Unicode underline (U+0332), never HTML `<u>`. Underlined clues may include the core action/relation, object/result, and key constraint. Each span must contain **1–3 words**; use two to four spans total. Never mark a clause or sentence.
+6. Choose `【】` for fast scanning, not for abstract semantic importance. Priority order is: unique subject/proper name → number/date/time/quoted term → rare concrete noun phrase → distinctive object/result. Skip article-wide subjects and generic words. If no reliable hard locator exists, choose the least paraphrase-prone concrete phrase. Use underlines for actions, states, negation, causality, comparison, change, results, and remaining constraints because these are more likely to be paraphrased.
+7. Solve in two passes: scan paragraphs with `【】` to locate likely positions, then compare the underlined semantic clues to verify the match. `【】` alone never determines the answer.
 8. Do not reveal, imply, highlight, reorder, or otherwise mark the correct choice when the user asks for a no-answer exercise.
-9. After answers are revealed, if the user requests option-by-option correspondence, display paragraphs in their original letter order. Under each paragraph, show the marked source evidence and then its fully marked corresponding question. If no question maps to that paragraph, leave the `对应题目：` field blank; do not write “none” or invent a match.
+9. After answers are revealed, if the user requests option-by-option correspondence, display paragraphs in their original letter order. Under each paragraph, show the marked source evidence and then its fully marked corresponding question. The question and passage `【】` spans should represent the corresponding hard locator; underlines should represent the semantic verification relationship. If no question maps to that paragraph, leave the `对应题目：` field blank; do not write “none” or invent a match.
 10. Keep the selected paragraph-matching mode and rendering defaults for the rest of the session unless the user explicitly overrides them. Do not return to the generic CET opening question during an established paragraph-matching workflow.
 
 ---
