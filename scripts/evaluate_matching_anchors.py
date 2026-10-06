@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import collections
 import difflib
+import hashlib
+import itertools
 import math
 import re
 import subprocess
@@ -19,6 +21,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import Normalizer
+from sklearn.model_selection import GroupKFold
 
 
 STOP = set("""
@@ -206,7 +209,28 @@ def rank(row, query, idf, semantic=None, semantic_query=None):
     return [letter for _, letter in scored]
 
 
-def evaluate(rows, idf, common, version, semantic=None, use_full_stem=False):
+def rank_local(row, query, semantic=None, semantic_query=None):
+    """Rank with within-passage distinctiveness after blind anchors are frozen."""
+    paragraph_tokens = {letter: tokens(text) for letter, text in row["paragraphs"].items()}
+    n = max(len(paragraph_tokens), 1)
+    df = collections.Counter(tok for toks in paragraph_tokens.values() for tok in set(toks))
+    local_idf = {tok: math.log((n + 1) / (count + 0.5)) + 1 for tok, count in df.items()}
+    q = collections.Counter(query)
+    q_unique = set(query)
+    scored = []
+    for letter, toks in paragraph_tokens.items():
+        p = collections.Counter(toks)
+        matched = {tok for tok in q_unique if p[tok]}
+        score = sum(local_idf.get(tok, 1.0) * (1 + math.log1p(p[tok])) * q[tok] for tok in matched)
+        score += 4.0 * len(matched) / max(len(q_unique), 1)
+        if semantic is not None:
+            score += semantic.similarity(semantic_query or " ".join(query), row["paragraphs"][letter]) * 10.0
+        scored.append((score, letter))
+    scored.sort(key=lambda item: (-item[0], item[1]))
+    return [letter for _, letter in scored]
+
+
+def evaluate(rows, idf, common, version, semantic=None, use_full_stem=False, use_local_rank=False):
     correct1 = correct3 = correct5 = usable = 0
     failures = []
     for row in rows:
@@ -214,14 +238,21 @@ def evaluate(rows, idf, common, version, semantic=None, use_full_stem=False):
             continue
         usable += 1
         query = select_anchor_tokens(row, idf, common, version)
-        ranking = rank(
-            row, expand_query(query, version), idf, semantic,
-            semantic_query=row["stem"] if use_full_stem else None,
-        )
+        ranker = rank_local if use_local_rank else rank
+        if use_local_rank:
+            ranking = ranker(
+                row, expand_query(query, version), semantic,
+                semantic_query=row["stem"] if use_full_stem else None,
+            )
+        else:
+            ranking = ranker(
+                row, expand_query(query, version), idf, semantic,
+                semantic_query=row["stem"] if use_full_stem else None,
+            )
         if ranking and ranking[0] == row["answer"]:
             correct1 += 1
         else:
-            failures.append((row, query, ranking[:3]))
+            failures.append((row, query, ranking[:5]))
         if row["answer"] in ranking[:3]:
             correct3 += 1
         if row["answer"] in ranking[:5]:
@@ -330,10 +361,43 @@ class SurfaceIndex:
         self.word.fit(corpus)
         self.char.fit(corpus)
 
-    def similarity(self, left, right):
+    def components(self, left, right):
         w = cosine_similarity(self.word.transform([left]), self.word.transform([right]))[0, 0]
         c = cosine_similarity(self.char.transform([left]), self.char.transform([right]))[0, 0]
+        return float(w), float(c)
+
+    def similarity(self, left, right):
+        w, c = self.components(left, right)
         return float(0.65 * w + 0.35 * c)
+
+
+class WindowSurfaceIndex:
+    """Compare a stem with the best sentence or adjacent-sentence evidence window."""
+
+    def __init__(self, rows):
+        self.surface = SurfaceIndex(rows)
+
+    @staticmethod
+    def windows(text):
+        sentences = [s.strip() for s in re.split(r"(?<=[.!?])(?:[\"'’”])?\s+", text) if s.strip()]
+        if not sentences:
+            return [text]
+        windows = list(sentences)
+        windows.extend(sentences[i] + " " + sentences[i + 1] for i in range(len(sentences) - 1))
+        return windows
+
+    def similarity(self, left, right):
+        whole = self.surface.similarity(left, right)
+        local = max(self.surface.similarity(left, window) for window in self.windows(right))
+        return 0.8 * local + 0.2 * whole
+
+
+class CvSelectedSurfaceIndex(SurfaceIndex):
+    """Surface scorer selected by passage-grouped cross-validation."""
+
+    def similarity(self, left, right):
+        word, char = self.components(left, right)
+        return 0.8 * (0.5 * word + 0.5 * char)
 
 
 class TranslationLexicon:
@@ -374,8 +438,111 @@ class TranslationLexicon:
         return expanded
 
 
+def passage_group(row):
+    normalized = "\n".join(
+        normalize_text(row["paragraphs"][letter]) for letter in sorted(row["paragraphs"])
+    )
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
+
+def local_candidate_features(row, query, surface):
+    paragraph_tokens = {letter: tokens(text) for letter, text in row["paragraphs"].items()}
+    n = max(len(paragraph_tokens), 1)
+    df = collections.Counter(tok for toks in paragraph_tokens.values() for tok in set(toks))
+    local_idf = {tok: math.log((n + 1) / (count + 0.5)) + 1 for tok, count in df.items()}
+    q = collections.Counter(query)
+    q_unique = set(query)
+    q_numbers = {t for t in tokens(row["stem"]) if any(ch.isdigit() for ch in t)}
+    q_logic = {t for t in tokens(row["stem"]) if t in LOGIC}
+    q_proper = {
+        stem(word) for word in re.findall(r"\b[A-Z][A-Za-z'-]+\b", row["stem"])
+        if word.lower() not in {"the", "a", "an", "according", "one", "many", "some", "it"}
+    }
+    features = {}
+    for letter, toks in paragraph_tokens.items():
+        p = collections.Counter(toks)
+        p_set = set(toks)
+        matched = {tok for tok in q_unique if p[tok]}
+        lexical = sum(local_idf.get(tok, 1.0) * (1 + math.log1p(p[tok])) * q[tok] for tok in matched)
+        coverage = len(matched) / max(len(q_unique), 1)
+        number_coverage = len(q_numbers & p_set) / max(len(q_numbers), 1) if q_numbers else 0.0
+        logic_coverage = len(q_logic & p_set) / max(len(q_logic), 1) if q_logic else 0.0
+        proper_coverage = len(q_proper & p_set) / max(len(q_proper), 1) if q_proper else 0.0
+        word_cos, char_cos = surface.components(row["stem"], row["paragraphs"][letter])
+        features[letter] = (lexical, coverage, word_cos, char_cos, number_coverage, logic_coverage, proper_coverage)
+    return features
+
+
+def metrics_from_rankings(rankings):
+    n = len(rankings)
+    return {
+        "top1": sum(answer in ranking[:1] for answer, ranking in rankings) / n,
+        "top3": sum(answer in ranking[:3] for answer, ranking in rankings) / n,
+        "top5": sum(answer in ranking[:5] for answer, ranking in rankings) / n,
+    }
+
+
+def grouped_cross_validation(rows):
+    groups = [passage_group(row) for row in rows]
+    unique_groups = len(set(groups))
+    splitter = GroupKFold(n_splits=min(6, unique_groups))
+    cached = {"v1": [], "v2": []}
+    for fold, (train_idx, valid_idx) in enumerate(splitter.split(rows, groups=groups), 1):
+        train_rows = [rows[i] for i in train_idx]
+        valid_rows = [rows[i] for i in valid_idx]
+        idf = build_idf(train_rows)
+        common = exam_common(rows)
+        surface = SurfaceIndex(train_rows)
+        for row in valid_rows:
+            for anchor_version in ("v1", "v2"):
+                query = select_anchor_tokens(row, idf, common, anchor_version)
+                cached[anchor_version].append((row["answer"], local_candidate_features(row, query, surface)))
+        print(f"CV_FOLD={fold} train={len(train_rows)} validation={len(valid_rows)}")
+
+    grid = itertools.product(
+        ("v1", "v2"),
+        (0.0, 4.0, 8.0),
+        (4.0, 8.0, 12.0, 16.0),
+        (0.50, 0.65, 0.80),
+        (0.0, 3.0),
+        (0.0, 3.0),
+        (0.0, 3.0),
+    )
+    results = []
+    for params in grid:
+        anchor_version, coverage_w, surface_w, word_mix, number_w, logic_w, proper_w = params
+        rankings = []
+        for answer, candidate_features in cached[anchor_version]:
+            scored = []
+            for letter, feature in candidate_features.items():
+                lexical, coverage, word_cos, char_cos, number_cov, logic_cov, proper_cov = feature
+                score = (
+                    lexical
+                    + coverage_w * coverage
+                    + surface_w * (word_mix * word_cos + (1 - word_mix) * char_cos)
+                    + number_w * number_cov
+                    + logic_w * logic_cov
+                    + proper_w * proper_cov
+                )
+                scored.append((score, letter))
+            scored.sort(key=lambda item: (-item[0], item[1]))
+            rankings.append((answer, [letter for _, letter in scored]))
+        metric = metrics_from_rankings(rankings)
+        results.append((metric["top1"], metric["top3"], metric["top5"], params))
+    results.sort(reverse=True)
+    print(f"CV_ROWS={len(rows)} UNIQUE_PASSAGES={unique_groups}")
+    for top1, top3, top5, params in results[:10]:
+        print(
+            f"CV top1={pct(top1)} top3={pct(top3)} top5={pct(top5)} "
+            f"params={params}"
+        )
+    return 0
+
+
 def main():
     rows = load_rows()
+    if "--cv" in sys.argv:
+        return grouped_cross_validation(rows)
     train = [r for r in rows if r["year"] <= 2023]
     valid = [r for r in rows if r["year"] == 2024]
     test = [r for r in rows if r["year"] >= 2025]
@@ -385,10 +552,12 @@ def main():
         return audit_answers(rows, idf, common)
     semantic = SemanticIndex(train)
     surface = SurfaceIndex(train)
+    window_surface = WindowSurfaceIndex(train)
+    cv_surface = CvSelectedSurfaceIndex(train)
     lexicon = TranslationLexicon(train)
     print(f"rows={len(rows)} train={len(train)} validation={len(valid)} test={len(test)}")
     selected = None
-    for version in ("v1", "v2", "v3", "v4", "v5", "v6"):
+    for version in ("v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10"):
         base_version = "v2" if version == "v3" else version
         scorer = semantic if version == "v3" else None
         if version == "v5":
@@ -398,19 +567,38 @@ def main():
         if version == "v6":
             base_version = "v2"
             scorer = surface
+        if version == "v7":
+            base_version = "v2"
+            scorer = window_surface
+            use_full_stem = True
+        use_local_rank = version in {"v8", "v9"}
+        if version == "v8":
+            base_version = "v1"
+            scorer = None
+        if version == "v9":
+            base_version = "v2"
+            scorer = surface
+            use_full_stem = True
+        if version == "v10":
+            base_version = "v2"
+            scorer = cv_surface
+            use_full_stem = True
+            use_local_rank = True
         if version == "v4":
             original_expand = expand_query
             def learned_expand(query, _version):
                 return lexicon.expand(original_expand(query, "v2"))
             globals()["expand_query"] = learned_expand
             base_version = "v2"
-        tr = evaluate(train, idf, common, base_version, scorer, use_full_stem)
-        va = evaluate(valid, idf, common, base_version, scorer, use_full_stem)
+        tr = evaluate(train, idf, common, base_version, scorer, use_full_stem, use_local_rank)
+        va = evaluate(valid, idf, common, base_version, scorer, use_full_stem, use_local_rank)
         if version == "v4":
             globals()["expand_query"] = original_expand
         print(f"{version} train top1={pct(tr['top1'])} top3={pct(tr['top3'])} top5={pct(tr['top5'])}")
         print(f"{version} validation top1={pct(va['top1'])} top3={pct(va['top3'])} top5={pct(va['top5'])}")
-        if selected is None or (va["top3"], va["top1"]) > (selected[1]["top3"], selected[1]["top1"]):
+        if selected is None or (va["top1"], va["top5"], va["top3"]) > (
+            selected[1]["top1"], selected[1]["top5"], selected[1]["top3"]
+        ):
             selected = (version, va)
     version = selected[0]
     base_version = "v2" if version == "v3" else version
@@ -422,20 +610,37 @@ def main():
     if version == "v6":
         base_version = "v2"
         scorer = surface
+    if version == "v7":
+        base_version = "v2"
+        scorer = window_surface
+        use_full_stem = True
+    use_local_rank = version in {"v8", "v9"}
+    if version == "v8":
+        base_version = "v1"
+        scorer = None
+    if version == "v9":
+        base_version = "v2"
+        scorer = surface
+        use_full_stem = True
+    if version == "v10":
+        base_version = "v2"
+        scorer = cv_surface
+        use_full_stem = True
+        use_local_rank = True
     if version == "v4":
         original_expand = expand_query
         def learned_expand(query, _version):
             return lexicon.expand(original_expand(query, "v2"))
         globals()["expand_query"] = learned_expand
         base_version = "v2"
-    te = evaluate(test, idf, common, base_version, scorer, use_full_stem)
+    te = evaluate(test, idf, common, base_version, scorer, use_full_stem, use_local_rank)
     if version == "v4":
         globals()["expand_query"] = original_expand
     print(f"selected={version}")
     print(f"test top1={pct(te['top1'])} top3={pct(te['top3'])} top5={pct(te['top5'])} n={te['n']}")
     print("sample_failures:")
-    for row, query, ranking in te["failures"][:12]:
-        print(f"{row['year']}-{row['month']:02d}-{row['set']} qid={row['id']} answer={row['answer']} top3={','.join(ranking)}")
+    for row, query, ranking in te["failures"]:
+        print(f"{row['year']}-{row['month']:02d}-{row['set']} qid={row['id']} answer={row['answer']} top5={','.join(ranking)}")
         print(f"  stem={row['stem']}")
         print(f"  anchors={' | '.join(query)}")
     anchor_status = "PASS" if te["top5"] >= 0.95 else "ITERATE"
