@@ -159,7 +159,87 @@ def exam_common(rows):
     return common
 
 
+def select_anchor_spans(row, idf, common):
+    """Select 2-4 non-overlapping blind spans, each containing 1-3 source words."""
+    matches = list(TOKEN_RE.finditer(row["stem"]))
+    raw_words = [match.group() for match in matches]
+    normalized = [stem(word) for word in raw_words]
+    topic = common[(row["year"], row["month"], row["set"])]
+    token_scores = []
+    for tok in normalized:
+        if tok in STOP and tok not in LOGIC:
+            token_scores.append(0.0)
+            continue
+        score = idf.get(tok, 1.0)
+        if tok in topic and tok not in LOGIC:
+            score *= 0.15
+        if tok in LOGIC:
+            score += 1.8
+        if any(ch.isdigit() for ch in tok):
+            score += 2.5
+        token_scores.append(score)
+
+    candidates = []
+    for start in range(len(raw_words)):
+        for length in (1, 2, 3):
+            end = start + length
+            if end > len(raw_words):
+                continue
+            scores = token_scores[start:end]
+            content_count = sum(score > 0 for score in scores)
+            if not content_count:
+                continue
+            utility = sum(scores) + 0.7 * (content_count - 1) - 0.2 * (length - content_count)
+            candidates.append((utility, content_count, -length, start, end))
+
+    selected = []
+    occupied = set()
+    for utility, content_count, neg_length, start, end in sorted(candidates, reverse=True):
+        positions = set(range(start, end))
+        if positions & occupied:
+            continue
+        selected.append((start, end))
+        occupied.update(positions)
+        if len(selected) == 4:
+            break
+
+    selected.sort()
+    spans = [" ".join(raw_words[start:end]) for start, end in selected]
+    query = []
+    for start, end in selected:
+        for tok in normalized[start:end]:
+            if tok not in STOP or tok in LOGIC:
+                query.append(tok)
+    return spans, query
+
+
+def select_anchor_singletons(row, idf, common):
+    """Select up to four one-word anchors for maximum marking convenience."""
+    matches = list(TOKEN_RE.finditer(row["stem"]))
+    topic = common[(row["year"], row["month"], row["set"])]
+    candidates = []
+    for index, match in enumerate(matches):
+        tok = stem(match.group())
+        if tok in STOP and tok not in LOGIC:
+            continue
+        score = idf.get(tok, 1.0)
+        if tok in topic and tok not in LOGIC:
+            score *= 0.15
+        if tok in LOGIC:
+            score += 1.8
+        if any(ch.isdigit() for ch in tok):
+            score += 2.5
+        candidates.append((score, index, match.group(), tok))
+    chosen = sorted(candidates, reverse=True)[:4]
+    chosen.sort(key=lambda item: item[1])
+    return [raw for _, _, raw, _ in chosen], [tok for _, _, _, tok in chosen]
+
+
 def select_anchor_tokens(row, idf, common, version):
+    if version == "v11":
+        return select_anchor_spans(row, idf, common)[1]
+    if version == "v12":
+        return select_anchor_singletons(row, idf, common)[1]
     raw = tokens(row["stem"])
     topic = common[(row["year"], row["month"], row["set"])]
     candidates = []
@@ -486,7 +566,7 @@ def grouped_cross_validation(rows):
     groups = [passage_group(row) for row in rows]
     unique_groups = len(set(groups))
     splitter = GroupKFold(n_splits=min(6, unique_groups))
-    cached = {"v1": [], "v2": []}
+    cached = {"v1": [], "v2": [], "v11": [], "v12": []}
     for fold, (train_idx, valid_idx) in enumerate(splitter.split(rows, groups=groups), 1):
         train_rows = [rows[i] for i in train_idx]
         valid_rows = [rows[i] for i in valid_idx]
@@ -494,13 +574,13 @@ def grouped_cross_validation(rows):
         common = exam_common(rows)
         surface = SurfaceIndex(train_rows)
         for row in valid_rows:
-            for anchor_version in ("v1", "v2"):
+            for anchor_version in ("v1", "v2", "v11", "v12"):
                 query = select_anchor_tokens(row, idf, common, anchor_version)
                 cached[anchor_version].append((row["answer"], local_candidate_features(row, query, surface)))
         print(f"CV_FOLD={fold} train={len(train_rows)} validation={len(valid_rows)}")
 
     grid = itertools.product(
-        ("v1", "v2"),
+        ("v1", "v2", "v11", "v12"),
         (0.0, 4.0, 8.0),
         (4.0, 8.0, 12.0, 16.0),
         (0.50, 0.65, 0.80),
@@ -556,8 +636,52 @@ def main():
     cv_surface = CvSelectedSurfaceIndex(train)
     lexicon = TranslationLexicon(train)
     print(f"rows={len(rows)} train={len(train)} validation={len(valid)} test={len(test)}")
+    if "--v11" in sys.argv:
+        span_counts = collections.Counter()
+        violations = []
+        for row in rows:
+            spans, _ = select_anchor_spans(row, idf, common)
+            span_counts[len(spans)] += 1
+            for phrase in spans:
+                count = len(TOKEN_RE.findall(phrase))
+                if not 1 <= count <= 3:
+                    violations.append((row["id"], phrase, count))
+        for name, split in (("train", train), ("validation", valid), ("test", test)):
+            result = evaluate(split, idf, common, "v11", cv_surface, True, True)
+            print(
+                f"v11 {name} top1={pct(result['top1'])} "
+                f"top3={pct(result['top3'])} top5={pct(result['top5'])} n={result['n']}"
+            )
+        print(f"SPAN_COUNTS={dict(sorted(span_counts.items()))}")
+        print(f"SPAN_VIOLATIONS={len(violations)}")
+        for row in [r for r in rows if r["year"] == 2026 and r["month"] == 6 and r["set"] == 1]:
+            spans, _ = select_anchor_spans(row, idf, common)
+            print(f"EXAMPLE qid={row['id']} spans={' | '.join(spans)}")
+        return 0 if not violations else 2
+    if "--v12" in sys.argv:
+        anchor_counts = collections.Counter()
+        violations = []
+        for row in rows:
+            spans, _ = select_anchor_singletons(row, idf, common)
+            anchor_counts[len(spans)] += 1
+            for word in spans:
+                count = len(TOKEN_RE.findall(word))
+                if count != 1:
+                    violations.append((row["id"], word, count))
+        for name, split in (("train", train), ("validation", valid), ("test", test)):
+            result = evaluate(split, idf, common, "v12", cv_surface, True, True)
+            print(
+                f"v12 {name} top1={pct(result['top1'])} "
+                f"top3={pct(result['top3'])} top5={pct(result['top5'])} n={result['n']}"
+            )
+        print(f"ANCHOR_COUNTS={dict(sorted(anchor_counts.items()))}")
+        print(f"ANCHOR_VIOLATIONS={len(violations)}")
+        for row in [r for r in rows if r["year"] == 2026 and r["month"] == 6 and r["set"] == 1]:
+            spans, _ = select_anchor_singletons(row, idf, common)
+            print(f"EXAMPLE qid={row['id']} anchors={' | '.join(spans)}")
+        return 0 if not violations else 2
     selected = None
-    for version in ("v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10"):
+    for version in ("v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v12"):
         base_version = "v2" if version == "v3" else version
         scorer = semantic if version == "v3" else None
         if version == "v5":
@@ -581,6 +705,16 @@ def main():
             use_full_stem = True
         if version == "v10":
             base_version = "v2"
+            scorer = cv_surface
+            use_full_stem = True
+            use_local_rank = True
+        if version == "v11":
+            base_version = "v11"
+            scorer = cv_surface
+            use_full_stem = True
+            use_local_rank = True
+        if version == "v12":
+            base_version = "v12"
             scorer = cv_surface
             use_full_stem = True
             use_local_rank = True
@@ -624,6 +758,16 @@ def main():
         use_full_stem = True
     if version == "v10":
         base_version = "v2"
+        scorer = cv_surface
+        use_full_stem = True
+        use_local_rank = True
+    if version == "v11":
+        base_version = "v11"
+        scorer = cv_surface
+        use_full_stem = True
+        use_local_rank = True
+    if version == "v12":
+        base_version = "v12"
         scorer = cv_surface
         use_full_stem = True
         use_local_rank = True

@@ -58,9 +58,9 @@ Use this mode when the user explicitly asks to retrieve or analyze records from 
 - Distinguish clearly between stored source text, annotations added by the assistant, and any answer-key verification.
 - For local-corpus paragraph-matching retrieval, drills, answer verification, or evidence-chain analysis, read and follow [references/paragraph-matching-local-corpus.md](references/paragraph-matching-local-corpus.md). This is the only fully developed local-corpus subtype for now; do not silently apply its workflow to banked cloze, careful reading, listening, writing, or translation.
 
-### Basic keyword-underlining workflow
+### Basic keyword-marking workflow
 
-For a request such as “先列出选项和题目，再列出有下划线的题目；不要看答案和选项分析”, use this sequence:
+For a request such as “先列出选项和题目，再列出有标记的题目；不要看答案和选项分析”, use this sequence:
 
 1. Resolve and retrieve the requested exam and question records without answer keys.
 2. Make an independent copy of each question and identify the words or phrases that should be searched for in the options/passage. Base this only on the question wording.
@@ -68,8 +68,8 @@ For a request such as “先列出选项和题目，再列出有下划线的题�
 4. Output in this order:
    - `选项`
    - `题目`
-   - `带下划线的题目`
-5. In annotated questions, mark only useful retrieval anchors. Each marked span must contain **1–3 words**, preferably one distinctive word or one compact phrase. Split longer relations into multiple short spans; never mark a clause or sentence. Use visible Unicode combining underlines; if the client does not display them reliably, use `【...】`. Do not use `<u>` after the user has reported it invisible. Prefer distinctive subjects, actions, objects, constraints, comparisons, causes/results, time markers, numbers, and polarity words. Do not mark generic function words or most of the sentence.
+   - `带【】标记的题目`
+5. In annotated questions, mark only useful retrieval anchors with `【...】`; this is a boundary marker, not an underline. Each marked span must contain **1–3 words**, preferably one distinctive word or one compact phrase. Split longer relations into multiple short spans; never mark a clause or sentence. Prefer distinctive subjects, actions, objects, constraints, comparisons, causes/results, time markers, numbers, and polarity words. Do not mark generic function words or most of the sentence.
 6. Treat marked anchors as a way to recall 3—5 candidate paragraphs, never as a direct answer selector. Verify subject, action/relation, object/result, and constraints before concluding.
 7. Do not reveal, imply, highlight, reorder, or otherwise mark the correct choice when the user asks for a no-answer exercise.
 
