@@ -68,10 +68,11 @@ For a request such as “先列出选项和题目，再列出有标记的题目�
 4. Output in this order:
    - `选项`
    - `题目`
-   - `带【】标记的题目`
-5. In annotated questions, mark only useful retrieval anchors with `【...】`; this is a boundary marker, not an underline. Each marked span must contain **1–3 words**, preferably one distinctive word or one compact phrase. Split longer relations into multiple short spans; never mark a clause or sentence. Prefer distinctive subjects, actions, objects, constraints, comparisons, causes/results, time markers, numbers, and polarity words. Do not mark generic function words or most of the sentence.
-6. Treat marked anchors as a way to recall 3—5 candidate paragraphs, never as a direct answer selector. Verify subject, action/relation, object/result, and constraints before concluding.
-7. Do not reveal, imply, highlight, reorder, or otherwise mark the correct choice when the user asks for a no-answer exercise.
+   - `带两级优先标记的题目`
+5. Use exactly two priority levels. Mark the single highest-priority core action or relation with `【...】`. Mark lower-priority supporting information with a visible Unicode underline (U+0332), never HTML `<u>`. Lower-priority information may include up to three separate spans: the unique subject, the object/result, and a key constraint. Each span must contain **1–3 words**. A question therefore normally has one primary span plus one to three secondary spans, for two to four spans total. Never mark a clause or sentence.
+6. Primary priority goes to the **minimum decisive relation**: the 1–3-word action, state, negation, causal, comparative, or change phrase without which the stem no longer states its testable claim. It is not merely any verb. Secondary priority is divided into three possible content roles: unique subject; object/result; key constraint such as time, number, place, direction, or scope. Mark only roles that actually distinguish the item. If no meaningful decisive relation exists, the most distinctive entity or fact may become primary. Do not mark generic function words or article-wide topic words.
+7. Treat marked anchors as a way to recall 3—5 candidate paragraphs, never as a direct answer selector. Verify subject, action/relation, object/result, and constraints before concluding.
+8. Do not reveal, imply, highlight, reorder, or otherwise mark the correct choice when the user asks for a no-answer exercise.
 
 ---
 

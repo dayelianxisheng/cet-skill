@@ -159,8 +159,8 @@ def exam_common(rows):
     return common
 
 
-def select_anchor_spans(row, idf, common):
-    """Select 2-4 non-overlapping blind spans, each containing 1-3 source words."""
+def select_anchor_spans(row, idf, common, max_spans=4):
+    """Select non-overlapping blind spans, each containing 1-3 source words."""
     matches = list(TOKEN_RE.finditer(row["stem"]))
     raw_words = [match.group() for match in matches]
     normalized = [stem(word) for word in raw_words]
@@ -200,7 +200,7 @@ def select_anchor_spans(row, idf, common):
             continue
         selected.append((start, end))
         occupied.update(positions)
-        if len(selected) == 4:
+        if len(selected) == max_spans:
             break
 
     selected.sort()
@@ -240,6 +240,10 @@ def select_anchor_tokens(row, idf, common, version):
         return select_anchor_spans(row, idf, common)[1]
     if version == "v12":
         return select_anchor_singletons(row, idf, common)[1]
+    if version == "v13":
+        return select_anchor_spans(row, idf, common, max_spans=2)[1]
+    if version == "v14":
+        return select_anchor_spans(row, idf, common, max_spans=3)[1]
     raw = tokens(row["stem"])
     topic = common[(row["year"], row["month"], row["set"])]
     candidates = []
@@ -566,7 +570,7 @@ def grouped_cross_validation(rows):
     groups = [passage_group(row) for row in rows]
     unique_groups = len(set(groups))
     splitter = GroupKFold(n_splits=min(6, unique_groups))
-    cached = {"v1": [], "v2": [], "v11": [], "v12": []}
+    cached = {"v1": [], "v2": [], "v11": [], "v12": [], "v13": [], "v14": []}
     for fold, (train_idx, valid_idx) in enumerate(splitter.split(rows, groups=groups), 1):
         train_rows = [rows[i] for i in train_idx]
         valid_rows = [rows[i] for i in valid_idx]
@@ -574,13 +578,13 @@ def grouped_cross_validation(rows):
         common = exam_common(rows)
         surface = SurfaceIndex(train_rows)
         for row in valid_rows:
-            for anchor_version in ("v1", "v2", "v11", "v12"):
+            for anchor_version in ("v1", "v2", "v11", "v12", "v13", "v14"):
                 query = select_anchor_tokens(row, idf, common, anchor_version)
                 cached[anchor_version].append((row["answer"], local_candidate_features(row, query, surface)))
         print(f"CV_FOLD={fold} train={len(train_rows)} validation={len(valid_rows)}")
 
     grid = itertools.product(
-        ("v1", "v2", "v11", "v12"),
+        ("v1", "v2", "v11", "v12", "v13", "v14"),
         (0.0, 4.0, 8.0),
         (4.0, 8.0, 12.0, 16.0),
         (0.50, 0.65, 0.80),
@@ -615,6 +619,22 @@ def grouped_cross_validation(rows):
         print(
             f"CV top1={pct(top1)} top3={pct(top3)} top5={pct(top5)} "
             f"params={params}"
+        )
+    for anchor_version in ("v1", "v2", "v11", "v12", "v13", "v14"):
+        best = next(result for result in results if result[3][0] == anchor_version)
+        top1, top3, top5, params = best
+        print(
+            f"CV_BEST_{anchor_version} top1={pct(top1)} top3={pct(top3)} "
+            f"top5={pct(top5)} params={params}"
+        )
+        recall_best = max(
+            (result for result in results if result[3][0] == anchor_version),
+            key=lambda result: (result[2], result[1], result[0]),
+        )
+        r_top1, r_top3, r_top5, r_params = recall_best
+        print(
+            f"CV_RECALL_{anchor_version} top1={pct(r_top1)} top3={pct(r_top3)} "
+            f"top5={pct(r_top5)} params={r_params}"
         )
     return 0
 
@@ -680,8 +700,52 @@ def main():
             spans, _ = select_anchor_singletons(row, idf, common)
             print(f"EXAMPLE qid={row['id']} anchors={' | '.join(spans)}")
         return 0 if not violations else 2
+    if "--v13" in sys.argv:
+        violations = []
+        for row in rows:
+            spans, _ = select_anchor_spans(row, idf, common, max_spans=2)
+            if len(spans) != 2:
+                violations.append((row["id"], "anchor_count", len(spans)))
+            for phrase in spans:
+                count = len(TOKEN_RE.findall(phrase))
+                if not 1 <= count <= 3:
+                    violations.append((row["id"], phrase, count))
+        for name, split in (("train", train), ("validation", valid), ("test", test)):
+            result = evaluate(split, idf, common, "v13", cv_surface, True, True)
+            print(
+                f"v13 {name} top1={pct(result['top1'])} "
+                f"top3={pct(result['top3'])} top5={pct(result['top5'])} n={result['n']}"
+            )
+        print(f"FORMAT_VIOLATIONS={len(violations)}")
+        for row in [r for r in rows if r["year"] == 2026 and r["month"] == 6 and r["set"] == 1]:
+            spans, _ = select_anchor_spans(row, idf, common, max_spans=2)
+            primary = spans[0] if spans else ""
+            secondary = spans[1] if len(spans) > 1 else ""
+            print(f"EXAMPLE qid={row['id']} primary={primary} secondary={secondary}")
+        return 0 if not violations else 2
+    if "--v14" in sys.argv:
+        violations = []
+        counts = collections.Counter()
+        for row in rows:
+            spans, _ = select_anchor_spans(row, idf, common, max_spans=3)
+            counts[len(spans)] += 1
+            if not 1 <= len(spans) <= 3:
+                violations.append((row["id"], "anchor_count", len(spans)))
+            for phrase in spans:
+                count = len(TOKEN_RE.findall(phrase))
+                if not 1 <= count <= 3:
+                    violations.append((row["id"], phrase, count))
+        for name, split in (("train", train), ("validation", valid), ("test", test)):
+            result = evaluate(split, idf, common, "v14", cv_surface, True, True)
+            print(
+                f"v14 {name} top1={pct(result['top1'])} "
+                f"top3={pct(result['top3'])} top5={pct(result['top5'])} n={result['n']}"
+            )
+        print(f"ANCHOR_COUNTS={dict(sorted(counts.items()))}")
+        print(f"FORMAT_VIOLATIONS={len(violations)}")
+        return 0 if not violations else 2
     selected = None
-    for version in ("v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v12"):
+    for version in ("v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v12", "v13", "v14"):
         base_version = "v2" if version == "v3" else version
         scorer = semantic if version == "v3" else None
         if version == "v5":
@@ -715,6 +779,16 @@ def main():
             use_local_rank = True
         if version == "v12":
             base_version = "v12"
+            scorer = cv_surface
+            use_full_stem = True
+            use_local_rank = True
+        if version == "v13":
+            base_version = "v13"
+            scorer = cv_surface
+            use_full_stem = True
+            use_local_rank = True
+        if version == "v14":
+            base_version = "v14"
             scorer = cv_surface
             use_full_stem = True
             use_local_rank = True
@@ -768,6 +842,16 @@ def main():
         use_local_rank = True
     if version == "v12":
         base_version = "v12"
+        scorer = cv_surface
+        use_full_stem = True
+        use_local_rank = True
+    if version == "v13":
+        base_version = "v13"
+        scorer = cv_surface
+        use_full_stem = True
+        use_local_rank = True
+    if version == "v14":
+        base_version = "v14"
         scorer = cv_surface
         use_full_stem = True
         use_local_rank = True
