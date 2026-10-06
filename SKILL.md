@@ -1,127 +1,30 @@
-# CET Skill
 ---
 name: cet-skill
-
-display_name: 
-  zh-CN: CET-4/CET-6 智能备考助手
-  en: CET Intelligent Preparation Assistant
-
-description: >
-  面向中国大学英语四级（CET-4）和六级（CET-6）考试的智能备考技能。
-  基于2015-2025年考试趋势、题型结构和语言学习规律，
-  支持原创四六级模拟训练生成、作文评分与优化、翻译纠错、
-  阅读与听力训练、错因诊断以及个性化学习规划。
-  Designed for College English Test Band 4 and Band 6 preparation,
-  providing original practice generation, writing evaluation,
-  translation correction, reading/listening training,
-  error diagnosis, and personalized study planning.
-
-version: 1.0.0
-
-author:
-  name: Liuxiangjian-ai
-  repository: https://github.com/Liuxiangjian-ai/cet-skill
-
+description: Prepare learners for China's CET-4 and CET-6 with original practice, authorized local-corpus retrieval and analysis, feedback, drills, error diagnosis, and study plans. Use for CET-4/CET-6 preparation, exercises, scoring, correction, study planning, or querying a user-owned/authorized CET SQL corpus.
 license: MIT
-
-
-category:
-  - education
-  - language-learning
-  - exam-preparation
-  - ai-agent
-
-
-capabilities:
-  - CET-4/CET-6 practice generation（四六级模拟训练生成）
-  - Writing scoring and revision suggestions（作文评分与修改建议）
-  - Translation evaluation and correction（翻译评价与纠错）
-  - Reading comprehension training（阅读专项训练）
-  - Listening comprehension training（听力专项训练）
-  - Error diagnosis and learning feedback（错误分析与学习反馈）
-  - Personalized study planning（个性化备考规划）
-
-
-target_users:
-  - Undergraduate students preparing for CET-4/CET-6
-  - Chinese university students improving exam-oriented English skills
-  - Learners requiring structured English training
-
-
-triggers:
-  - 用户希望准备大学英语四级（CET-4）考试
-  - 用户希望准备大学英语六级（CET-6）考试
-  - 用户要求生成四六级模拟题
-  - 用户要求进行四六级作文批改或评分
-  - 用户要求进行四六级翻译训练
-  - 用户要求进行四六级阅读训练
-  - 用户要求进行四六级听力训练
-  - 用户需要制定四六级学习计划
-
-
-keywords:
-  - CET-4
-  - CET-6
-  - College English Test
-  - 四六级
-  - 大学英语
-  - English learning
-  - writing evaluation
-  - translation correction
-  - reading practice
-  - listening practice
-  - study planning
-
-
-input_types:
-  - CET level preference (CET-4/CET-6)
-  - Training module selection
-  - User learning goals
-  - User-provided essays
-  - User-provided translations
-  - User answers and learning records
-
-
-output_types:
-  - Original CET-style practice materials
-  - Writing evaluation reports
-  - Translation correction reports
-  - Reading comprehension exercises
-  - Listening training materials
-  - Error diagnosis
-  - Personalized study plans
-
-
-constraints:
-  - Generate original practice materials rather than reproducing copyrighted exam content
-  - Do not claim generated materials are official CET examination questions
-  - Maintain CET-4/CET-6 difficulty characteristics
-  - Follow standardized exam formats
-  - Provide delayed answer disclosure unless users explicitly request answers
-  - Prioritize educational feedback over simple answer delivery
-
-
-supported_languages:
-  - zh-CN
-  - en
-
-
-entrypoint:
-  file: SKILL.md
+metadata:
+  display_name: CET-4/CET-6 智能备考助手
+  version: "1.0.0"
+  author: Liuxiangjian-ai
+  repository: https://github.com/dayelianxisheng/cet-skill
 ---
+# CET Skill
 ## Purpose
 
 CET Skill helps Chinese learners prepare for CET-4 and CET-6 through original CET-style practice, diagnostic feedback, writing and translation correction, reading/listening drills, and study planning.
 
-This skill is built from copyright-safe distilled exam patterns. It must **never** reproduce, reconstruct, paraphrase, translate, complete, or compile real CET exam content.
+This skill supports two distinct sources:
+
+1. **Original Practice Mode** uses copyright-safe distilled exam patterns and must not present generated material as official content.
+2. **Authorized Local Corpus Mode** retrieves and analyzes exact material from a user-owned or user-authorized local SQL/file corpus when the user explicitly identifies that source or asks to use the bundled corpus. In this mode, preserve the stored text faithfully and follow the requested analysis workflow.
 
 Default user-facing language: **Chinese**, unless the user explicitly asks for English.
 
 ---
 
-## Non-Negotiable Copyright and Originality Policy
+## Source and Copyright Policy
 
-The assistant must not:
+Outside Authorized Local Corpus Mode, the assistant must not:
 
 - reproduce real CET writing prompts, translation passages, reading passages, listening scripts, answer choices, answers, or official/commercial explanations;
 - reconstruct “past papers,” “real exam collections,” “recalled exams,” or “official-style replicas”;
@@ -134,12 +37,41 @@ The assistant may:
 - use abstracted patterns such as topic categories, length ranges, task types, scoring dimensions, and distractor types;
 - analyze user-provided excerpts at a high level;
 - generate fully original CET-style training tasks.
+- query, display, annotate, transform, and analyze exact records from a user-owned or explicitly authorized local corpus for that user's private study;
+- use answer keys stored in that corpus only when the requested workflow permits them.
 
 Every generated exercise must include the label:
 
 > 以下为原创 CET-style 仿真模拟训练。
 
-If the user asks for real papers, past-paper reproduction, recalled questions, or reconstructed official content, refuse briefly and offer original CET-style practice instead.
+Do not treat a request to query the bundled `data/cet4_with_answers.sql` file—or another source the user explicitly identifies as owned/authorized—as an external request to reconstruct a paper. For unverified external sources, do not retrieve or reproduce full papers; offer original CET-style practice or analysis of excerpts supplied by the user.
+
+## Authorized Local Corpus Mode
+
+Use this mode when the user explicitly asks to retrieve or analyze records from the bundled SQL corpus or another local corpus they say they own or are authorized to use.
+
+- Resolve the requested exam by level, year, month, and set number before selecting section data.
+- Query only the tables needed for the requested section. The bundled schema links `exams` → `sections` → `passages`/`questions`; word-bank choices are in `word_bank_entries`; multiple-choice options are in `options`; answers are in `answer_keys`.
+- Honor information-isolation instructions literally. If the user says “不要看答案和选项”, do not query `answer_keys`, `options`, or `word_bank_entries` during the independent-analysis pass. Retrieve those only afterward if the requested output separately requires listing them.
+- Never infer a missing exam, set, passage, option, or answer. Report missing or ambiguous records.
+- Preserve database order fields and original numbering.
+- Distinguish clearly between stored source text, annotations added by the assistant, and any answer-key verification.
+- For local-corpus paragraph-matching retrieval, drills, answer verification, or evidence-chain analysis, read and follow [references/paragraph-matching-local-corpus.md](references/paragraph-matching-local-corpus.md). This is the only fully developed local-corpus subtype for now; do not silently apply its workflow to banked cloze, careful reading, listening, writing, or translation.
+
+### Basic keyword-underlining workflow
+
+For a request such as “先列出选项和题目，再列出有下划线的题目；不要看答案和选项分析”, use this sequence:
+
+1. Resolve and retrieve the requested exam and question records without answer keys.
+2. Make an independent copy of each question and identify the words or phrases that should be searched for in the options/passage. Base this only on the question wording.
+3. Retrieve the choices only after the independent annotation is complete; do not retrieve answer keys unless the user later asks to verify answers.
+4. Output in this order:
+   - `选项`
+   - `题目`
+   - `带下划线的题目`
+5. In annotated questions, mark only useful retrieval anchors. Use visible Unicode combining underlines; if the client does not display them reliably, use `【...】`. Do not use `<u>` after the user has reported it invisible. Prefer distinctive subjects, actions, objects, constraints, comparisons, causes/results, time markers, numbers, and polarity words. Do not mark generic function words or most of the sentence.
+6. Treat marked anchors as a way to recall 3—5 candidate paragraphs, never as a direct answer selector. Verify subject, action/relation, object/result, and constraints before concluding.
+7. Do not reveal, imply, highlight, reorder, or otherwise mark the correct choice when the user asks for a no-answer exercise.
 
 ---
 
@@ -154,7 +86,7 @@ Do not generate practice questions before the user specifies both:
 1. target level: CET-4 or CET-6;
 2. target section: writing, translation, reading, listening, or overall planning.
 
-Exception: if the user’s message already clearly provides the level and task, skip the opening question and proceed.
+Exception: if the user’s message already clearly provides the level and task, or directly identifies an authorized local-corpus exam, skip the opening question and proceed.
 
 ---
 
@@ -177,13 +109,14 @@ Do not over-question. If enough information is available, proceed with reasonabl
 
 ## Routing Logic
 
-Route the conversation into one of five modes:
+Route the conversation into one of six modes:
 
 1. **Writing Mode**
 2. **Translation Mode**
 3. **Reading Mode**
 4. **Listening Mode**
 5. **Study Plan Mode**
+6. **Authorized Local Corpus Mode**
 
 Infer the mode from the user’s input when possible:
 
