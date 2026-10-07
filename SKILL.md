@@ -4,7 +4,7 @@ description: Prepare learners for China's CET-4 and CET-6 with original practice
 license: MIT
 metadata:
   display_name: CET-4/CET-6 智能备考助手
-  version: "1.2.0"
+  version: "1.2.1"
   author: Liuxiangjian-ai
   repository: https://github.com/dayelianxisheng/cet-skill
 ---
@@ -64,15 +64,15 @@ Use this mode when the user explicitly asks to retrieve or analyze records from 
 For a request such as “先列出选项和题目，再列出有标记的题目；不要看答案和选项分析”, use this sequence:
 
 1. Resolve and retrieve the requested exam and question records without answer keys.
-2. Make an independent copy of each question and identify the words or phrases that should be searched for in the options/passage. Base this only on the question wording.
-3. Retrieve the choices only after the independent annotation is complete; do not retrieve answer keys unless the user later asks to verify answers.
+2. Make an independent copy of each question, select and freeze the 2–4 candidate spans using only all question stems, and assign a provisional `【】` after cross-question repetition checking.
+3. Retrieve the passage only after the span set is frozen. Without reading answer keys, use the title and cross-paragraph repetition to demote confirmed topic words and reassign `【】` among the frozen spans. Do not add or remove spans. Do not retrieve answer keys unless the user later asks to verify answers.
 4. Output in this order:
    - `选项`
    - `题目`
    - `带两级优先标记的题目`
 5. Use exactly two functional levels. Mark one highest-priority **hard locator** with `【...】`: a 1–3-word subject, proper name, number/time expression, quoted term, or rare concrete noun phrase that is likely to survive in the passage as the same or a near-same surface form. Mark semantic verification clues with a visible Unicode underline (U+0332), never HTML `<u>`. Underlined clues may include the core action/relation, object/result, and key constraint. Each span must contain **1–3 words**; use two to four spans total. Never mark a clause or sentence.
-6. Choose `【】` for fast scanning, not for abstract semantic importance. Priority order is: unique subject/proper name → number/date/time/quoted term → rare concrete noun phrase → distinctive object/result. Skip article-wide subjects and generic words. If no reliable hard locator exists, choose the least paraphrase-prone concrete phrase. Use underlines for actions, states, negation, causality, comparison, change, results, and remaining constraints because these are more likely to be paraphrased.
-7. Solve in two passes: scan paragraphs with `【】` to locate likely positions, then compare the underlined semantic clues to verify the match. `【】` alone never determines the answer.
+6. Choose `【】` for fast scanning, not for abstract semantic importance. Priority order is: unique subject/proper name → number/date/time/quoted term → rare concrete noun phrase → distinctive object/result. A solver cannot know article-wide topic words from one stem alone, so use a two-step topic check: before reading the passage, demote terms repeated across several of the ten stems; after the passage becomes available, but before reading answers, demote terms repeated in the title or across many paragraphs. Reassign `【】` only among the already selected stem spans; do not use answers or evidence mappings. In strict question-only mode, label the locator priority as provisional.
+7. Solve in two passes: scan paragraphs with the finalized `【】` hard locator to find likely positions, then compare the underlined semantic clues to verify the match. `【】` alone never determines the answer. If no reliable hard locator remains after topic-word demotion, use the least paraphrase-prone concrete phrase.
 8. Do not reveal, imply, highlight, reorder, or otherwise mark the correct choice when the user asks for a no-answer exercise.
 9. After answers are revealed, if the user requests option-by-option correspondence, display paragraphs in their original letter order. Under each paragraph, show the marked source evidence and then its fully marked corresponding question. The question and passage `【】` spans should represent the corresponding hard locator; underlines should represent the semantic verification relationship. If no question maps to that paragraph, leave the `对应题目：` field blank; do not write “none” or invent a match.
 10. Keep the selected paragraph-matching mode and rendering defaults for the rest of the session unless the user explicitly overrides them. Do not return to the generic CET opening question during an established paragraph-matching workflow.
