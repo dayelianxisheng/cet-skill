@@ -56,8 +56,9 @@ Use this mode when the user explicitly asks to retrieve or analyze records from 
 - Never infer a missing exam, set, passage, option, or answer. Report missing or ambiguous records.
 - Preserve database order fields and original numbering.
 - Distinguish clearly between stored source text, annotations added by the assistant, and any answer-key verification.
-- For local-corpus paragraph-matching retrieval, drills, answer verification, or evidence-chain analysis, read and follow [references/paragraph-matching-local-corpus.md](references/paragraph-matching-local-corpus.md). This is the only fully developed local-corpus subtype for now; do not silently apply its workflow to banked cloze, careful reading, listening, writing, or translation.
+- For local-corpus paragraph-matching retrieval, drills, answer verification, or evidence-chain analysis, read and follow [references/paragraph-matching-local-corpus.md](references/paragraph-matching-local-corpus.md). Do not silently apply its workflow to banked cloze, careful reading, listening, writing, or translation.
 - Whenever producing user-visible paragraph-matching output, also read and follow [references/paragraph-matching-output-contract.md](references/paragraph-matching-output-contract.md). Treat that file as the authoritative rendering and interaction contract, and do not ask the user to repeat a format already defined there.
+- For local-corpus careful-reading retrieval, drills, answer verification, evidence-window analysis, or workflow development, read and follow [references/careful-reading-local-corpus.md](references/careful-reading-local-corpus.md). Preserve its measured-coverage caveats: answer coverage is 420/420, evidence annotations cover 405/420, and algorithmic locator-sentence statistics are estimates rather than official labels.
 
 ### Basic keyword-marking workflow
 

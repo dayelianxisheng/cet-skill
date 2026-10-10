@@ -1,0 +1,9 @@
+# Local backups, generated audits, and third-party corpora without a declared license.
+data/backups/
+data/*_audit.json
+data/external-sources/
+data/lexical/raw/
+data/lexical/normalized/
+
+__pycache__/
+*.pyc

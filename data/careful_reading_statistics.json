@@ -1,0 +1,152 @@
+{
+  "corpus": {
+    "exams": 42,
+    "passages": 84,
+    "questions": 420,
+    "answer_coverage": 420,
+    "annotation_coverage": 405
+  },
+  "one_paragraph_one_question": {
+    "question_level_count": 341,
+    "question_level_total": 405,
+    "question_level_probability": 0.842,
+    "passage_level_count": 49,
+    "passage_level_total": 69,
+    "passage_level_probability": 0.7101
+  },
+  "evidence_relative_to_locator": {
+    "method": "题干非停用实词按段内IDF定位；证据句由来源标注回配；置信度<0.35不计概率",
+    "counts": {
+      "相隔两句及以上": 121,
+      "不可可靠定位": 27,
+      "本句": 185,
+      "前一句": 17,
+      "后一句": 55
+    },
+    "reliable_total": 378,
+    "probabilities": {
+      "相隔两句及以上": 0.3201,
+      "本句": 0.4894,
+      "前一句": 0.045,
+      "后一句": 0.1455
+    },
+    "mean_locator_confidence": 0.905
+  },
+  "paraphrase": {
+    "questions_with_nonliteral_answer_mapping": 405,
+    "questions_with_mapping_total": 405,
+    "probability": 1.0,
+    "pair_classes": {
+      "低词面同义改写": 519,
+      "部分词面重合": 47,
+      "字面一致": 3
+    },
+    "note": "这是正确选项与证据短语的改写率；不是题干定位锚点本身的同义替换率。"
+  },
+  "source_question_types": {
+    "细节题": 377,
+    "词义句意题": 4,
+    "推断题": 17,
+    "例证目的题": 5,
+    "态度题": 2
+  },
+  "solver_question_types": {
+    "事实细节题": {
+      "count": 295,
+      "share": 0.7024,
+      "annotated_count": 287,
+      "nonliteral_answer_mapping_rate": 1.0
+    },
+    "原因题": {
+      "count": 43,
+      "share": 0.1024,
+      "annotated_count": 43,
+      "nonliteral_answer_mapping_rate": 1.0
+    },
+    "推断判断题": {
+      "count": 32,
+      "share": 0.0762,
+      "annotated_count": 29,
+      "nonliteral_answer_mapping_rate": 1.0
+    },
+    "方式过程题": {
+      "count": 27,
+      "share": 0.0643,
+      "annotated_count": 27,
+      "nonliteral_answer_mapping_rate": 1.0
+    },
+    "态度观点题": {
+      "count": 17,
+      "share": 0.0405,
+      "annotated_count": 14,
+      "nonliteral_answer_mapping_rate": 1.0
+    },
+    "例证目的题": {
+      "count": 4,
+      "share": 0.0095,
+      "annotated_count": 4,
+      "nonliteral_answer_mapping_rate": 1.0
+    },
+    "词义指代题": {
+      "count": 1,
+      "share": 0.0024,
+      "annotated_count": 1,
+      "nonliteral_answer_mapping_rate": 1.0
+    },
+    "主旨目的题": {
+      "count": 1,
+      "share": 0.0024,
+      "annotated_count": 0,
+      "nonliteral_answer_mapping_rate": 0.0
+    }
+  },
+  "markers": {
+    "主旨目的题": [
+      "mainly about/discuss",
+      "main idea",
+      "best title",
+      "purpose of the passage"
+    ],
+    "推断判断题": [
+      "infer",
+      "conclude",
+      "imply",
+      "suggest",
+      "most likely",
+      "probably"
+    ],
+    "词义指代题": [
+      "word/phrase/term ... mean",
+      "refer to",
+      "closest in meaning"
+    ],
+    "态度观点题": [
+      "attitude",
+      "tone",
+      "view of",
+      "think of"
+    ],
+    "例证目的题": [
+      "mention",
+      "cite",
+      "example",
+      "illustrate",
+      "quote"
+    ],
+    "原因题": [
+      "why",
+      "reason",
+      "account for"
+    ],
+    "方式过程题": [
+      "how",
+      "in what way",
+      "by what means"
+    ],
+    "事实细节题": [
+      "what/which/who/when/where",
+      "according to",
+      "what does ... say/learn"
+    ]
+  }
+}
