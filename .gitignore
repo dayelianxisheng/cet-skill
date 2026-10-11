@@ -5,6 +5,9 @@ data/external-sources/
 data/lexical/raw/
 data/lexical/normalized/
 data/cet4_candidate.sql
+data/careful_reading_articles.json
+data/careful_reading_evidence_recovery.json
+data/careful_reading_locator_rows.json
 
 __pycache__/
 *.pyc

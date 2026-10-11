@@ -1,0 +1,172 @@
+{
+  "corpus_questions": 420,
+  "match_type_counts": {
+    "部分原词重现": 162,
+    "词典同义替换": 25,
+    "无可验证词面对应": 15,
+    "无硬定位词": 9,
+    "原词原短语": 186,
+    "词形变化": 12,
+    "同根词或派生词": 8,
+    "部分词典同义": 3
+  },
+  "usable_hard_locators": 396,
+  "strict_dictionary_synonym": {
+    "count": 28,
+    "denominator": 396,
+    "probability": 0.0707,
+    "all_question_probability": 0.0667
+  },
+  "nonexact_locator_mapping": {
+    "count": 198,
+    "denominator": 396,
+    "probability": 0.5
+  },
+  "manual_synonym_review": {
+    "dictionary_candidates_reviewed": 28,
+    "verified_secondary_relation_synonyms": 8,
+    "verified_secondary_rate_all_questions": 0.019,
+    "verified_secondary_rate_usable_locators": 0.0202,
+    "pure_hard_locator_synonym_required_observed": 0,
+    "note": "人工复核的是定位短语中的关系词；所有确认案例仍保留至少一个可直接扫描的主体、对象、专名或限定词。"
+  },
+  "locator_coverage_train": {
+    "questions": 270,
+    "located": 254,
+    "coverage": 0.9407,
+    "usable_locators": 254,
+    "strict_synonym_rate": 0.0827
+  },
+  "locator_coverage_test": {
+    "questions": 150,
+    "located": 142,
+    "coverage": 0.9467,
+    "usable_locators": 142,
+    "strict_synonym_rate": 0.0493
+  },
+  "locator_coverage_all": {
+    "questions": 420,
+    "located": 396,
+    "coverage": 0.9429,
+    "usable_locators": 396,
+    "strict_synonym_rate": 0.0707
+  },
+  "evidence_relative_to_locator_paragraph": {
+    "count": 396,
+    "counts": {
+      "证据在前一段": 18,
+      "同段": 312,
+      "证据在前两段及以上": 10,
+      "证据在后两段及以上": 13,
+      "证据在后一段": 43
+    },
+    "probabilities": {
+      "证据在前一段": 0.0455,
+      "同段": 0.7879,
+      "证据在前两段及以上": 0.0253,
+      "证据在后两段及以上": 0.0328,
+      "证据在后一段": 0.1086
+    }
+  },
+  "answer_relative_to_locator_sentence": {
+    "count": 396,
+    "coverage": 0.9429,
+    "counts": {
+      "前两句及以上": 40,
+      "本句": 213,
+      "后一句": 56,
+      "后两句及以上": 59,
+      "前一句": 28
+    },
+    "probabilities": {
+      "前两句及以上": 0.101,
+      "本句": 0.5379,
+      "后一句": 0.1414,
+      "后两句及以上": 0.149,
+      "前一句": 0.0707
+    }
+  },
+  "patterns_by_question_type": {
+    "主旨题": {
+      "questions": 10,
+      "usable_locators": 3,
+      "strict_synonym_rate": 0.0,
+      "no_hard_or_unresolved": 7
+    },
+    "例证目的题": {
+      "questions": 5,
+      "usable_locators": 5,
+      "strict_synonym_rate": 0.2,
+      "no_hard_or_unresolved": 0
+    },
+    "态度题": {
+      "questions": 5,
+      "usable_locators": 5,
+      "strict_synonym_rate": 0.0,
+      "no_hard_or_unresolved": 0
+    },
+    "推断题": {
+      "questions": 19,
+      "usable_locators": 18,
+      "strict_synonym_rate": 0.0,
+      "no_hard_or_unresolved": 1
+    },
+    "细节题": {
+      "questions": 377,
+      "usable_locators": 361,
+      "strict_synonym_rate": 0.0748,
+      "no_hard_or_unresolved": 16
+    },
+    "词义句意题": {
+      "questions": 4,
+      "usable_locators": 4,
+      "strict_synonym_rate": 0.0,
+      "no_hard_or_unresolved": 0
+    }
+  },
+  "patterns_by_question_position": {
+    "首题": {
+      "questions": 84,
+      "usable_locators": 81,
+      "strict_synonym_rate": 0.0494,
+      "no_hard_or_unresolved": 3
+    },
+    "中间题": {
+      "questions": 252,
+      "usable_locators": 241,
+      "strict_synonym_rate": 0.0871,
+      "no_hard_or_unresolved": 11
+    },
+    "末题": {
+      "questions": 84,
+      "usable_locators": 74,
+      "strict_synonym_rate": 0.0405,
+      "no_hard_or_unresolved": 10
+    }
+  },
+  "deduplicated_by_passage_and_stem": {
+    "questions": 390,
+    "usable_locators": 366,
+    "verified_secondary_relation_synonyms": 8,
+    "verified_secondary_rate_all_questions": 0.0205,
+    "verified_secondary_rate_usable_locators": 0.0219,
+    "pure_hard_locator_synonym_required_observed": 0,
+    "answer_relative_to_locator_sentence": {
+      "count": 366,
+      "counts": {
+        "前两句及以上": 39,
+        "本句": 198,
+        "后一句": 48,
+        "后两句及以上": 55,
+        "前一句": 26
+      },
+      "probabilities": {
+        "前两句及以上": 0.1066,
+        "本句": 0.541,
+        "后一句": 0.1311,
+        "后两句及以上": 0.1503,
+        "前一句": 0.071
+      }
+    }
+  }
+}

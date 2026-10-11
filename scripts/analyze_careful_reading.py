@@ -4,12 +4,15 @@
 from __future__ import annotations
 
 import ast
+import hashlib
 import json
 import math
 import re
 import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
+
+from import_careful_reading_web_analysis import dehex, mysql
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -102,100 +105,63 @@ def solver_type(stem: str) -> str:
 
 
 def main() -> None:
-    audit = json.loads(AUDIT.read_text(encoding="utf-8"))
-    passages = {row[0]: row for row in load_insert("passages") if row[3] == "careful_reading"}
-    questions = {row[0]: row for row in load_insert("questions") if row[6] == "careful_reading"}
-    eligible = audit["eligible"]
-    annotated = [row for row in eligible if row.get("analysis_eligible")]
-
+    raw_rows = mysql(
+        "cet4",
+        "SELECT p.id,HEX(p.content_text),q.id,HEX(q.stem_text),a.question_subtype,"
+        "a.evidence_paragraph_start,a.evidence_paragraph_end "
+        "FROM passages p JOIN questions q ON q.passage_id=p.id "
+        "JOIN careful_reading_analysis a ON a.question_id=q.id "
+        "WHERE p.passage_type='careful_reading' ORDER BY p.id,q.question_number",
+    )
+    rows = [
+        {
+            "passage_id": int(row[0]), "passage": dehex(row[1]), "question_id": int(row[2]),
+            "stem": dehex(row[3]), "source_type": row[4],
+            "evidence_span": (int(row[5]), int(row[6])),
+        }
+        for row in raw_rows
+    ]
     by_passage = defaultdict(list)
-    for row in annotated:
-        passage_id = questions[row["question_id"]][4]
-        by_passage[passage_id].append(row)
+    for row in rows:
+        by_passage[row["passage_id"]].append(row)
 
-    unique_question_count = 0
-    all_unique_passages = 0
-    for rows in by_passage.values():
-        counts = Counter((r["evidence_paragraph_start"], r["evidence_paragraph_end"]) for r in rows)
-        unique_question_count += sum(counts[(r["evidence_paragraph_start"], r["evidence_paragraph_end"])] == 1 for r in rows)
-        all_unique_passages += len(rows) == 5 and len(counts) == 5
+    def paragraph_metrics(passage_ids: list[int]) -> dict:
+        question_total = unique_questions = all_distinct = 0
+        for passage_id in passage_ids:
+            current = by_passage[passage_id]
+            counts = Counter(row["evidence_span"] for row in current)
+            question_total += len(current)
+            unique_questions += sum(counts[row["evidence_span"]] == 1 for row in current)
+            all_distinct += len(current) == 5 and len(counts) == 5
+        return {
+            "passages": len(passage_ids), "questions": question_total,
+            "question_level_unique": unique_questions,
+            "question_level_probability": round(unique_questions / question_total, 4),
+            "five_distinct_passages": all_distinct,
+            "passage_level_probability": round(all_distinct / len(passage_ids), 4),
+        }
 
-    offsets = Counter()
-    locator_confidences = []
-    pair_classes = Counter()
-    question_with_replacement = 0
-    type_counts = Counter(solver_type(row["stem"]) for row in eligible)
-    type_annotated_counts = Counter()
-    type_replacements = Counter()
-    source_types = Counter(row["question_subtype"] for row in annotated)
-    for row in annotated:
-        question = questions[row["question_id"]]
-        passage = passages[question[4]][6]
-        all_sentences = sentences(passage)
-        locator, confidence = locator_index(all_sentences, row["stem"])
-        evidence = evidence_index(all_sentences, row["evidence_text"])
-        if locator is None or evidence is None or confidence < 0.35:
-            offsets["不可可靠定位"] += 1
-        else:
-            locator_confidences.append(confidence)
-            delta = evidence - locator
-            offsets[{0: "本句", -1: "前一句", 1: "后一句"}.get(delta, "相隔两句及以上")] += 1
-        replaced = False
-        for pair in row.get("paraphrase_pairs", []):
-            left, right = soft(pair.get("original", "")), soft(pair.get("option", ""))
-            if not left or not right:
-                continue
-            if left == right:
-                pair_classes["字面一致"] += 1
-            else:
-                overlap = len(set(left.split()) & set(right.split())) / max(1, len(set(left.split()) | set(right.split())))
-                pair_classes["部分词面重合" if overlap >= 0.35 else "低词面同义改写"] += 1
-                replaced = True
-        if replaced:
-            question_with_replacement += 1
-        kind = solver_type(row["stem"])
-        type_annotated_counts[kind] += 1
-        if replaced:
-            type_replacements[kind] += 1
-
-    reliable_total = sum(value for key, value in offsets.items() if key != "不可可靠定位")
+    passage_ids = list(by_passage)
+    fingerprints = {}
+    for passage_id in passage_ids:
+        normalized = soft(by_passage[passage_id][0]["passage"])
+        fingerprints.setdefault(hashlib.sha256(normalized.encode("utf-8")).hexdigest(), passage_id)
+    locator_stats = json.loads((ROOT / "data" / "careful_reading_locator_statistics.json").read_text(encoding="utf-8"))
+    source_types = Counter(row["source_type"] for row in rows)
+    solver_types = Counter(solver_type(row["stem"]) for row in rows)
     result = {
         "corpus": {
-            "exams": 42, "passages": 84, "questions": 420,
-            "answer_coverage": len(eligible), "annotation_coverage": len(annotated),
+            "exams": 42, "passage_records": len(passage_ids), "unique_passages": len(fingerprints),
+            "question_records": len(rows), "unique_questions_by_passage_and_stem": locator_stats["deduplicated_by_passage_and_stem"]["questions"],
+            "answer_coverage": 420, "evidence_annotation_coverage": len(rows),
         },
         "one_paragraph_one_question": {
-            "question_level_count": unique_question_count,
-            "question_level_total": len(annotated),
-            "question_level_probability": round(unique_question_count / len(annotated), 4),
-            "passage_level_count": all_unique_passages,
-            "passage_level_total": sum(len(rows) == 5 for rows in by_passage.values()),
-            "passage_level_probability": round(all_unique_passages / max(1, sum(len(rows) == 5 for rows in by_passage.values())), 4),
+            "record_weighted": paragraph_metrics(passage_ids),
+            "deduplicated": paragraph_metrics(list(fingerprints.values())),
         },
-        "evidence_relative_to_locator": {
-            "method": "题干非停用实词按段内IDF定位；证据句由来源标注回配；置信度<0.35不计概率",
-            "counts": dict(offsets),
-            "reliable_total": reliable_total,
-            "probabilities": {key: round(value / reliable_total, 4) for key, value in offsets.items() if key != "不可可靠定位"},
-            "mean_locator_confidence": round(sum(locator_confidences) / max(1, len(locator_confidences)), 4),
-        },
-        "paraphrase": {
-            "questions_with_nonliteral_answer_mapping": question_with_replacement,
-            "questions_with_mapping_total": len(annotated),
-            "probability": round(question_with_replacement / len(annotated), 4),
-            "pair_classes": dict(pair_classes),
-            "note": "这是正确选项与证据短语的改写率；不是题干定位锚点本身的同义替换率。",
-        },
+        "locator_analysis": locator_stats,
         "source_question_types": dict(source_types),
-        "solver_question_types": {
-            key: {
-                "count": value,
-                "share": round(value / len(eligible), 4),
-                "annotated_count": type_annotated_counts[key],
-                "nonliteral_answer_mapping_rate": round(type_replacements[key] / max(1, type_annotated_counts[key]), 4),
-            }
-            for key, value in type_counts.most_common()
-        },
+        "solver_question_types": {key: {"count": value, "share": round(value / len(rows), 4)} for key, value in solver_types.most_common()},
         "markers": {
             "主旨目的题": ["mainly about/discuss", "main idea", "best title", "purpose of the passage"],
             "推断判断题": ["infer", "conclude", "imply", "suggest", "most likely", "probably"],
@@ -206,6 +172,12 @@ def main() -> None:
             "方式过程题": ["how", "in what way", "by what means"],
             "事实细节题": ["what/which/who/when/where", "according to", "what does ... say/learn"],
         },
+        "method_notes": [
+            "定位锚点只由同篇五个题干、题号顺序和本地词性信息选择，不读取选项或答案。",
+            "答案证据段和证据句来自careful_reading_analysis；15个原缺失项由解析页显式原文改写对回配文章后补齐。",
+            "本句/前后句统计覆盖396题；24题无可靠硬定位，不强行制造定位句。",
+            "词典产生28个同义候选，逐条人工复核后仅8题存在关系词同义改写；8题仍保留可直接扫描的主体/对象/专名/限定词。",
+        ],
     }
     OUTPUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False, indent=2))

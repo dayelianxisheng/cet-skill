@@ -1,103 +1,243 @@
 {
   "corpus": {
     "exams": 42,
-    "passages": 84,
-    "questions": 420,
+    "passage_records": 84,
+    "unique_passages": 78,
+    "question_records": 420,
+    "unique_questions_by_passage_and_stem": 390,
     "answer_coverage": 420,
-    "annotation_coverage": 405
+    "evidence_annotation_coverage": 420
   },
   "one_paragraph_one_question": {
-    "question_level_count": 341,
-    "question_level_total": 405,
-    "question_level_probability": 0.842,
-    "passage_level_count": 49,
-    "passage_level_total": 69,
-    "passage_level_probability": 0.7101
+    "record_weighted": {
+      "passages": 84,
+      "questions": 420,
+      "question_level_unique": 354,
+      "question_level_probability": 0.8429,
+      "five_distinct_passages": 56,
+      "passage_level_probability": 0.6667
+    },
+    "deduplicated": {
+      "passages": 78,
+      "questions": 390,
+      "question_level_unique": 326,
+      "question_level_probability": 0.8359,
+      "five_distinct_passages": 51,
+      "passage_level_probability": 0.6538
+    }
   },
-  "evidence_relative_to_locator": {
-    "method": "题干非停用实词按段内IDF定位；证据句由来源标注回配；置信度<0.35不计概率",
-    "counts": {
-      "相隔两句及以上": 121,
-      "不可可靠定位": 27,
-      "本句": 185,
-      "前一句": 17,
-      "后一句": 55
+  "locator_analysis": {
+    "corpus_questions": 420,
+    "match_type_counts": {
+      "部分原词重现": 162,
+      "词典同义替换": 25,
+      "无可验证词面对应": 15,
+      "无硬定位词": 9,
+      "原词原短语": 186,
+      "词形变化": 12,
+      "同根词或派生词": 8,
+      "部分词典同义": 3
     },
-    "reliable_total": 378,
-    "probabilities": {
-      "相隔两句及以上": 0.3201,
-      "本句": 0.4894,
-      "前一句": 0.045,
-      "后一句": 0.1455
+    "usable_hard_locators": 396,
+    "strict_dictionary_synonym": {
+      "count": 28,
+      "denominator": 396,
+      "probability": 0.0707,
+      "all_question_probability": 0.0667
     },
-    "mean_locator_confidence": 0.905
-  },
-  "paraphrase": {
-    "questions_with_nonliteral_answer_mapping": 405,
-    "questions_with_mapping_total": 405,
-    "probability": 1.0,
-    "pair_classes": {
-      "低词面同义改写": 519,
-      "部分词面重合": 47,
-      "字面一致": 3
+    "nonexact_locator_mapping": {
+      "count": 198,
+      "denominator": 396,
+      "probability": 0.5
     },
-    "note": "这是正确选项与证据短语的改写率；不是题干定位锚点本身的同义替换率。"
+    "manual_synonym_review": {
+      "dictionary_candidates_reviewed": 28,
+      "verified_secondary_relation_synonyms": 8,
+      "verified_secondary_rate_all_questions": 0.019,
+      "verified_secondary_rate_usable_locators": 0.0202,
+      "pure_hard_locator_synonym_required_observed": 0,
+      "note": "人工复核的是定位短语中的关系词；所有确认案例仍保留至少一个可直接扫描的主体、对象、专名或限定词。"
+    },
+    "locator_coverage_train": {
+      "questions": 270,
+      "located": 254,
+      "coverage": 0.9407,
+      "usable_locators": 254,
+      "strict_synonym_rate": 0.0827
+    },
+    "locator_coverage_test": {
+      "questions": 150,
+      "located": 142,
+      "coverage": 0.9467,
+      "usable_locators": 142,
+      "strict_synonym_rate": 0.0493
+    },
+    "locator_coverage_all": {
+      "questions": 420,
+      "located": 396,
+      "coverage": 0.9429,
+      "usable_locators": 396,
+      "strict_synonym_rate": 0.0707
+    },
+    "evidence_relative_to_locator_paragraph": {
+      "count": 396,
+      "counts": {
+        "证据在前一段": 18,
+        "同段": 312,
+        "证据在前两段及以上": 10,
+        "证据在后两段及以上": 13,
+        "证据在后一段": 43
+      },
+      "probabilities": {
+        "证据在前一段": 0.0455,
+        "同段": 0.7879,
+        "证据在前两段及以上": 0.0253,
+        "证据在后两段及以上": 0.0328,
+        "证据在后一段": 0.1086
+      }
+    },
+    "answer_relative_to_locator_sentence": {
+      "count": 396,
+      "coverage": 0.9429,
+      "counts": {
+        "前两句及以上": 40,
+        "本句": 213,
+        "后一句": 56,
+        "后两句及以上": 59,
+        "前一句": 28
+      },
+      "probabilities": {
+        "前两句及以上": 0.101,
+        "本句": 0.5379,
+        "后一句": 0.1414,
+        "后两句及以上": 0.149,
+        "前一句": 0.0707
+      }
+    },
+    "patterns_by_question_type": {
+      "主旨题": {
+        "questions": 10,
+        "usable_locators": 3,
+        "strict_synonym_rate": 0.0,
+        "no_hard_or_unresolved": 7
+      },
+      "例证目的题": {
+        "questions": 5,
+        "usable_locators": 5,
+        "strict_synonym_rate": 0.2,
+        "no_hard_or_unresolved": 0
+      },
+      "态度题": {
+        "questions": 5,
+        "usable_locators": 5,
+        "strict_synonym_rate": 0.0,
+        "no_hard_or_unresolved": 0
+      },
+      "推断题": {
+        "questions": 19,
+        "usable_locators": 18,
+        "strict_synonym_rate": 0.0,
+        "no_hard_or_unresolved": 1
+      },
+      "细节题": {
+        "questions": 377,
+        "usable_locators": 361,
+        "strict_synonym_rate": 0.0748,
+        "no_hard_or_unresolved": 16
+      },
+      "词义句意题": {
+        "questions": 4,
+        "usable_locators": 4,
+        "strict_synonym_rate": 0.0,
+        "no_hard_or_unresolved": 0
+      }
+    },
+    "patterns_by_question_position": {
+      "首题": {
+        "questions": 84,
+        "usable_locators": 81,
+        "strict_synonym_rate": 0.0494,
+        "no_hard_or_unresolved": 3
+      },
+      "中间题": {
+        "questions": 252,
+        "usable_locators": 241,
+        "strict_synonym_rate": 0.0871,
+        "no_hard_or_unresolved": 11
+      },
+      "末题": {
+        "questions": 84,
+        "usable_locators": 74,
+        "strict_synonym_rate": 0.0405,
+        "no_hard_or_unresolved": 10
+      }
+    },
+    "deduplicated_by_passage_and_stem": {
+      "questions": 390,
+      "usable_locators": 366,
+      "verified_secondary_relation_synonyms": 8,
+      "verified_secondary_rate_all_questions": 0.0205,
+      "verified_secondary_rate_usable_locators": 0.0219,
+      "pure_hard_locator_synonym_required_observed": 0,
+      "answer_relative_to_locator_sentence": {
+        "count": 366,
+        "counts": {
+          "前两句及以上": 39,
+          "本句": 198,
+          "后一句": 48,
+          "后两句及以上": 55,
+          "前一句": 26
+        },
+        "probabilities": {
+          "前两句及以上": 0.1066,
+          "本句": 0.541,
+          "后一句": 0.1311,
+          "后两句及以上": 0.1503,
+          "前一句": 0.071
+        }
+      }
+    }
   },
   "source_question_types": {
     "细节题": 377,
     "词义句意题": 4,
-    "推断题": 17,
+    "主旨题": 10,
+    "推断题": 19,
     "例证目的题": 5,
-    "态度题": 2
+    "态度题": 5
   },
   "solver_question_types": {
     "事实细节题": {
       "count": 295,
-      "share": 0.7024,
-      "annotated_count": 287,
-      "nonliteral_answer_mapping_rate": 1.0
+      "share": 0.7024
     },
     "原因题": {
       "count": 43,
-      "share": 0.1024,
-      "annotated_count": 43,
-      "nonliteral_answer_mapping_rate": 1.0
+      "share": 0.1024
     },
     "推断判断题": {
       "count": 32,
-      "share": 0.0762,
-      "annotated_count": 29,
-      "nonliteral_answer_mapping_rate": 1.0
+      "share": 0.0762
     },
     "方式过程题": {
       "count": 27,
-      "share": 0.0643,
-      "annotated_count": 27,
-      "nonliteral_answer_mapping_rate": 1.0
+      "share": 0.0643
     },
     "态度观点题": {
       "count": 17,
-      "share": 0.0405,
-      "annotated_count": 14,
-      "nonliteral_answer_mapping_rate": 1.0
+      "share": 0.0405
     },
     "例证目的题": {
       "count": 4,
-      "share": 0.0095,
-      "annotated_count": 4,
-      "nonliteral_answer_mapping_rate": 1.0
+      "share": 0.0095
     },
     "词义指代题": {
       "count": 1,
-      "share": 0.0024,
-      "annotated_count": 1,
-      "nonliteral_answer_mapping_rate": 1.0
+      "share": 0.0024
     },
     "主旨目的题": {
       "count": 1,
-      "share": 0.0024,
-      "annotated_count": 0,
-      "nonliteral_answer_mapping_rate": 0.0
+      "share": 0.0024
     }
   },
   "markers": {
@@ -148,5 +288,11 @@
       "according to",
       "what does ... say/learn"
     ]
-  }
+  },
+  "method_notes": [
+    "定位锚点只由同篇五个题干、题号顺序和本地词性信息选择，不读取选项或答案。",
+    "答案证据段和证据句来自careful_reading_analysis；15个原缺失项由解析页显式原文改写对回配文章后补齐。",
+    "本句/前后句统计覆盖396题；24题无可靠硬定位，不强行制造定位句。",
+    "词典产生28个同义候选，逐条人工复核后仅8题存在关系词同义改写；8题仍保留可直接扫描的主体/对象/专名/限定词。"
+  ]
 }
