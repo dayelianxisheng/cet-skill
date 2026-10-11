@@ -4,6 +4,7 @@ data/*_audit.json
 data/external-sources/
 data/lexical/raw/
 data/lexical/normalized/
+data/cet4_candidate.sql
 
 __pycache__/
 *.pyc
