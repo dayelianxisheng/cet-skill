@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CET-4 仔细阅读定位与同义替换训练工具" />
+    <title>CET-4 仔细阅读定位训练</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">L</div>
+          <div>
+            <p class="eyebrow">CET-4 READING LAB</p>
+            <h1>仔细阅读定位训练</h1>
+          </div>
+        </div>
+        <div class="top-actions">
+          <label class="mode-select">
+            <span>训练模式</span>
+            <select id="modeSelect">
+              <option value="guided">引导模式</option>
+              <option value="blind">盲练模式</option>
+              <option value="review">复盘模式</option>
+            </select>
+          </label>
+          <button class="button button-ghost" id="exportButton" type="button">导出记录</button>
+          <label class="button button-ghost file-button">
+            导入记录<input id="importInput" type="file" accept="application/json" />
+          </label>
+        </div>
+      </header>
+
+      <section class="dataset-bar" aria-label="选择练习材料">
+        <div class="dataset-copy">
+          <span class="live-dot"></span>
+          <span id="datasetStats">正在载入题库…</span>
+        </div>
+        <label class="passage-picker">
+          <span>练习材料</span>
+          <select id="passageSelect" aria-label="选择年份、卷次和文章"></select>
+        </label>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>本篇进度</span><strong id="progressText">0 / 5</strong></div>
+          <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
+        </div>
+      </section>
+
+      <main class="workspace">
+        <section class="reading-panel panel">
+          <div class="panel-heading reading-heading">
+            <div>
+              <p class="section-kicker" id="passageMeta">READING PASSAGE</p>
+              <h2 id="passageTitle">文章全文</h2>
+            </div>
+            <button class="button button-small button-ghost" id="clearEvidenceButton" type="button">清除本题划线</button>
+          </div>
+          <div class="reading-tip" id="readingTip">
+            <span class="tip-icon">↗</span>
+            点击句子完成粗定位；划取文字保存为答案证据或同义替换。
+          </div>
+          <article id="articleBody" class="article-body" tabindex="0" aria-label="阅读文章全文"></article>
+          <div id="selectionToolbar" class="selection-toolbar" hidden>
+            <span id="selectionPreview"></span>
+            <button id="saveSelectionButton" type="button">保存为本题证据</button>
+            <button id="pairSelectionButton" type="button" class="pair-selection-button" hidden>配成同义替换</button>
+            <button id="cancelSelectionButton" class="selection-cancel" type="button" aria-label="取消">×</button>
+          </div>
+          <div class="legend">
+            <span><i class="legend-current"></i>当前题证据</span>
+            <span><i class="legend-other"></i>其他题证据</span>
+          </div>
+        </section>
+
+        <section class="training-panel panel">
+          <nav class="question-nav" id="questionNav" aria-label="题目导航"></nav>
+
+          <div class="question-card">
+            <div class="question-number-row">
+              <span id="questionBadge" class="question-badge">Q46</span>
+              <span id="questionStatus" class="status-pill">未开始</span>
+            </div>
+            <h2 id="questionStem" class="question-stem">正在载入题目…</h2>
+            <div id="questionSelectionToolbar" class="selection-toolbar question-selection-toolbar" hidden>
+              <span id="questionSelectionPreview"></span>
+              <button id="useAsLocatorButton" type="button">设为定位词</button>
+              <button id="useAsPhraseButton" type="button">用于同义配对</button>
+              <button id="cancelQuestionSelectionButton" class="selection-cancel" type="button" aria-label="取消">×</button>
+            </div>
+            <details id="optionsDetails" class="options-details" open>
+              <summary>点击选择你的最终答案</summary>
+              <ol id="optionsList" class="options-list"></ol>
+            </details>
+          </div>
+
+          <div class="step-list">
+            <section class="step-card" data-step="1">
+              <div class="step-head">
+                <span class="step-index">01</span>
+                <div><h3>题干硬定位词</h3><p>直接在上方题干中划取文字，点击“设为定位词”。</p></div>
+              </div>
+              <div id="locatorChips" class="locator-chips empty-state">尚未划取定位词</div>
+              <button id="noLocatorButton" class="button button-small button-ghost no-locator-button" type="button">本题没有硬定位词</button>
+              <div class="mouse-choice-row">
+                <span>粗定位句</span>
+                <button id="locatorSentenceButton" class="mouse-choice" type="button">点击左侧原文中的句子</button>
+              </div>
+            </section>
+
+            <section class="step-card" data-step="2">
+              <div class="step-head">
+                <span class="step-index">02</span>
+                <div><h3>文章选择依据</h3><p>只划能够推出答案的最小证据范围，避免整段全划。</p></div>
+              </div>
+              <div id="evidenceList" class="evidence-list empty-state">还没有保存证据。请在左侧文章中选中文字。</div>
+            </section>
+
+            <section class="step-card" data-step="3">
+              <div class="step-head">
+                <span class="step-index">03</span>
+                <div><h3>同义替换配对</h3><p>先划题目表达，再划原文表达，点击“配成同义替换”。</p></div>
+              </div>
+              <div id="pairDraft" class="pair-draft empty-state">
+                在题干中划取表达，或点击选项右侧的“配对”按钮。
+              </div>
+              <div id="pairList" class="pair-list"></div>
+            </section>
+
+            <details class="optional-note">
+              <summary>可选：补充自己的答案命题</summary>
+              <textarea id="propositionInput" class="text-input proposition" rows="3" placeholder="这一步不是必填，需要时再写"></textarea>
+            </details>
+          </div>
+
+          <section class="answer-zone" id="answerZone">
+            <div id="answerLocked" class="answer-locked">
+              <div><p class="answer-label">FINAL CHECK</p><h3>完成定位后再核对答案</h3></div>
+              <button id="revealAnswerButton" class="button button-primary" type="button">核对正确答案</button>
+            </div>
+            <div id="answerRevealed" class="answer-revealed" hidden>
+              <p class="answer-label">CORRECT ANSWER</p>
+              <div class="answer-content"><strong id="answerLetter">A</strong><span id="answerText"></span></div>
+            </div>
+          </section>
+
+          <div class="footer-actions">
+            <button id="previousButton" class="button button-ghost" type="button">上一题</button>
+            <button id="completeButton" class="button button-dark" type="button">完成并进入下一题</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="app.js" defer></script>
+  </body>
+</html>
