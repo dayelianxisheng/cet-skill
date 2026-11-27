@@ -35,7 +35,9 @@ OPTION_RE = re.compile(r"^\s*([A-D])\.\s*(.*)$")
 # A second option on the same PDF text line is column-aligned with at least
 # two spaces.  Requiring that gap avoids misreading "Ph. D." as option D.
 OPTION_TOKEN_RE = re.compile(r"(?:^|\s{2,})([A-D])\.\s*")
-MATCHING_PARAGRAPH_RE = re.compile(r"^\s*([A-O])\)\s*(.*)$")
+# Most papers end at O, but a few historical matching passages continue to P
+# or Q.  Do not conflate this with the A-O word bank below.
+MATCHING_PARAGRAPH_RE = re.compile(r"^\s*([A-Z])\)\s*(.*)$")
 WORD_BANK_RE = re.compile(r"(?:^|\s)([A-O])\.\s*([A-Za-z][A-Za-z'’-]*)")
 GROUP_RANGE_RE = re.compile(r"questions?\s+(\d{1,2})\s+(?:to|and)\s+(\d{1,2})", re.I)
 GROUP_RANGE_ALT_RE = re.compile(r"questions?\s+(\d{1,2})\s*[-–]\s*(\d{1,2})", re.I)
