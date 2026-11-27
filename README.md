@@ -63,6 +63,8 @@ Codex 对本地四六级材料进行了逐份登记、分类和结构化解析�
 - 用户提交译文后，分析信息完整度、误译、中式英语、搭配、语序和表达自然度；
 - 提供标准译文、高分译文和可复用表达。
 
+四级翻译语料还提供完整的分句与高频统计数据：数据库原始记录 42 条，其中 41 篇有效翻译材料被拆成 391 个简单句/语义单元；汇总得到 45 类英文结构标签和 19 类内容主题。明细见 `analysis/translation_clause_annotations.tsv`，统计见 `analysis/translation_frequency.json` 和 `analysis/translation_high_frequency_report.md`，可直接导入 MySQL 的完整表与频次视图见 `data/cet4_translation_clause_analysis.sql`。
+
 ### 阅读训练
 
 阅读模块严格区分三种题型：

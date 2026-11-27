@@ -1,0 +1,392 @@
+prompt_id	exam	set_number	unit	zh_clause	zh_backbone	en_phrase	pattern	theme
+1	2020-09	1	01	茶拥有5000年的历史	茶—拥有—历史	have a history of 5,000 years	have/contain/include	茶文化;文化传统
+1	2020-09	1	02	几片野树叶落进开水里	树叶—落进—开水	fall into the boiling water	动作与过程	茶文化
+1	2020-09	1	03	开水顿时散发出宜人的香味	开水—散发—香味	give off a pleasant smell	动作与过程	茶文化
+1	2020-09	1	04	神农喝后觉得很提神	神农—觉得—提神	feel refreshed after drinking it	感官与状态	茶文化
+1	2020-09	1	05	茶就这样被发现了	茶—被发现	be discovered in this way	被动语态	茶文化;文化传统
+1	2020-09	1	06	茶开始在中国流行	茶—开始流行	become popular in China	流行与欢迎	茶文化
+1	2020-09	1	07	茶园遍布全国	茶园—遍布—全国	be found throughout the country	被动语态;地点与分布	茶文化
+1	2020-09	1	08	茶具成了地位的象征	茶具—成为—象征	become a symbol of status	成为;象征与代表	茶文化;文化传统
+1	2020-09	1	09	茶是健康饮品和中国文化的一部分	茶—是—饮品与组成部分	be a healthy drink and an integral part of Chinese culture	是与定义;组成部分	茶文化;文化传统
+1	2020-09	1	10	越来越多的国际游客品茶并了解中国文化	游客—品茶并了解—文化	learn about Chinese culture while enjoying tea	伴随与同时;越来越多	茶文化;文化传播
+1	2020-09	1	11	茶商变得富有	茶商—变得—富有	become wealthy through the tea trade	成为;结果与后果	茶文化;经济发展
+2	2020-09	2	01	茅台是中国最有名的白酒	茅台—是—白酒	be China's best-known liquor	是与定义	饮食健康;文化传统
+2	2020-09	2	02	茅台被选为国宴用酒	茅台—被选为—国宴用酒	be chosen for state banquets	被动语态	饮食健康;文化传统
+2	2020-09	2	03	村民四千年前就开始酿造茅台	村民—开始酿造—茅台	begin making Moutai 4,000 years ago	开始与持续	饮食健康;文化传统
+2	2020-09	2	04	当地人生产出了高质量的茅台	人们—生产—茅台	produce high-quality Moutai	动作与过程	饮食健康
+2	2020-09	2	05	人们把茅台贡给皇帝	人们—进贡—茅台	offer it to the emperor as tribute	动作与过程	文化传统
+2	2020-09	2	06	这种酒通过海上丝绸之路运往海外	酒—被运往—海外	be shipped overseas via the Maritime Silk Road	被动语态;方式与途径	文化传播
+2	2020-09	2	07	茅台有特殊的香味	茅台—有—香味	have a distinctive aroma	have/contain/include	饮食健康
+2	2020-09	2	08	适量饮用可以缓解疲劳并使人镇静	适量饮用—缓解并镇静—人	help relieve fatigue and calm the nerves	help (to) do	饮食健康
+2	2020-09	2	09	茅台广受国内外消费者喜爱	茅台—受到—喜爱	be popular with consumers at home and abroad	流行与欢迎;被动语态	饮食健康;文化传播
+2	2020-09	2	10	新中国成立前夕茅台被选为国宴用酒	茅台—被选为—国宴用酒	be selected for state banquets before the founding of New China	被动语态;时间结构	饮食健康;文化传统
+2	2020-09	2	11	西汉时期当地人把优质茅台贡给皇帝	当地人—进贡—茅台	offer high-quality Moutai to the emperor during the Western Han Dynasty	动作与过程;时间结构	饮食健康;文化传统
+2	2020-09	2	12	自唐朝起茅台经海上丝路销往海外	茅台—销往—海外	be exported overseas via the Maritime Silk Road from the Tang Dynasty onward	被动语态;时间结构	文化传播
+3	2020-12	1	01	中国不同地区的人们饮食多种多样	饮食—多样	vary greatly across different regions of China	变化与差异;地点与分布	饮食健康
+3	2020-12	1	02	北方人主要吃面食	北方人—吃—面食	mainly eat food made from wheat	动作与过程	饮食健康
+3	2020-12	1	03	南方人大多吃米饭	南方人—吃—米饭	mostly eat rice as a staple	动作与过程	饮食健康
+3	2020-12	1	04	水产品在沿海地区饮食中占有较大比例	水产品—占—比例	account for a large share of the coastal diet	占比与数量	饮食健康
+3	2020-12	1	05	肉类和奶制品在其他地区更常见	肉奶制品—更常见	be more common in other regions	比较结构;地点与分布	饮食健康
+3	2020-12	1	06	四川和湖南居民爱吃辛辣食物	居民—喜欢—辣食	be fond of spicy food	偏好与选择	饮食健康
+3	2020-12	1	07	江苏和浙江人更喜欢甜食	居民—更喜欢—甜食	prefer sweet food	比较结构;偏好与选择	饮食健康
+3	2020-12	1	08	烹饪方式不同会使同类食物味道不同	烹饪方式—使—味道不同	make the same food taste different	使役结构;变化与差异	饮食健康
+4	2020-12	2	01	春节前夕吃团圆饭是中国人的传统	吃团圆饭—是—传统	be a Chinese tradition on Lunar New Year's Eve	是与定义	饮食健康;文化传统
+4	2020-12	2	02	团圆饭是一年中最重要的晚餐	团圆饭—是—晚餐	be the most important dinner of the year	是与定义;最高级	饮食健康;文化传统
+4	2020-12	2	03	团圆饭是家庭团聚的最佳时机	团圆饭—是—时机	be the best occasion for a family reunion	是与定义;最高级	文化传统
+4	2020-12	2	04	团圆饭上的菜肴丰富多样	菜肴—丰富多样	feature a rich variety of dishes	have/contain/include	饮食健康
+4	2020-12	2	05	有些菜肴有特殊含义	菜肴—有—含义	carry special meanings	have/contain/include	饮食健康;文化传统
+4	2020-12	2	06	鱼是不可缺少的一道菜	鱼—是—菜	be an indispensable dish	是与定义	饮食健康;文化传统
+4	2020-12	2	07	“鱼”和“余”听上去一样	鱼和余—发音相同	sound the same in Chinese	感官与状态	文化传统
+4	2020-12	2	08	饺子象征财富和好运	饺子—象征—财富好运	symbolize wealth and good luck	象征与代表	饮食健康;文化传统
+4	2020-12	2	09	团圆饭对家人分居各地的家庭尤其重要	团圆饭—对家庭重要	be especially important to families whose members live apart	重要性	文化传统
+5	2020-12	3	01	鱼是春节前夕不可或缺的一道菜	鱼—是—菜	be an essential dish on Lunar New Year's Eve	是与定义	饮食健康;文化传统
+5	2020-12	3	02	“鱼”与“余”的发音相同	鱼和余—发音相同	have the same pronunciation	have/contain/include	文化传统
+5	2020-12	3	03	春节期间人们把鱼作为礼物送给亲友	人们—赠送—鱼	give fish to relatives and friends as a gift	动作与过程	文化传统
+5	2020-12	3	04	鱼的象征意义源于中国传统文化	意义—源于—文化	originate from traditional Chinese culture	起源与历史	文化传统
+5	2020-12	3	05	中国人有节省的传统	中国人—有—传统	have a tradition of saving	have/contain/include	文化传统
+5	2020-12	3	06	节省得越多人们越有安全感	节省越多—越安全	the more people save, the safer they feel	越…越…;比较结构	文化传统
+5	2020-12	3	07	人们仍认为节省是值得弘扬的美德	人们—认为—节省是美德	regard thrift as a virtue worth promoting	认为与评价	文化传统
+5	2020-12	3	08	如今人们变得越来越富裕	人们—变得—富裕	become increasingly prosperous	成为;越来越多	社会发展
+6	2021-06	1	01	铁观音是中国最受欢迎的茶之一	铁观音—是—茶	be one of the most popular teas in China	是与定义;流行与欢迎	茶文化
+6	2021-06	1	02	铁观音原产于福建安溪	铁观音—原产于—安溪	originate in Anxi, Fujian Province	起源与历史;地点与分布	茶文化
+6	2021-06	1	03	安溪全县普遍种植铁观音	安溪—种植—铁观音	be widely grown across Anxi County	被动语态;地点与分布	茶文化;农业
+6	2021-06	1	04	不同地区生产的铁观音各具风味	铁观音—风味不同	have distinct flavors in different areas	have/contain/include;变化与差异	茶文化
+6	2021-06	1	05	铁观音一年四季均可采摘	铁观音—可采摘	be harvested throughout the year	被动语态;时间结构	茶文化;农业
+6	2021-06	1	06	春秋采摘的茶叶品质最佳	茶叶—品质最佳	be of the highest quality when picked in spring or autumn	最高级;依据与条件	茶文化;农业
+6	2021-06	1	07	铁观音加工需要技术和经验	加工—需要—技术经验	require specialized skills and extensive experience	需要与要求	茶文化
+6	2021-06	1	08	铁观音含有多种维生素	铁观音—含有—维生素	contain a variety of vitamins	have/contain/include	茶文化;饮食健康
+6	2021-06	1	09	常饮铁观音有助于预防疾病并增强记忆	常饮—有助于—健康	help prevent heart disease, lower blood pressure and improve memory	help (to) do	茶文化;饮食健康
+6	2021-06	1	10	铁观音喝起来口感独特	铁观音—口感独特	have a distinctive taste	have/contain/include;感官与状态	茶文化
+7	2021-06	2	01	普洱茶深受中国人喜爱	普洱茶—受喜爱	be highly popular among Chinese people	流行与欢迎;被动语态	茶文化
+7	2021-06	2	02	最好的普洱茶产自西双版纳	普洱茶—产自—西双版纳	come from Xishuangbanna in Yunnan	起源与历史;地点与分布	茶文化
+7	2021-06	2	03	当地气候环境为茶树生长提供最佳条件	气候环境—提供—条件	provide ideal conditions for tea trees to grow	提供;最高级	茶文化;农业
+7	2021-06	2	04	普洱茶颜色较深且味道不同	普洱茶—颜色深味道不同	have a darker color and a distinctive taste	have/contain/include;变化与差异	茶文化
+7	2021-06	2	05	普洱茶泡得越久越有味道	泡得越久—味道越浓	taste better the longer it is brewed	越…越…;被动语态	茶文化
+7	2021-06	2	06	爱茶者喜欢其独特香味和口感	爱茶者—喜欢—香味口感	appreciate its distinctive aroma and taste	偏好与选择	茶文化
+7	2021-06	2	07	普洱茶含有多种有益健康的元素	普洱茶—含有—元素	contain various health-promoting elements	have/contain/include	茶文化;饮食健康
+7	2021-06	2	08	常饮普洱茶有助于保护心血管	常饮—有助于—保护	help protect the heart and blood vessels	help (to) do	茶文化;饮食健康
+7	2021-06	2	09	普洱茶有减肥消疲和促消化功效	普洱茶—具有—功效	help with weight loss, fatigue relief and digestion	help (to) do	茶文化;饮食健康
+8	2021-06	3	01	龙井是一种绿茶	龙井—是—绿茶	be a type of green tea	是与定义	茶文化
+8	2021-06	3	02	龙井主要产自浙江省	龙井—产自—浙江	be mainly produced in Zhejiang Province	被动语态;地点与分布	茶文化
+8	2021-06	3	03	独特香味和口感为龙井赢得名茶称号	香味口感—赢得—称号	earn Longjing the title of a famous Chinese tea	使役结构;认为与评价	茶文化
+8	2021-06	3	04	龙井在中国深受大众欢迎	龙井—受欢迎	be highly popular in China	流行与欢迎	茶文化
+8	2021-06	3	05	海外饮用龙井的人越来越多	饮用者—越来越多	attract a growing number of overseas drinkers	越来越多	茶文化;文化传播
+8	2021-06	3	06	龙井茶通常手工制作	龙井茶—被制作	be usually made by hand	被动语态;方式与途径	茶文化
+8	2021-06	3	07	龙井价格取决于产地采摘时间和工艺	价格—取决于—因素	depend on where and when it is picked and how it is processed	取决于;被动语态	茶文化
+8	2021-06	3	08	龙井富含维生素C等有益元素	龙井—富含—元素	be rich in vitamin C and other beneficial elements	have/contain/include	茶文化;饮食健康
+8	2021-06	3	09	常饮龙井有助于减轻疲劳延缓衰老	常饮—有助于—健康	help reduce fatigue and slow aging	help (to) do	茶文化;饮食健康
+8	2021-06	3	10	龙井价格可能极高也可能较低	价格—高或低	range from extremely expensive to relatively affordable	变化与差异;比较结构	茶文化
+9	2021-12	1	01	大运河是世界上最长的人工河	大运河—是—人工河	be the world's longest man-made river	是与定义;最高级	工程建设
+9	2021-12	1	02	大运河北起北京南至杭州	大运河—连接—北京杭州	run from Beijing in the north to Hangzhou in the south	地点与分布	工程建设
+9	2021-12	1	03	大运河是中国最宏伟的工程之一	大运河—是—工程	be one of the most magnificent projects in Chinese history	是与定义;最高级	工程建设
+9	2021-12	1	04	大运河始建于公元前4世纪	大运河—始建于—公元前4世纪	date back to the fourth century BC	起源与历史	工程建设
+9	2021-12	1	05	大运河在13世纪末建成	大运河—建成	be completed by the end of the thirteenth century	被动语态;时间结构	工程建设
+9	2021-12	1	06	大运河最初用于运输粮食	大运河—用于—运粮	be initially used to transport grain	用途与功能;被动语态	工程建设
+9	2021-12	1	07	沿线区域发展成为工商业中心	区域—发展成为—中心	develop into centers of industry and commerce	发展与变化;成为	经济发展
+9	2021-12	1	08	大运河对经济发展发挥重要作用	大运河—发挥—作用	play an important role in China's economic development	发挥作用	经济发展;工程建设
+9	2021-12	1	09	大运河促进人员往来和文化交流	大运河—促进—往来交流	promote travel and cultural exchange between north and south	促进与推动	文化传播;经济发展
+9	2021-12	1	10	大运河后来也用于运输其他商品	大运河—用于—运送商品	later be used to transport other goods	用途与功能;被动语态	工程建设;经济发展
+10	2021-12	2	01	坎儿井是干旱地区的水利系统	坎儿井—是—系统	be an irrigation system in arid areas	是与定义	工程建设
+10	2021-12	2	02	地下渠道将水井连接起来	渠道—连接—水井	connect wells through underground channels	动作与过程	工程建设
+10	2021-12	2	03	该系统收集雨水和积雪融水	系统—收集—水	collect rainwater and melted snow	动作与过程	工程建设;环境保护
+10	2021-12	2	04	系统利用山体坡度把水引到地面	系统—引—水	channel water to the surface by using the natural slope	方式与途径	工程建设
+10	2021-12	2	05	水被用于灌溉和满足日常用水	水—用于—灌溉用水	be used for irrigation and daily needs	用途与功能;被动语态	工程建设;农业
+10	2021-12	2	06	坎儿井减少地表水蒸发	坎儿井—减少—蒸发	reduce surface evaporation	减少与保护	工程建设;环境保护
+10	2021-12	2	07	坎儿井有效保护自然资源和生态环境	坎儿井—保护—资源环境	protect natural resources and the ecological environment	减少与保护	环境保护
+10	2021-12	2	08	坎儿井体现人与自然和谐共存的智慧	坎儿井—体现—智慧	embody the wisdom of living in harmony with nature	象征与代表	文化传统;环境保护
+10	2021-12	2	09	坎儿井是对人类文明的一大贡献	坎儿井—是—贡献	make a major contribution to human civilization	贡献	工程建设;文化传统
+10	2021-12	2	10	坎儿井对地表破坏很小	坎儿井—很少破坏—地表	cause little damage to the ground surface	减少与保护	工程建设;环境保护
+11	2021-12	3	01	都江堰坐落在岷江上	都江堰—坐落于—岷江	be located on the Min River	地点与分布	工程建设
+11	2021-12	3	02	都江堰距成都约50公里	都江堰—距离—成都	be about 50 kilometers from Chengdu	地点与分布	工程建设
+11	2021-12	3	03	都江堰始建于公元前三世纪	都江堰—始建于—公元前三世纪	date back to the third century BC	起源与历史	工程建设
+11	2021-12	3	04	都江堰无需堤坝调控水流	都江堰—无需—堤坝	regulate water flow without using dams	方式与途径	工程建设
+11	2021-12	3	05	都江堰长期发挥防洪灌溉作用	都江堰—发挥—作用	serve flood-control and irrigation purposes for over 2,000 years	发挥作用;时间结构	工程建设;农业
+11	2021-12	3	06	都江堰使成都平原成为沃土和粮食产地	都江堰—使—平原成为产地	turn the Chengdu Plain into fertile land and a major grain-producing area	使役结构;成为	工程建设;农业
+11	2021-12	3	07	工程体现人与自然和谐共存的智慧	工程—体现—智慧	embody the wisdom of living in harmony with nature	象征与代表	文化传统;环境保护
+11	2021-12	3	08	都江堰是仍在使用的最古老无坝水利工程	都江堰—是—工程	be the world's oldest dam-free water-control project still in use	是与定义;最高级	工程建设
+12	2022-06	1	01	农夫嫌禾苗长得慢	农夫—嫌—禾苗慢	be impatient with the slow growth of his seedlings	感官与状态	寓言故事;农业
+12	2022-06	1	02	农夫把禾苗逐株拔高	农夫—拔高—禾苗	pull each seedling upward	动作与过程	寓言故事;农业
+12	2022-06	1	03	农夫认为自己让禾苗长高了	农夫—认为—禾苗长高	believe that he has helped the seedlings grow	认为与评价;help (to) do	寓言故事
+12	2022-06	1	04	禾苗最后全死了	禾苗—死去	die as a result	结果与后果	寓言故事;农业
+12	2022-06	1	05	有些家长急于让孩子成功	家长—急于—孩子成功	be eager to make their children succeed	使役结构	教育;寓言故事
+12	2022-06	1	06	这些家长重蹈农夫覆辙	家长—重蹈—覆辙	follow in the farmer's footsteps	动作与过程	教育;寓言故事
+12	2022-06	1	07	家长使孩子苦不堪言	家长—使—孩子痛苦	make their children suffer	使役结构	教育
+12	2022-06	1	08	家长没有看到孩子学业进步	家长—未看到—进步	see no improvement in their children's studies	结果与后果	教育
+12	2022-06	1	09	家长应让孩子自然成长	家长—让—孩子成长	allow children to grow at their own pace	使役结构	教育;寓言故事
+12	2022-06	1	10	拔苗使农夫筋疲力尽	拔苗—使—农夫疲惫	leave the farmer exhausted	使役结构;结果与后果	寓言故事;农业
+12	2022-06	1	11	农夫的儿子发现禾苗全死了	儿子—发现—禾苗死亡	find that all the seedlings have died	感官与状态;结果与后果	寓言故事;农业
+13	2022-06	2	01	一个人养了一群羊	人—养—羊	keep a flock of sheep	动作与过程	寓言故事
+13	2022-06	2	02	他发现少了一只羊	他—发现—羊少了	discover that one sheep is missing	感官与状态	寓言故事
+13	2022-06	2	03	羊栏上有个窟窿	羊栏—有—窟窿	have a hole in the sheepfold	have/contain/include	寓言故事
+13	2022-06	2	04	狼钻进羊圈叼走了羊	狼—叼走—羊	get into the sheepfold and carry off a sheep	动作与过程	寓言故事
+13	2022-06	2	05	邻居劝他修羊栏	邻居—劝—他修栏	advise him to repair the sheepfold	建议与要求	寓言故事
+13	2022-06	2	06	他没有听从建议	他—不听—建议	ignore the advice	偏好与选择	寓言故事
+13	2022-06	2	07	狼又叼走了一只羊	狼—又叼走—羊	carry off another sheep	动作与过程	寓言故事
+13	2022-06	2	08	他堵住窟窿并修好羊栏	他—修补—羊栏	block the hole and repair the sheepfold	动作与过程	寓言故事
+13	2022-06	2	09	他的羊不再被狼叼走	羊—不再被叼走	no longer be carried off by wolves	被动语态;结果与后果	寓言故事
+13	2022-06	2	10	及时补救可以防止更大损失	补救—防止—损失	take timely action to prevent greater losses	目的结构;减少与保护	寓言故事
+14	2022-06	3	01	农夫在地里耕作	农夫—耕作	work in the field	动作与过程	寓言故事;农业
+14	2022-06	3	02	兔子撞在树上死了	兔子—撞树死亡	run into a tree and die	动作与过程;结果与后果	寓言故事
+14	2022-06	3	03	农夫毫不费力吃到兔肉	农夫—得到—兔肉	get rabbit meat without effort	方式与途径	寓言故事
+14	2022-06	3	04	农夫希望这种事总会发生	农夫—希望—事情发生	wish the same thing would happen again	愿望与期望	寓言故事
+14	2022-06	3	05	农夫不再耕作	农夫—停止—耕作	stop working in the field	开始与持续	寓言故事;农业
+14	2022-06	3	06	农夫每天守在树旁等兔子	农夫—守候—兔子	wait by the tree for another rabbit	动作与过程	寓言故事
+14	2022-06	3	07	田地荒芜了	田地—荒芜	be left uncultivated	被动语态;结果与后果	寓言故事;农业
+14	2022-06	3	08	农夫没有等到第二只兔子	农夫—没有等到—兔子	fail to find another rabbit	结果与后果	寓言故事
+14	2022-06	3	09	人们嘲笑他把偶然当必然	人们—嘲笑—农夫	be laughed at for mistaking chance for certainty	被动语态;认为与评价	寓言故事
+15	2022-09	1	01	太极拳起源于中国古代	太极拳—起源于—古代中国	originate in ancient China	起源与历史	文化传统;体育健康
+15	2022-09	1	02	太极拳是中国武术的重要分支	太极拳—是—分支	be an important branch of Chinese martial arts	是与定义;组成部分	文化传统;体育健康
+15	2022-09	1	03	练太极拳最初是为了自卫	练太极拳—为了—自卫	be originally practiced for self-defense	目的结构;被动语态	体育健康
+15	2022-09	1	04	太极拳现在是促进身心健康的锻炼方式	太极拳—是—锻炼方式	be an effective exercise for physical and mental health	是与定义;用途与功能	体育健康
+15	2022-09	1	05	太极拳有助于保持力量灵活性和平衡	太极拳—有助于—保持能力	help maintain strength, flexibility and balance	help (to) do	体育健康
+15	2022-09	1	06	太极拳有助于减少压力和焦虑	太极拳—减少—压力焦虑	help reduce stress and anxiety	help (to) do	体育健康
+15	2022-09	1	07	太极拳练习起来容易又愉快	太极拳—容易愉快	be easy and enjoyable to practice	是与定义;感官与状态	体育健康
+15	2022-09	1	08	轻柔动作使人心情平静头脑清晰	动作—使—心情头脑变化	calm the mind and clear the head	使役结构	体育健康
+15	2022-09	1	09	太极拳已经传播到世界各地	太极拳—传播到—世界	spread throughout the world	地点与分布;发展与变化	文化传统;体育健康
+15	2022-09	1	10	太极拳深受健身者喜爱	太极拳—受喜爱	be popular among fitness enthusiasts	流行与欢迎	体育健康
+15	2022-09	1	11	大量研究表明太极拳有益健康	研究—表明—太极拳有益健康	studies show that Taijiquan offers health benefits	认为与评价	体育健康
+16	2022-12	1	01	立秋意味着夏天结束和秋天开始	立秋—意味着—季节更替	mark the end of summer and the beginning of autumn	象征与代表	节气时令
+16	2022-12	1	02	立秋首先带来天气变化	立秋—带来—变化	bring changes in the weather	变化与差异	节气时令
+16	2022-12	1	03	气温逐渐下降	气温—下降	fall gradually	发展与变化	节气时令
+16	2022-12	1	04	树叶开始变黄飘落	树叶—变黄飘落	begin to turn yellow and fall	开始与持续;发展与变化	节气时令
+16	2022-12	1	05	酷热天气尚未完全结束	酷热天气—未结束	not come to a complete end	开始与持续	节气时令
+16	2022-12	1	06	高温还会持续一段时间	高温—持续	continue for some time	开始与持续;时间结构	节气时令
+16	2022-12	1	07	这段高温被称为秋老虎	高温—被称为—秋老虎	be known as an autumn tiger	被动语态;认为与评价	节气时令;文化传统
+16	2022-12	1	08	立秋对农民意义重大	立秋—意义重大	be of great importance to farmers	重要性	节气时令;农业
+16	2022-12	1	09	秋季作物迅速生长并开始成熟	作物—生长成熟	grow rapidly and begin to ripen	开始与持续;发展与变化	节气时令;农业
+16	2022-12	1	10	收获季节即将到来	季节—即将到来	be just around the corner	时间结构	节气时令;农业
+16	2022-12	1	11	人们从一片落叶知道秋天到来	人们—从落叶判断—秋天到来	know autumn has arrived from the sight of a falling leaf	依据与条件;感官与状态	节气时令;文化传统
+17	2022-12	2	01	立春表示春天开始	立春—表示—春天开始	mark the beginning of spring	象征与代表	节气时令
+17	2022-12	2	02	白天变得更长	白天—变长	grow longer	成为;发展与变化	节气时令
+17	2022-12	2	03	天气变得更温暖	天气—变暖	become warmer	成为;发展与变化	节气时令
+17	2022-12	2	04	万物开始复苏	万物—复苏	come back to life	开始与持续	节气时令
+17	2022-12	2	05	大地充满生机	大地—充满—生机	be full of vitality	have/contain/include	节气时令
+17	2022-12	2	06	农民开始播种	农民—开始—播种	begin sowing seeds	开始与持续	节气时令;农业
+17	2022-12	2	07	播种为全年丰收打下基础	播种—打下—基础	lay the foundation for a good harvest	发挥作用	节气时令;农业
+17	2022-12	2	08	中国人三千年前开始庆祝立春	中国人—开始庆祝—立春	begin celebrating the day about 3,000 years ago	开始与持续;起源与历史	节气时令;文化传统
+17	2022-12	2	09	迎春一直是民间重要习俗	迎春—是—习俗	remain an important folk custom	是与定义;时间结构	节气时令;文化传统
+17	2022-12	2	10	人们外出欣赏春景	人们—外出欣赏—美景	go outdoors to enjoy the beauty of spring	目的结构	节气时令;文化传统
+18	2022-12	3	01	冬至是一年中白昼最短黑夜最长的一天	冬至—是—一天	be the day with the shortest daylight and longest night	是与定义;最高级	节气时令
+18	2022-12	3	02	冬至标志最寒冷时节开始	冬至—标志—寒冷开始	mark the beginning of the coldest period	象征与代表;最高级	节气时令
+18	2022-12	3	03	冬至后气温越来越低	气温—越来越低	continue to fall after the winter solstice	越来越多;发展与变化	节气时令
+18	2022-12	3	04	人们户外活动逐渐减少	户外活动—减少	gradually reduce outdoor activities	减少与保护	节气时令
+18	2022-12	3	05	农民维护灌溉系统并保护作物防冻	农民—维护保护—系统作物	maintain irrigation systems and protect crops from frost	动作与过程;减少与保护	节气时令;农业
+18	2022-12	3	06	农民为来春播种做准备	农民—准备—播种	prepare for spring sowing	目的结构	节气时令;农业
+18	2022-12	3	07	中国人历来重视冬至	中国人—重视—冬至	attach great importance to the winter solstice	重要性	节气时令;文化传统
+18	2022-12	3	08	许多地方把冬至当作节日	地方—把冬至当作—节日	regard the winter solstice as a festival	认为与评价	节气时令;文化传统
+18	2022-12	3	09	各地庆祝方式不同	庆祝方式—不同	vary from place to place	变化与差异;地点与分布	节气时令;文化传统
+18	2022-12	3	10	北方人冬至吃饺子	北方人—吃—饺子	have a custom of eating jiaozi on the winter solstice	have/contain/include	饮食健康;文化传统
+18	2022-12	3	11	南方人冬至吃汤圆	南方人—吃—汤圆	have a tradition of eating tangyuan on the winter solstice	have/contain/include	饮食健康;文化传统
+19	2023-03	1	01	越来越多年轻人喜爱自助旅游	年轻人—喜爱—自助游	show a growing preference for independent travel	越来越多;偏好与选择	旅游生活
+19	2023-03	1	02	许多游客选择徒步或骑车出游	游客—选择—出游方式	choose to travel on foot or by bicycle	偏好与选择;方式与途径	旅游生活
+19	2023-03	1	03	游客自己设计路线	游客—设计—路线	plan their own routes	动作与过程	旅游生活
+19	2023-03	1	04	游客自带生活用品	游客—携带—用品	carry their own essential supplies	动作与过程	旅游生活
+19	2023-03	1	05	游客能发现新的美丽景点	游客—发现—景点	discover new scenic spots	动作与过程	旅游生活
+19	2023-03	1	06	游客有时遇到困难和突发事件	游客—遇到—困难	encounter unexpected difficulties or emergencies	结果与后果	旅游生活
+19	2023-03	1	07	游客拥抱自然并欣赏美景	游客—亲近欣赏—自然美景	get close to nature and enjoy beautiful scenery	动作与过程	旅游生活
+19	2023-03	1	08	旅行增强克服困难的勇气	旅行—增强—勇气	build the courage to overcome difficulties	促进与推动	旅游生活
+19	2023-03	1	09	旅行增强野外生存能力	旅行—增强—能力	improve wilderness survival skills	促进与推动	旅游生活
+20	2023-03	2	01	更多人开始加入自驾游行列	更多人—开始—自驾游	begin to take self-driving trips	越来越多;开始与持续	旅游生活
+20	2023-03	2	02	生活水平提高推动自驾游发展	生活水平提高—推动—自驾游	grow with the improvement in living standards	原因与结果;发展与变化	旅游生活;社会发展
+20	2023-03	2	03	自驾游者可用自家车或租车	游客—使用—车辆	travel in their own, borrowed or rented cars	方式与途径	旅游生活
+20	2023-03	2	04	司机可以是车主或同行者	司机—可以是—人员	be either the owner or a travel companion	是与定义	旅游生活
+20	2023-03	2	05	自驾游不同于传统组团旅游	自驾游—不同于—组团游	differ from traditional group tours	变化与差异	旅游生活
+20	2023-03	2	06	自驾游满足游客个性化需求	自驾游—满足—需求	better meet travelers' individual needs	满足需求	旅游生活
+20	2023-03	2	07	自驾游让游客更好享受旅程	自驾游—使—游客享受旅程	enable travelers to enjoy the journey more fully	使役结构	旅游生活
+20	2023-03	2	08	自驾游尤其受年轻人欢迎	自驾游—受欢迎	be especially popular among young travelers	流行与欢迎	旅游生活
+20	2023-03	2	09	自驾游满足年轻人对独立自由的需求	自驾游—满足—需求	satisfy young people's desire for independence and freedom	满足需求	旅游生活
+21	2023-03	3	01	越来越多城市居民被田园风光吸引	城市居民—被吸引	be attracted by the rural landscape in growing numbers	越来越多;被动语态	旅游生活
+21	2023-03	3	02	城市居民利用节假日到乡村旅游	居民—到乡村旅游	travel to the countryside during holidays	时间结构;地点与分布	旅游生活
+21	2023-03	3	03	游客住在农民家中	游客—住—农家	stay in farmers' homes	地点与分布	旅游生活
+21	2023-03	3	04	游客品尝当地农家饭菜	游客—品尝—饭菜	taste local home-style dishes	动作与过程	旅游生活;饮食健康
+21	2023-03	3	05	游客参加采摘活动并感受收获喜悦	游客—参与感受—活动喜悦	take part in fruit picking and experience the joy of harvest	参与与合作	旅游生活;农业
+21	2023-03	3	06	乡村旅游帮助游客缓解压力放松心情	乡村旅游—帮助—游客放松	help tourists relieve stress and relax	help (to) do	旅游生活;体育健康
+21	2023-03	3	07	乡村旅游增进游客身心健康	乡村旅游—增进—健康	improve physical and mental health	促进与推动	旅游生活;体育健康
+21	2023-03	3	08	乡村旅游使城市游客受益	乡村旅游—使—游客受益	benefit urban visitors	使役结构	旅游生活
+21	2023-03	3	09	乡村旅游增加农民收入并促进农村经济	乡村旅游—增加促进—收入经济	increase farmers' income and promote the rural economy	促进与推动	旅游生活;经济发展;农业
+22	2023-06	1	01	中国越来越重视终身教育	中国—重视—终身教育	attach growing importance to lifelong education	越来越多;重要性	教育
+22	2023-06	1	02	发展继续教育是构建终身教育体系的有效途径	发展继续教育—是—途径	be an effective way to build a lifelong education system	是与定义;用途与功能	教育
+22	2023-06	1	03	高校是人才培养基地	高校—是—基地	serve as bases for talent development	是与定义	教育
+22	2023-06	1	04	高校拥有先进理念和优越资源	高校—拥有—理念资源	have advanced teaching concepts and excellent resources	have/contain/include	教育
+22	2023-06	1	05	高校理应成为继续教育主体	高校—成为—主体	serve as the main providers of continuing education	成为	教育
+22	2023-06	1	06	高校适应社会需求	高校—适应—需求	respond to the needs of society	满足需求	教育;社会发展
+22	2023-06	1	07	高校加强与用人单位沟通	高校—加强—沟通	strengthen communication with employers	参与与合作	教育;经济发展
+22	2023-06	1	08	高校探索符合国情的发展道路	高校—探索—道路	explore a path suited to China's conditions	动作与过程	教育
+22	2023-06	1	09	继续教育在国家战略中发挥更大作用	继续教育—发挥—作用	play a greater role in national development	发挥作用	教育;社会发展
+23	2023-06	2	01	中国政府越来越重视高等教育	政府—重视—高等教育	attach increasing importance to higher education	越来越多;重要性	教育
+23	2023-06	2	02	高等教育进入稳步发展阶段	高等教育—进入—阶段	enter a stage of steady development	发展与变化	教育
+23	2023-06	2	03	高校学生总数接近4700万	学生数—接近—4700万	reach nearly 47 million	占比与数量	教育
+23	2023-06	2	04	高校学生总数位居世界第一	学生数—位居—第一	rank first in the world	最高级;占比与数量	教育
+23	2023-06	2	05	越来越多人渴望接受高等教育	人们—渴望—高等教育	be eager to receive higher education in growing numbers	越来越多;愿望与期望	教育
+23	2023-06	2	06	高校数量和专业持续增加	高校专业—增加	continue to increase	发展与变化;占比与数量	教育
+23	2023-06	2	07	招生人数逐年上升	招生人数—上升	rise year by year	发展与变化;时间结构	教育
+23	2023-06	2	08	教学质量不断改进	教学质量—改进	continue to improve	发展与变化	教育
+23	2023-06	2	09	这些变化为更多年轻人创造受教育机会	变化—创造—机会	create opportunities for more young people to receive higher education	提供;越来越多	教育
+23	2023-06	2	10	改革开放四十多年来高等教育稳步发展	高等教育—稳步发展	develop steadily over more than four decades of reform and opening up	发展与变化;时间结构	教育;社会发展
+23	2023-06	2	11	经济增长和生活水平提高推动教育需求	经济与生活水平—推动—教育需求	drive demand for higher education as the economy and living standards improve	原因与结果;促进与推动	教育;社会发展
+24	2023-06	3	01	中国政府大力推行义务教育	政府—推行—义务教育	vigorously promote compulsory education	促进与推动	教育
+24	2023-06	3	02	每个儿童都应享有受教育机会	儿童—享有—机会	ensure every child has access to education	使役结构;提供	教育
+24	2023-06	3	03	中国实现全国推行义务教育的目标	中国—实现—目标	achieve the goal of nationwide compulsory education	目标与成就	教育
+24	2023-06	3	04	儿童六岁开始上小学	儿童—开始—上小学	start primary school at the age of six	开始与持续;时间结构	教育
+24	2023-06	3	05	学生接受九年义务教育	学生—接受—义务教育	receive nine years of compulsory education	时间结构	教育
+24	2023-06	3	06	义务教育学生无须缴纳学费	学生—无需—缴费	be exempt from tuition fees	被动语态	教育
+24	2023-06	3	07	教育改革措施得到实施	措施—被实施	implement a series of education reforms	被动语态;动作与过程	教育
+24	2023-06	3	08	义务教育质量显著提高	质量—提高	improve significantly	发展与变化	教育
+24	2023-06	3	09	义务教育法自1986年起生效	法律—生效	take effect in 1986	时间结构	教育;公共治理
+24	2023-06	3	10	从2008年秋季起学生免交学费	学生—免交—学费	be exempt from tuition fees from the autumn of 2008	被动语态;时间结构	教育;公共治理
+25	2023-12	1	01	中国政府重视人民健康饮食	政府—重视—健康饮食	attach great importance to a healthy diet	重要性	饮食健康;公共治理
+25	2023-12	1	02	政府大力提倡健康饮食	政府—提倡—健康饮食	strongly advocate a healthy diet	促进与推动	饮食健康;公共治理
+25	2023-12	1	03	人们更深刻认识合理营养的重要性	人们—认识—重要性	gain a deeper understanding of the importance of balanced nutrition	认为与评价;重要性	饮食健康
+25	2023-12	1	04	安全营养健康的饮食是美好生活的基本需要	健康饮食—是—需要	be a basic need for a better life	是与定义;满足需求	饮食健康
+25	2023-12	1	05	健康饮食是提升幸福感的必然要求	健康饮食—是—要求	be essential to improving people's well-being	是与定义;需要与要求	饮食健康
+25	2023-12	1	06	健康饮食为食品产业提供新机遇	健康饮食—提供—机遇	provide new opportunities for the food industry	提供	饮食健康;经济发展
+25	2023-12	1	07	各级政府采取措施确保饮食健康	政府—采取措施—确保健康	take various measures to ensure a healthy diet	采取措施;目的结构	饮食健康;公共治理
+25	2023-12	1	08	各级政府推进健康中国建设	政府—推进—建设	advance the Healthy China initiative	促进与推动	饮食健康;公共治理
+26	2023-12	2	01	中国人民生活水平不断提高	生活水平—提高	continue to improve living standards	发展与变化	社会发展
+26	2023-12	2	02	生活水平提高体现在饮食变化上	提高—体现于—饮食变化	be reflected in changes in people's diet	被动语态;变化与差异	饮食健康;社会发展
+26	2023-12	2	03	人们不再满足于吃饱	人们—不满足于—吃饱	no longer be satisfied with having enough to eat	满足需求	饮食健康
+26	2023-12	2	04	人们追求更安全营养健康的饮食	人们—追求—健康饮食	seek safer, more nutritious and healthier food	愿望与期望	饮食健康
+26	2023-12	2	05	食物变得更加丰富多样	食物—变得—丰富多样	become increasingly diverse	成为;越来越多	饮食健康
+26	2023-12	2	06	食物不再局限于本地农产品	食物—不局限于—本地产品	no longer be limited to local produce	被动语态;地点与分布	饮食健康
+26	2023-12	2	07	物流发展使人们容易品尝各地特产	物流发展—使—人们品尝特产	enable people to enjoy specialties from across the country	使役结构	饮食健康;经济发展
+26	2023-12	2	08	食品质量与饮食结构得到改善	质量结构—改善	improve food quality and dietary structure	发展与变化	饮食健康
+26	2023-12	2	09	这些改善为健康提供有力保障	改善—提供—保障	provide strong support for better health	提供	饮食健康
+26	2023-12	2	10	改革开放以来饮食随生活水平而变化	饮食—随生活水平变化	change along with rising living standards since reform and opening up	发展与变化;时间结构	饮食健康;社会发展
+27	2023-12	3	01	中国人的饮食发生显著变化	饮食—发生—变化	undergo significant changes	发展与变化	饮食健康;社会发展
+27	2023-12	3	02	过去食品种类有限数量不足	食品—种类有限数量不足	be limited in variety and quantity	被动语态;占比与数量	饮食健康
+27	2023-12	3	03	过去人们仅满足于吃饱	人们—满足于—吃饱	be content simply to have enough to eat	满足需求	饮食健康
+27	2023-12	3	04	现在食品更加丰富多样	食品—更加丰富多样	become richer and more diverse	成为;比较结构	饮食健康
+27	2023-12	3	05	食品质量大幅提高	食品质量—提高	improve substantially	发展与变化	饮食健康
+27	2023-12	3	06	人们对饮食要求越来越高	人们—要求—更高	set increasingly high standards for food	越来越多;需要与要求	饮食健康
+27	2023-12	3	07	人们更加注重营养健康	人们—注重—营养健康	pay more attention to nutrition and health	重要性;比较结构	饮食健康
+27	2023-12	3	08	低脂低糖有机食品广受欢迎	食品—受欢迎	be widely popular among consumers	流行与欢迎	饮食健康
+27	2023-12	3	09	过去经济落后导致食品短缺	经济落后—导致—食品短缺	lead to limited food variety and insufficient supplies	原因与结果;结果与后果	饮食健康;社会发展
+27	2023-12	3	10	如今经济发展改善了食品供应和质量	经济发展—改善—食品供应质量	improve food supply and quality through rapid economic growth	发展与变化;原因与结果	饮食健康;社会发展
+28	2024-06	1	01	四合院是中国传统住宅建筑	四合院—是—建筑	be a traditional Chinese residential building	是与定义	建筑文化;文化传统
+28	2024-06	1	02	房屋建造在院子四周	房屋—建在—院子四周	be built around a courtyard	被动语态;地点与分布	建筑文化
+28	2024-06	1	03	房屋把院子围在中间	房屋—围合—院子	enclose a courtyard in the center	动作与过程	建筑文化
+28	2024-06	1	04	四合院冬暖夏凉环境舒适	四合院—舒适	stay warm in winter and cool in summer	感官与状态	建筑文化
+28	2024-06	1	05	四合院适合大家庭居住	四合院—适合—大家庭	be especially suitable for large families	用途与功能	建筑文化
+28	2024-06	1	06	四合院在中国各地有多种类型	四合院—有—多种类型	come in many forms across China	have/contain/include;地点与分布	建筑文化
+28	2024-06	1	07	北京四合院最为典型	北京四合院—最典型	be the most typical example	最高级	建筑文化
+28	2024-06	1	08	传统四合院逐渐减少	四合院—减少	gradually decline in number	减少与保护	建筑文化;社会发展
+28	2024-06	1	09	四合院对文化传承和历史研究意义重大	四合院—具有—意义	be important to cultural preservation and historical research	重要性	建筑文化;文化传统
+28	2024-06	1	10	现代城市发展导致传统四合院减少	城市发展—导致—四合院减少	lead to the gradual decline of traditional siheyuan	原因与结果;减少与保护	建筑文化;社会发展
+29	2024-06	2	01	农历起源于数千年前的中国	农历—起源于—古代中国	originate in China thousands of years ago	起源与历史	文化传统;节气时令
+29	2024-06	2	02	农历根据日月运行规律制定	农历—根据规律制定	be developed according to the movements of the sun and moon	被动语态;依据与条件	文化传统;节气时令
+29	2024-06	2	03	农历在农业和日常生活中发挥重要作用	农历—发挥—作用	play an important role in farming and daily life	发挥作用	农业;文化传统
+29	2024-06	2	04	古人用农历记录日期安排农活	古人—用农历—记录安排	use the lunar calendar to record dates and arrange farm work	用途与功能;目的结构	农业;文化传统
+29	2024-06	2	05	古人有效利用自然资源和气候条件	古人—利用—资源条件	make efficient use of natural resources and climate conditions	用途与功能	农业;环境保护
+29	2024-06	2	06	利用农历有助于提高作物产量和质量	利用农历—提高—产量质量	improve crop yield and quality	help (to) do	农业
+29	2024-06	2	07	传统节日日期基于农历	节日日期—基于—农历	be based on the lunar calendar	被动语态;依据与条件	文化传统
+29	2024-06	2	08	农历是中国传统文化的重要组成部分	农历—是—组成部分	be an important part of traditional Chinese culture	是与定义;组成部分	文化传统
+29	2024-06	2	09	农历当今仍广为使用	农历—仍被使用	remain widely used today	被动语态;时间结构	文化传统
+30	2024-06	3	01	福字表示幸福和好运	福字—表示—幸福好运	represent happiness and good luck	象征与代表	文化传统
+30	2024-06	3	02	福字是最常用的吉祥符号之一	福字—是—符号	be one of the most commonly used auspicious symbols	是与定义;最高级	文化传统
+30	2024-06	3	03	人们把大福字写在红纸上	人们—写—福字	write a large character fu on red paper	动作与过程	文化传统
+30	2024-06	3	04	福字寓意家庭幸福社会安定国家昌盛	福字—寓意—美好愿望	express wishes for family happiness, social stability and national prosperity	象征与代表	文化传统
+30	2024-06	3	05	春节贴福字是古老民间习俗	贴福字—是—习俗	be a long-standing folk custom during the Spring Festival	是与定义;起源与历史	文化传统
+30	2024-06	3	06	家家户户把福字贴在门墙上	家家户户—贴—福字	put the character fu on doors or walls	动作与过程	文化传统
+30	2024-06	3	07	贴福字表达对幸福生活和美好未来的期待	贴福字—表达—期待	express hopes for a happy life and a bright future	愿望与期望	文化传统
+30	2024-06	3	08	人们有时把福字倒贴	人们—倒贴—福字	put the character fu upside down	动作与过程	文化传统
+30	2024-06	3	09	倒贴福字表示幸福和好运已到	倒贴福字—表示—好运到来	symbolize the arrival of happiness and good fortune	象征与代表	文化传统
+31	2024-12	1	01	中国政府重视环境保护	政府—重视—环境保护	attach great importance to environmental protection	重要性	环境保护;公共治理
+31	2024-12	1	02	中国在减少污染方面取得显著成效	中国—取得—成效	make remarkable progress in reducing pollution	目标与成就;减少与保护	环境保护;公共治理
+31	2024-12	1	03	中国采取一系列有效措施	中国—采取—措施	take a series of effective measures	采取措施	环境保护;公共治理
+31	2024-12	1	04	中国大力发展清洁能源	中国—发展—清洁能源	vigorously develop clean energy	发展与变化	环境保护;科技创新
+31	2024-12	1	05	中国改善公共交通并推广共享单车	中国—改善推广—交通方式	improve public transport and promote bike sharing	促进与推动	环境保护;公共治理
+31	2024-12	1	06	中国实施垃圾分类	中国—实施—垃圾分类	implement waste sorting	动作与过程	环境保护;公共治理
+31	2024-12	1	07	这些措施使城乡环境更绿更美	措施—使—城乡变美	make urban and rural areas greener and more beautiful	使役结构	环境保护;社会发展
+31	2024-12	1	08	中国积极参与国际合作	中国—参与—合作	actively participate in international cooperation	参与与合作	环境保护;文化传播
+31	2024-12	1	09	中国为全球环境保护作出重要贡献	中国—作出—贡献	make an important contribution to global environmental protection	贡献	环境保护;文化传播
+32	2024-12	2	01	莫高窟数字展示中心于2014年开放	展示中心—开放	open to the public in 2014	时间结构	文化传统;科技创新
+32	2024-12	2	02	展示中心是保护利用工程的重要组成部分	展示中心—是—组成部分	be an important part of the conservation project	是与定义;组成部分	文化传统;环境保护
+32	2024-12	2	03	展示中心采用数字技术和多媒体手段	展示中心—采用—技术	use digital technology and multimedia displays	用途与功能	科技创新;文化传统
+32	2024-12	2	04	数字展示使游客提前了解历史文化	数字展示—使—游客了解文化	enable visitors to learn about the site's history and culture before entering	使役结构	科技创新;文化传播
+32	2024-12	2	05	数字展示使游客鉴赏艺术经典	数字展示—使—游客鉴赏艺术	enable visitors to appreciate its artistic treasures	使役结构	科技创新;文化传播
+32	2024-12	2	06	数字中心将减少开放洞窟数量	数字中心—减少—洞窟数量	reduce the number of caves open to visitors	减少与保护;占比与数量	环境保护;文化传统
+32	2024-12	2	07	数字中心将缩短游客逗留时间	数字中心—缩短—逗留时间	shorten the time visitors spend inside the caves	减少与保护;时间结构	环境保护;文化传统
+32	2024-12	2	08	数字中心减轻参观对莫高窟的影响	数字中心—减轻—影响	reduce the impact of tourism on the grottoes	减少与保护	环境保护;文化传统
+32	2024-12	2	09	莫高窟将得到妥善保护和长久利用	莫高窟—被保护利用	ensure the heritage site is properly protected and sustainably used	使役结构;被动语态	环境保护;文化传统
+33	2024-12	3	01	中国新能源汽车产业发展迅速	产业—发展—迅速	develop rapidly	发展与变化	科技创新;经济发展
+33	2024-12	3	02	年产量接近千万辆	年产量—接近—千万辆	reach nearly ten million vehicles a year	占比与数量	科技创新;经济发展
+33	2024-12	3	03	中国占全球市场份额超过60%	中国—占—市场份额	account for over 60 percent of the global market	占比与数量	科技创新;经济发展
+33	2024-12	3	04	新能源汽车出口量不断创新高	出口量—创新高	reach new highs in exports	发展与变化;占比与数量	科技创新;经济发展
+33	2024-12	3	05	政府加大资金投入和政策引导	政府—加大—投入引导	increase financial investment and policy support	促进与推动;采取措施	科技创新;经济发展
+33	2024-12	3	06	政府鼓励企业开展技术创新	政府—鼓励—企业创新	encourage companies to pursue technological innovation	建议与要求;使役结构	科技创新;公共治理
+33	2024-12	3	07	企业不断提高产品竞争力	企业—提高—竞争力	continually improve product competitiveness	发展与变化	科技创新;经济发展
+33	2024-12	3	08	产业发展推动国内经济	产业发展—推动—经济	strongly drive domestic economic growth	促进与推动	科技创新;经济发展
+33	2024-12	3	09	产业为新能源利用和环保作出贡献	产业—作出—贡献	contribute to clean-energy use and environmental protection	贡献	科技创新;环境保护
+34	2025-06	1	01	袁隆平团队克服重重困难	团队—克服—困难	overcome numerous difficulties	动作与过程	农业;科技创新
+34	2025-06	1	02	团队研发出超级杂交水稻	团队—研发—水稻	develop a variety of super hybrid rice	动作与过程	农业;科技创新
+34	2025-06	1	03	这项技术获得举世公认的成功	技术—获得—成功	achieve worldwide recognition and success	目标与成就	农业;科技创新
+34	2025-06	1	04	水稻抗旱抗病能力更强	水稻—能力更强	have stronger resistance to drought and disease	have/contain/include;比较结构	农业;科技创新
+34	2025-06	1	05	水稻能适应不同气候和土壤	水稻—适应—条件	adapt to different climates and soil conditions	依据与条件	农业;科技创新
+34	2025-06	1	06	水稻产量可提高20%至30%	产量—提高—比例	increase yields by 20 to 30 percent	占比与数量;发展与变化	农业;科技创新
+34	2025-06	1	07	超级杂交水稻营养丰富口感更好	水稻—营养丰富口感好	be more nutritious and taste better	比较结构;感官与状态	农业;饮食健康
+34	2025-06	1	08	这项技术在许多国家广泛应用	技术—被应用	be widely applied in many countries	被动语态;地点与分布	农业;科技创新
+34	2025-06	1	09	技术为全球粮食安全作出重大贡献	技术—作出—贡献	make a major contribution to global food security	贡献	农业;科技创新
+35	2025-06	2	01	越来越多城市打造15分钟生活圈	城市—打造—生活圈	develop 15-minute convenient living circles in growing numbers	越来越多;发展与变化	社区生活;公共治理
+35	2025-06	2	02	居民步行15分钟可享受公共服务	居民—享受—服务	access essential public services within a 15-minute walk	方式与途径;时间结构	社区生活
+35	2025-06	2	03	生活圈建有多种公共设施	生活圈—建有—设施	include shops, parks, libraries, schools and clinics	have/contain/include	社区生活
+35	2025-06	2	04	生活圈为居民提供便利舒适环境	生活圈—提供—环境	provide residents with a more convenient and comfortable environment	提供	社区生活
+35	2025-06	2	05	生活圈满足居民多元服务需求	生活圈—满足—需求	meet residents' diverse daily service needs	满足需求	社区生活
+35	2025-06	2	06	生活圈提升居民生活品质	生活圈—提升—生活品质	improve residents' quality of life	促进与推动	社区生活
+35	2025-06	2	07	生活圈提升居民幸福感	生活圈—提升—幸福感	enhance residents' sense of well-being	促进与推动	社区生活
+36	2025-06	3	01	中国东北大力开发冰雪资源	东北地区—开发—冰雪资源	vigorously develop ice-and-snow resources	发展与变化	旅游生活;经济发展
+36	2025-06	3	02	哈尔滨利用冰雪资源打造冰雪大世界	哈尔滨—利用打造—资源景区	use abundant resources to create an ice-and-snow attraction	用途与功能	旅游生活
+36	2025-06	3	03	游客欣赏冰雪之美	游客—欣赏—冰雪	appreciate the beauty of ice and snow	动作与过程	旅游生活
+36	2025-06	3	04	游客体验当地民俗文化	游客—体验—民俗文化	experience distinctive local folk culture	动作与过程	旅游生活;文化传播
+36	2025-06	3	05	冰天雪地吸引四方游客	冰雪—吸引—游客	attract visitors from across the country	地点与分布	旅游生活
+36	2025-06	3	06	冰天雪地成为热门旅游胜地	冰雪地区—成为—胜地	become a popular tourist destination	成为;流行与欢迎	旅游生活
+36	2025-06	3	07	冰雪旅游业为当地经济作出更大贡献	旅游业—作出—贡献	make a growing contribution to the local economy	贡献;越来越多	旅游生活;经济发展
+36	2025-06	3	08	过去令人畏惧的冰雪如今成为旅游资源	冰雪—从威胁变成—资源	turn once-feared winter conditions into a tourism resource	成为;变化与差异	旅游生活;经济发展
+37	2025-12	1	01	中国政府高度重视民营经济发展	政府—重视—民营经济	attach great importance to the development of the private economy	重要性	经济发展;公共治理
+37	2025-12	1	02	政府出台政策支持民营企业	政府—出台—政策	introduce policies to support private enterprises	采取措施;目的结构	经济发展;公共治理
+37	2025-12	1	03	民营企业数量超过5700万家	企业数量—超过—5700万	exceed 57 million private enterprises	占比与数量	经济发展
+37	2025-12	1	04	民营企业占企业总量92.3%	民企—占—比例	account for 92.3 percent of all enterprises	占比与数量	经济发展
+37	2025-12	1	05	民营企业数量稳步增长	企业数量—增长	grow steadily in number	发展与变化;占比与数量	经济发展
+37	2025-12	1	06	民营企业质量和结构不断提升	质量结构—提升	continue to improve in quality and structure	发展与变化	经济发展
+37	2025-12	1	07	民营企业研发投入不断增加	研发投入—增加	increase investment in research and development	发展与变化	经济发展;科技创新
+37	2025-12	1	08	民营企业在新技术领域发展迅速	民营企业—发展—迅速	develop rapidly in emerging technology sectors	发展与变化	经济发展;科技创新
+37	2025-12	1	09	核心竞争力增强为高质量发展提供支撑	竞争力增强—提供—支撑	provide strong support for high-quality economic development	提供	经济发展
+37	2025-12	1	10	截至2025年3月底民营企业已超过5700万家	民企数量—超过—5700万	exceed 57 million by the end of March 2025	占比与数量;时间结构	经济发展
+39	2025-12	3	01	中国政府重视绿色经济发展	政府—重视—绿色经济	attach great importance to the green economy	重要性	环境保护;经济发展;公共治理
+39	2025-12	3	02	政府加强森林资源保护	政府—加强—森林保护	strengthen the protection of forest resources	减少与保护	环境保护;公共治理
+39	2025-12	3	03	政府加大污染治理力度	政府—加大—污染治理	step up pollution control	减少与保护;采取措施	环境保护;公共治理
+39	2025-12	3	04	许多地区生态环境显著改善	生态环境—改善	improve the ecological environment significantly	发展与变化	环境保护
+39	2025-12	3	05	良好生态促进当地产业发展	生态—促进—产业发展	promote local tourism and health-related industries	促进与推动	环境保护;经济发展
+39	2025-12	3	06	良好生态创造可观经济效益	生态—创造—效益	generate considerable economic benefits	结果与后果	环境保护;经济发展
+39	2025-12	3	07	和谐共存观念深入人心	观念—深入人心	become deeply rooted in people's minds	成为;被动语态	环境保护;文化传统
+39	2025-12	3	08	绿色经济为中国可持续发展作出贡献	绿色经济—作出—贡献	contribute to China's sustainable development	贡献	环境保护;经济发展
+39	2025-12	3	09	绿色经济为全球环保提供经验	绿色经济—提供—经验	provide valuable experience for global environmental protection	提供	环境保护;文化传播
+40	2026-06	1	01	中国有一日为师终身为父的老话	中国—有—老话	have an old saying that a teacher for a day is a father for life	have/contain/include	教育;文化传统
+40	2026-06	1	02	老师传授知识	老师—传授—知识	pass on knowledge	动作与过程	教育
+40	2026-06	1	03	老师教学生做人的道理	老师—教—学生道理	teach students how to conduct themselves	动作与过程	教育
+40	2026-06	1	04	古代学生初见老师要举行隆重仪式	学生—举行—仪式	hold a solemn ceremony when meeting a teacher for the first time	时间结构	教育;文化传统
+40	2026-06	1	05	仪式显示老师地位很高	仪式—显示—地位	demonstrate the high status of teachers	象征与代表	教育;文化传统
+40	2026-06	1	06	中国把9月10日定为教师节	中国—定—教师节	designate September 10 as Teachers' Day	动作与过程	教育;公共治理
+40	2026-06	1	07	设立教师节旨在弘扬尊师传统	设立教师节—为了—弘扬传统	promote the fine tradition of respecting teachers	目的结构;促进与推动	教育;文化传统
+40	2026-06	1	08	学生用多种方式表达对老师的敬意	学生—表达—敬意	express respect for teachers in various ways	方式与途径	教育;文化传统
+40	2026-06	1	09	尊师是中华民族传统美德	尊师—是—美德	be a traditional Chinese virtue	是与定义	教育;文化传统
+40	2026-06	1	10	尊师传统在当今得到发扬	传统—得到发扬	be carried forward in modern society	被动语态	教育;文化传统
+40	2026-06	1	11	中国自1985年起庆祝教师节	中国—开始庆祝—教师节	celebrate Teachers' Day annually since 1985	时间结构;开始与持续	教育;文化传统
+41	2026-06	2	01	餐桌礼仪是中华文化的重要组成部分	餐桌礼仪—是—组成部分	be an important part of traditional Chinese culture	是与定义;组成部分	礼仪交往;文化传统
+41	2026-06	2	02	餐桌礼仪蕴含热情有礼的待客之道	餐桌礼仪—蕴含—待客之道	embody warm and courteous hospitality	have/contain/include;象征与代表	礼仪交往;文化传统
+41	2026-06	2	03	主人根据客人口味准备菜肴	主人—准备—菜肴	prepare a rich selection of dishes according to guests' tastes	依据与条件	礼仪交往;饮食健康
+41	2026-06	2	04	就餐座位安排很讲究	座位安排—讲究	follow careful seating arrangements	需要与要求	礼仪交往
+41	2026-06	2	05	主人坐在正对大门的位置	主人—坐—正对大门位置	sit in the seat facing the entrance	地点与分布	礼仪交往
+41	2026-06	2	06	最重要的客人坐在主人身边	客人—坐—主人身边	seat the most important guest beside the host	地点与分布;最高级	礼仪交往
+41	2026-06	2	07	主人不时为客人添酒加菜	主人—添—酒菜	serve guests more food and drink from time to time	动作与过程	礼仪交往;饮食健康
+41	2026-06	2	08	餐桌礼仪延续了数千年	餐桌礼仪—延续—数千年	continue for thousands of years	时间结构;开始与持续	礼仪交往;文化传统
+41	2026-06	2	09	餐桌礼仪促进和谐人际交往	餐桌礼仪—促进—人际交往	play an important role in promoting harmonious relationships	发挥作用;促进与推动	礼仪交往
+42	2026-06	3	01	亲友互赠礼物是重要礼节	互赠礼物—是—礼节	be an important form of social etiquette	是与定义	礼仪交往;文化传统
+42	2026-06	3	02	赠送礼物是物质馈赠	赠送礼物—是—馈赠	be a material gift	是与定义	礼仪交往
+42	2026-06	3	03	赠送礼物更是情感表达	赠送礼物—是—情感表达	be an expression of affection	是与定义	礼仪交往
+42	2026-06	3	04	礼物是维系人际关系的重要纽带	礼物—是—纽带	serve as an important bond in maintaining relationships	是与定义;发挥作用	礼仪交往
+42	2026-06	3	05	精心挑选的礼物符合接受者喜好	礼物—符合—喜好	match the recipient's preferences	依据与条件	礼仪交往
+42	2026-06	3	06	合适礼物能加深彼此感情	礼物—加深—感情	deepen the bond between people	促进与推动	礼仪交往
+42	2026-06	3	07	中国人遵循礼尚往来传统	中国人—遵循—传统	follow the tradition of mutually exchanging courtesies	动作与过程	礼仪交往;文化传统
+42	2026-06	3	08	人们接受礼物时表达谢意	人们—表达—谢意	express gratitude when receiving a gift	时间结构	礼仪交往
+42	2026-06	3	09	人们适时回赠礼物	人们—回赠—礼物	return a gift at an appropriate time	时间结构	礼仪交往
+42	2026-06	3	10	回赠礼物增进融洽关系	回赠—增进—关系	promote harmonious relationships	促进与推动	礼仪交往
