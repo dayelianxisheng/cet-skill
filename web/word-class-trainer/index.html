@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="CET-4 选词填空三阶段词性训练：判词性、筛候选、定答案。">
+  <title>CET-4 词性筛选训练</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="返回训练首页">
+      <span class="brand-mark">15→10</span>
+      <span><strong>CET-4</strong><small>词性筛选训练</small></span>
+    </a>
+    <div class="top-actions">
+      <label class="analysis-loader button ghost">
+        <span>读取分析 JSON</span>
+        <input id="analysisFile" type="file" accept=".json,application/json">
+      </label>
+      <label class="set-picker">
+        <span>选择试卷</span>
+        <select id="setSelect" aria-label="选择试卷"></select>
+      </label>
+      <button id="resetBtn" class="button ghost" type="button">重置本卷</button>
+      <p id="analysisStatus" class="analysis-status">正在读取预设分析</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">WORD CLASS FIRST</p>
+        <h1>先判词性，<br>再把 15 个词缩成答案。</h1>
+        <p class="hero-copy">覆盖本地题库全部 <strong id="setCount">42</strong> 套选词填空。每一空都按“句法位置 → 同词性候选 → 语义搭配”完成。</p>
+      </div>
+      <div class="hero-card" aria-label="学习方法">
+        <span class="card-index">方法</span>
+        <ol>
+          <li><b>标词库</b><span>判断每个单词的词性</span></li>
+          <li><b>判空格</b><span>看前后结构，确定所需词性</span></li>
+          <li><b>锁答案</b><span>从候选最少的空开始排除</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <nav class="stage-tabs" aria-label="训练阶段">
+      <button class="stage-tab active" data-stage="1" type="button"><span>01</span>词库词性</button>
+      <button class="stage-tab" data-stage="2" type="button"><span>02</span>空格词性</button>
+      <button class="stage-tab" data-stage="3" type="button"><span>03</span>最终选词</button>
+    </nav>
+
+    <section class="workspace">
+      <aside class="passage-panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">CURRENT PASSAGE</p>
+            <h2 id="currentLabel">载入中</h2>
+          </div>
+          <button id="speakBtn" class="icon-button" type="button" title="朗读文章" aria-label="朗读文章">▶</button>
+        </div>
+        <article id="passage" class="passage"></article>
+        <div class="legend">
+          <span><i class="dot unresolved"></i>未完成</span>
+          <span><i class="dot tagged"></i>已判词性</span>
+          <span><i class="dot solved"></i>已选答案</span>
+        </div>
+      </aside>
+
+      <section class="task-panel">
+        <div id="stageIntro" class="stage-intro"></div>
+        <div id="taskArea"></div>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <template id="wordCardTemplate">
+    <article class="word-card">
+      <div class="word-row"><span class="word-label"></span><strong class="word-text"></strong><button class="mini-speak" type="button" aria-label="朗读单词">▶</button></div>
+      <div class="pos-buttons"></div>
+      <p class="word-feedback"></p>
+    </article>
+  </template>
+
+  <script src="dataset.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

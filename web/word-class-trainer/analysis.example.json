@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "sets": {
+    "2020-09-1": {
+      "words": {
+        "A": {
+          "pos": ["noun"],
+          "form": "n-sg"
+        },
+        "B": {
+          "pos": ["verb"],
+          "form": "v-ed"
+        },
+        "I": {
+          "pos": ["adj"],
+          "form": "adj"
+        }
+      },
+      "blanks": {
+        "26": {
+          "requiredPos": "adj",
+          "requiredForm": "adj",
+          "answer": "I",
+          "reason": "空格修饰后面的复数名词 ups and downs，需要形容词。"
+        }
+      }
+    }
+  }
+}

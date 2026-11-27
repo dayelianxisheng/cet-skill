@@ -69,6 +69,7 @@ Codex 对本地四六级材料进行了逐份登记、分类和结构化解析�
 
 1. **选词填空 / Banked Cloze / 15选10**  
    一篇 passage，10 个空，15 个 A–O 选项，题号 26–35。
+   本地词性筛选训练网页位于 `web/word-class-trainer/index.html`，可直接用浏览器打开。
 
 2. **长篇阅读 / 信息匹配 / Paragraph Matching**  
    一篇长文，段落编号至少覆盖 `[A]` 到 `[O]`，10 个 statements，题号 36–45，段落可重复选择。
