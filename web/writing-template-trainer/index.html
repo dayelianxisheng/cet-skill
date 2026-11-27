@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10251f">
+  <meta name="description" content="CET-4 写作模板分句朗读与打字记忆训练">
+  <title>CET-4 模板记忆训练</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="返回顶部">
+      <span><strong>CET-4 写作模板</strong><small>听读 · 默写 · 复现</small></span>
+    </a>
+    <nav class="quick-nav" aria-label="页面导航">
+      <a href="#templateContent">模板</a>
+      <a href="#promptBankSection">真题库</a>
+      <a href="#smilebarSection">SMILEBAR</a>
+      <a href="#practiceSection">默写</a>
+    </nav>
+    <div class="streak" title="连续练习天数">
+      <span>今日进度</span><strong id="todayProgress">0%</strong>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="intro">
+      <div>
+        <h1>四级写作模板记忆训练</h1>
+        <p>选择模板，按句听读，再通过默写完成记忆。模板中的方括号内容可按题目替换。</p>
+      </div>
+      <div class="study-stats" aria-label="学习统计">
+        <div><span id="learnedCount">0</span><small>已掌握句子</small></div>
+        <div><span id="bestAccuracy">—</span><small>最佳正确率</small></div>
+        <div><span>5</span><small>写作模板</small></div>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <aside class="sidebar" aria-label="模板列表">
+        <div class="side-heading">
+          <span>模板库</span><small>5 TEMPLATES</small>
+        </div>
+        <nav id="templateNav"></nav>
+        <button class="all-play" id="playAllTemplates" type="button">
+          连续朗读全部模板
+        </button>
+        <p class="side-note">全部播放会按模板、段落、句子依次朗读，可随时暂停。</p>
+      </aside>
+
+      <div class="content" id="templateContent">
+        <section class="control-panel" aria-label="朗读设置">
+          <div class="control-title">
+            <span class="status-dot"></span>
+            <span id="audioStatus">朗读已就绪</span>
+          </div>
+          <div class="controls">
+            <label>声音来源
+              <select id="voiceSource">
+                <option value="auto">自动（有道优先）</option>
+                <option value="youdao">有道在线发音</option>
+                <option value="system">浏览器系统语音</option>
+              </select>
+            </label>
+            <label>口音
+              <select id="accent">
+                <option value="2">美音</option>
+                <option value="1">英音</option>
+              </select>
+            </label>
+            <label>语速 <span id="rateValue">0.85×</span>
+              <input id="rate" type="range" min="0.6" max="1.2" step="0.05" value="0.85">
+            </label>
+          </div>
+        </section>
+
+        <section class="template-head">
+          <div>
+            <p class="eyebrow" id="templateType">SUGGESTION ESSAY</p>
+            <h2 id="templateTitle">建议类议论文</h2>
+            <p id="templateUse"></p>
+          </div>
+          <div class="head-actions">
+            <button class="button primary" id="playTemplate" type="button">朗读当前模板</button>
+            <button class="button ghost" id="stopAudio" type="button">■ 停止</button>
+          </div>
+        </section>
+
+        <section id="paragraphs" class="paragraphs" aria-live="polite"></section>
+
+        <section class="prompt-bank" id="promptBankSection">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">WRITING PROMPT ARCHIVE</p>
+              <h2>作文真题分类库</h2>
+              <p>收录本地数据库中的全部 42 条作文记录。按任务类型筛选，展开可查看完整英文题目与推荐模板。</p>
+            </div>
+            <strong class="record-count"><span id="visiblePromptCount">42</span> / 42 题</strong>
+          </div>
+          <div class="prompt-filters" aria-label="真题筛选">
+            <label>关键词
+              <input id="promptSearch" type="search" placeholder="搜索题目或年份">
+            </label>
+            <label>题型
+              <select id="promptCategory"></select>
+            </label>
+            <label>年份
+              <select id="promptYear"></select>
+            </label>
+          </div>
+          <div id="categorySummary" class="category-summary"></div>
+          <div id="promptList" class="prompt-list" aria-live="polite"></div>
+        </section>
+
+        <section class="phrase-bank" id="smilebarSection">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">SMILEBAR</p>
+              <h2>好处词块记忆表</h2>
+              <p>按首字母记忆常用好处表达，写作时直接替换模板中的 <strong>[BENEFIT]</strong>。</p>
+            </div>
+            <button class="button secondary" id="playAllPhrases" type="button">朗读全部词块</button>
+          </div>
+          <div class="smilebar-code" aria-label="SMILEBAR 记忆顺序">
+            <span>S</span><span>M</span><span>I</span><span>L</span><span>E</span><span>B</span><span>A</span><span>R</span>
+          </div>
+          <div id="phraseGrid" class="phrase-grid"></div>
+        </section>
+
+        <section class="practice" id="practiceSection">
+          <div class="practice-head">
+            <div>
+              <p class="eyebrow">ACTIVE RECALL</p>
+              <h2>打字默写</h2>
+              <p>先听、再隐藏原文，凭记忆完整输入。</p>
+            </div>
+            <div class="mode-switch" role="group" aria-label="练习范围">
+              <button class="active" data-mode="sentence" type="button">单句</button>
+              <button data-mode="paragraph" type="button">整段</button>
+              <button data-mode="template" type="button">整篇</button>
+            </div>
+          </div>
+
+          <div class="prompt-bar">
+            <label>练习内容
+              <select id="practiceTarget"></select>
+            </label>
+            <button class="mini-button" id="listenPrompt" type="button">🔊 听一遍</button>
+            <button class="mini-button" id="togglePrompt" type="button">隐藏原文</button>
+          </div>
+
+          <div class="recall-card">
+            <div class="reference" id="referenceText"></div>
+            <textarea id="typingInput" spellcheck="false" autocomplete="off" placeholder="在这里输入英文模板……"></textarea>
+            <div class="typing-meta">
+              <span id="wordCount">0 words</span>
+              <span id="liveAccuracy">等待输入</span>
+            </div>
+          </div>
+
+          <div class="practice-actions">
+            <button class="button primary" id="checkAnswer" type="button">检查答案</button>
+            <button class="button ghost" id="clearAnswer" type="button">重新输入</button>
+          </div>
+          <div id="result" class="result" hidden></div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Template Lab · 进度保存在当前浏览器</p>
+    <p>有道发音为非官方公开端点，失败时自动切换系统语音。</p>
+  </footer>
+
+  <audio id="remoteAudio" preload="none"></audio>
+  <script src="./app.js"></script>
+</body>
+</html>
