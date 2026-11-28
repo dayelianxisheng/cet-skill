@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#10251f">
   <meta name="description" content="CET-4 写作模板分句朗读与打字记忆训练">
   <title>CET-4 模板记忆训练</title>
-  <link rel="stylesheet" href="./styles.css?v=windows-20261127">
+  <link rel="stylesheet" href="./styles.css?v=template-view-toggle-20261128">
 </head>
 <body>
   <header class="topbar">
@@ -82,6 +82,7 @@
             <p id="templateUse"></p>
           </div>
           <div class="head-actions">
+            <button class="button secondary" id="toggleTemplateView" type="button" aria-pressed="false">中英合并版</button>
             <button class="button primary" id="playTemplate" type="button">朗读当前模板</button>
             <button class="button ghost" id="stopAudio" type="button">■ 停止</button>
           </div>
@@ -177,6 +178,6 @@
   </footer>
 
   <audio id="remoteAudio" preload="none"></audio>
-  <script src="./app.js?v=typing-xx-20261128"></script>
+  <script src="./app.js?v=template-view-toggle-20261128"></script>
 </body>
 </html>

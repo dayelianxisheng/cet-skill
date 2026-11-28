@@ -272,6 +272,7 @@ const paragraphsEl = $("#paragraphs");
 const remoteAudio = $("#remoteAudio");
 let currentTemplate = 0;
 let practiceMode = "sentence";
+let templateView = "sentence";
 let queueToken = 0;
 
 const progress = JSON.parse(localStorage.getItem("cet4-template-progress") || '{"attempts":{},"learned":[],"date":""}');
@@ -317,13 +318,20 @@ function renderNav() {
   }));
 }
 
-function renderTemplate() {
-  const template = templates[currentTemplate];
-  $("#templateTitle").textContent = template.title;
-  $("#templateType").textContent = template.type;
-  $("#templateUse").textContent = template.use;
+function isLetterTemplate(template) {
+  return template.id.includes("letter");
+}
+
+function isLetterStandaloneLine(template, pi, si) {
+  if (!isLetterTemplate(template)) return false;
+  const lastParagraph = template.paragraphs.length - 1;
+  const lastSentences = template.paragraphs[lastParagraph].sentences;
+  return (pi === 0 && si === 0) || (pi === lastParagraph && si >= lastSentences.length - 2);
+}
+
+function renderSentenceTemplate(template) {
   let globalNumber = 0;
-  paragraphsEl.innerHTML = template.paragraphs.map((p, pi) => `
+  return template.paragraphs.map((p, pi) => `
     <article class="paragraph-card">
       <div class="paragraph-title"><strong>${p.label}</strong><button class="paragraph-play" data-pi="${pi}" type="button">朗读本段</button></div>
       ${p.sentences.map(({ text, translation }, si) => {
@@ -341,9 +349,48 @@ function renderTemplate() {
         </div>`;
       }).join("")}
     </article>`).join("");
+}
 
-  paragraphsEl.querySelectorAll(".sentence-play").forEach(btn => btn.addEventListener("click", () => {
+function renderMergedTemplate(template) {
+  const letterClass = isLetterTemplate(template) ? " is-letter" : "";
+  const chinese = template.paragraphs.map(({ sentences }, pi) => `
+    <p>${sentences.map(({ translation }, si) => `
+      <span class="merged-sentence${isLetterStandaloneLine(template, pi, si) ? " letter-line" : ""}">${escapeHtml(translation)}</span>
+    `).join(" ")}</p>
+  `).join("");
+  const english = template.paragraphs.map(({ label, sentences }, pi) => `
+    <div class="merged-paragraph">
+      <p>${sentences.map(({ text }, si) => `
+        <span class="template-sentence${isLetterStandaloneLine(template, pi, si) ? " letter-line" : ""}" role="button" tabindex="0" data-pi="${pi}" data-si="${si}" title="朗读本句">${escapeHtml(text)}</span>
+      `).join(" ")}</p>
+      <button class="paragraph-play compact" data-pi="${pi}" type="button" aria-label="朗读${escapeHtml(label)}" title="朗读本段">🔊</button>
+    </div>
+  `).join("");
+  return `
+    <article class="merged-template${letterClass}">
+      <section class="template-copy template-copy-zh" lang="zh-CN" aria-label="中文模板">${chinese}</section>
+      <section class="template-copy template-copy-en" lang="en" aria-label="English template">${english}</section>
+      <p class="template-audio-hint">点击英文句子朗读本句；点击段末声音按钮朗读整段。</p>
+    </article>`;
+}
+
+function renderTemplate() {
+  const template = templates[currentTemplate];
+  $("#templateTitle").textContent = template.title;
+  $("#templateType").textContent = template.type;
+  $("#templateUse").textContent = template.use;
+  const toggle = $("#toggleTemplateView");
+  toggle.textContent = templateView === "sentence" ? "中英合并版" : "逐句对照版";
+  toggle.setAttribute("aria-pressed", String(templateView === "merged"));
+  paragraphsEl.innerHTML = templateView === "sentence" ? renderSentenceTemplate(template) : renderMergedTemplate(template);
+
+  paragraphsEl.querySelectorAll(".sentence-play, .template-sentence").forEach(btn => btn.addEventListener("click", () => {
     playQueue([{ text: template.paragraphs[btn.dataset.pi].sentences[btn.dataset.si].text, pi: Number(btn.dataset.pi), si: Number(btn.dataset.si) }]);
+  }));
+  paragraphsEl.querySelectorAll(".template-sentence").forEach(sentence => sentence.addEventListener("keydown", event => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    sentence.click();
   }));
   paragraphsEl.querySelectorAll(".paragraph-play").forEach(btn => {
     btn.addEventListener("click", () => playQueue(template.paragraphs[btn.dataset.pi].sentences.map(({ text }, si) => ({ text, pi: Number(btn.dataset.pi), si }))));
@@ -527,9 +574,9 @@ function setAudioStatus(text, active = false) {
 }
 
 function markSpeaking(item, on) {
-  document.querySelectorAll(".sentence.speaking").forEach(el => el.classList.remove("speaking"));
+  document.querySelectorAll(".sentence.speaking, .template-sentence.speaking").forEach(el => el.classList.remove("speaking"));
   if (!on || item.pi === undefined) return;
-  const el = document.querySelector(`.sentence[data-pi="${item.pi}"][data-si="${item.si}"]`);
+  const el = document.querySelector(`.sentence[data-pi="${item.pi}"][data-si="${item.si}"], .template-sentence[data-pi="${item.pi}"][data-si="${item.si}"]`);
   if (el) { el.classList.add("speaking"); el.scrollIntoView({ behavior: "smooth", block: "center" }); }
 }
 
@@ -650,6 +697,11 @@ $("#togglePrompt").addEventListener("click", () => {
   $("#togglePrompt").textContent = hidden ? "显示原文" : "隐藏原文";
 });
 $("#listenPrompt").addEventListener("click", () => playQueue([{ text: getPracticeText() }]));
+$("#toggleTemplateView").addEventListener("click", () => {
+  stopAudio();
+  templateView = templateView === "sentence" ? "merged" : "sentence";
+  renderTemplate();
+});
 $("#playTemplate").addEventListener("click", () => playQueue(getAllSentences()));
 $("#stopAudio").addEventListener("click", stopAudio);
 $("#playAllTemplates").addEventListener("click", () => {
