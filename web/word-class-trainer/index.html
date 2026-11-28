@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="CET-4 选词填空三阶段词性训练：判词性、筛候选、定答案。">
   <title>CET-4 词性筛选训练</title>
-  <link rel="stylesheet" href="styles.css?v=roulette-20261128">
+  <link rel="stylesheet" href="styles.css?v=standalone-roulette-20261128">
 </head>
 <body>
   <header class="topbar">
@@ -22,7 +22,7 @@
         <span>选择试卷</span>
         <select id="setSelect" aria-label="选择试卷"></select>
       </label>
-      <button id="rouletteOpenBtn" class="button lime" type="button">转盘选下一套</button>
+      <a class="button lime" href="../question-roulette/">下一题转盘</a>
       <button id="resetBtn" class="button ghost" type="button">重置本卷</button>
       <p id="analysisStatus" class="analysis-status">正在读取预设分析</p>
     </div>
@@ -77,28 +77,6 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <dialog id="rouletteDialog" class="roulette-dialog" aria-labelledby="rouletteTitle">
-    <div class="roulette-head">
-      <div>
-        <p class="eyebrow">NEXT SET ROULETTE</p>
-        <h2 id="rouletteTitle">下一套做什么？</h2>
-      </div>
-      <button id="rouletteCloseBtn" class="dialog-close" type="button" aria-label="关闭转盘">×</button>
-    </div>
-    <p class="roulette-copy">每次从未完成试卷中随机挑选 8 套候选；转盘不会抽中当前试卷。</p>
-    <div class="roulette-stage">
-      <div class="roulette-pointer" aria-hidden="true"></div>
-      <div id="rouletteWheel" class="roulette-wheel" aria-hidden="true"></div>
-      <button id="rouletteSpinBtn" class="roulette-spin" type="button">开始</button>
-    </div>
-    <div id="rouletteCandidates" class="roulette-candidates" aria-label="本轮候选试卷"></div>
-    <p id="rouletteResult" class="roulette-result" role="status" aria-live="polite">点击“开始”，让转盘替你决定。</p>
-    <div class="roulette-actions">
-      <button id="rouletteRefreshBtn" class="button ghost" type="button">换一组候选</button>
-      <button id="rouletteAcceptBtn" class="button primary" type="button" hidden>开始这套</button>
-    </div>
-  </dialog>
-
   <template id="wordCardTemplate">
     <article class="word-card">
       <div class="word-row"><span class="word-label"></span><strong class="word-text"></strong><button class="mini-speak" type="button" aria-label="朗读单词">▶</button></div>
@@ -108,6 +86,6 @@
   </template>
 
   <script src="dataset.js"></script>
-  <script src="app.js?v=roulette-20261128"></script>
+  <script src="app.js?v=standalone-roulette-20261128"></script>
 </body>
 </html>

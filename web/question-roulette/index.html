@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="从 CET-4 选词填空题库中随机选择下一套练习。">
+  <title>CET-4 下一题转盘</title>
+  <link rel="stylesheet" href="styles.css?v=20261128">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../word-class-trainer/">
+      <span class="brand-mark">?</span>
+      <span><strong>CET-4</strong><small>下一题转盘</small></span>
+    </a>
+    <a class="button ghost" href="../word-class-trainer/">返回选词填空</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p class="eyebrow">NEXT QUESTION ROULETTE</p>
+      <h1>下一套，<br>交给转盘。</h1>
+      <p>从 42 套选词填空中优先选择尚未完成的试卷，当前正在练习的试卷不会进入候选。</p>
+    </section>
+
+    <section class="game" aria-labelledby="gameTitle">
+      <div class="wheel-column">
+        <h2 id="gameTitle" class="sr-only">选题转盘</h2>
+        <div class="roulette-stage">
+          <div class="roulette-pointer" aria-hidden="true"></div>
+          <div id="rouletteWheel" class="roulette-wheel" aria-hidden="true"></div>
+          <button id="spinBtn" class="roulette-spin" type="button">开始</button>
+        </div>
+      </div>
+
+      <div class="decision-panel">
+        <div class="current-card">
+          <span>当前试卷</span>
+          <strong id="currentSet">正在读取</strong>
+        </div>
+        <div>
+          <p class="eyebrow">本轮候选</p>
+          <div id="candidateList" class="candidate-list" aria-label="本轮候选试卷"></div>
+        </div>
+        <p id="result" class="result" role="status" aria-live="polite">点击转盘中央的“开始”。</p>
+        <div class="actions">
+          <button id="refreshBtn" class="button ghost" type="button">换一组候选</button>
+          <button id="acceptBtn" class="button primary" type="button" hidden>开始这套</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../word-class-trainer/dataset.js"></script>
+  <script src="app.js?v=20261128"></script>
+</body>
+</html>
