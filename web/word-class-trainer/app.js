@@ -26,6 +26,15 @@
     speak: document.querySelector("#speakBtn"),
     toast: document.querySelector("#toast"),
     template: document.querySelector("#wordCardTemplate"),
+    rouletteOpen: document.querySelector("#rouletteOpenBtn"),
+    rouletteDialog: document.querySelector("#rouletteDialog"),
+    rouletteClose: document.querySelector("#rouletteCloseBtn"),
+    rouletteWheel: document.querySelector("#rouletteWheel"),
+    rouletteSpin: document.querySelector("#rouletteSpinBtn"),
+    rouletteRefresh: document.querySelector("#rouletteRefreshBtn"),
+    rouletteAccept: document.querySelector("#rouletteAcceptBtn"),
+    rouletteCandidates: document.querySelector("#rouletteCandidates"),
+    rouletteResult: document.querySelector("#rouletteResult"),
   };
 
   let current = null;
@@ -34,6 +43,12 @@
   let sortEasyFirst = true;
   let toastTimer = null;
   let analysis = { version: 1, sets: {} };
+  let rouletteItems = [];
+  let rouletteWinner = null;
+  let rouletteRotation = 0;
+  let rouletteTimer = null;
+
+  const ROULETTE_COLORS = ["#d9ff66", "#dcecff", "#ffd9ca", "#d9eee7", "#fff0ae", "#dfe0ff", "#cde8d2", "#ffe1ef"];
 
   function blankState() {
     return { wordPos: {}, blankPos: {}, answers: {}, checkedWords: {} };
@@ -46,6 +61,100 @@
     } catch {
       return blankState();
     }
+  }
+
+  function shuffled(items) {
+    const copy = [...items];
+    for (let i = copy.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  function solvedCount(item) {
+    return Object.keys(loadState(item.id).answers || {}).length;
+  }
+
+  function compactSetLabel(item) {
+    return `${String(item.year).slice(-2)}.${String(item.month).padStart(2, "0")} 卷${item.set}`;
+  }
+
+  function pickRouletteItems() {
+    const alternatives = DATA.filter((item) => !current || String(item.id) !== String(current.id));
+    const unfinished = shuffled(alternatives.filter((item) => solvedCount(item) < item.blanks.length));
+    const completed = shuffled(alternatives.filter((item) => solvedCount(item) >= item.blanks.length));
+    rouletteItems = [...unfinished, ...completed].slice(0, 8);
+    rouletteWinner = null;
+    els.rouletteAccept.hidden = true;
+    els.rouletteResult.textContent = "点击“开始”，让转盘替你决定。";
+    renderRoulette();
+  }
+
+  function renderRoulette() {
+    const size = rouletteItems.length || 1;
+    const segment = 360 / size;
+    const gradient = rouletteItems.map((_, index) => {
+      const start = index * segment;
+      const end = (index + 1) * segment;
+      return `${ROULETTE_COLORS[index % ROULETTE_COLORS.length]} ${start}deg ${end}deg`;
+    }).join(", ");
+    els.rouletteWheel.style.background = `conic-gradient(from 0deg, ${gradient})`;
+    els.rouletteWheel.innerHTML = rouletteItems.map((item, index) => {
+      const angle = index * segment + segment / 2;
+      return `
+      <span class="roulette-label" style="--angle:${angle}deg;--counter-angle:${-angle}deg">
+        <b>${escapeHtml(compactSetLabel(item))}</b>
+        <small>${solvedCount(item)}/${item.blanks.length}</small>
+      </span>`;
+    }).join("");
+    els.rouletteCandidates.innerHTML = rouletteItems.map((item) => `
+      <span title="${escapeHtml(item.label)}">${escapeHtml(compactSetLabel(item))}</span>
+    `).join("");
+  }
+
+  function openRoulette() {
+    clearTimeout(rouletteTimer);
+    rouletteRotation = 0;
+    els.rouletteWheel.style.transition = "none";
+    els.rouletteWheel.style.transform = "rotate(0deg)";
+    els.rouletteSpin.disabled = false;
+    els.rouletteRefresh.disabled = false;
+    pickRouletteItems();
+    els.rouletteDialog.showModal();
+    requestAnimationFrame(() => { els.rouletteWheel.style.transition = ""; });
+  }
+
+  function spinRoulette() {
+    if (!rouletteItems.length || els.rouletteSpin.disabled) return;
+    const winnerIndex = Math.floor(Math.random() * rouletteItems.length);
+    rouletteWinner = rouletteItems[winnerIndex];
+    const segment = 360 / rouletteItems.length;
+    const target = (360 - (winnerIndex * segment + segment / 2)) % 360;
+    const currentAngle = ((rouletteRotation % 360) + 360) % 360;
+    rouletteRotation += 5 * 360 + ((target - currentAngle + 360) % 360);
+    els.rouletteSpin.disabled = true;
+    els.rouletteRefresh.disabled = true;
+    els.rouletteAccept.hidden = true;
+    els.rouletteResult.textContent = "转盘正在选择……";
+    els.rouletteWheel.style.transform = `rotate(${rouletteRotation}deg)`;
+    const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 50 : 3900;
+    rouletteTimer = setTimeout(() => {
+      els.rouletteSpin.disabled = false;
+      els.rouletteRefresh.disabled = false;
+      els.rouletteAccept.hidden = false;
+      els.rouletteResult.innerHTML = `下一套：<strong>${escapeHtml(rouletteWinner.label)}</strong>`;
+      els.rouletteAccept.focus();
+    }, duration);
+  }
+
+  function acceptRouletteResult() {
+    if (!rouletteWinner) return;
+    const next = rouletteWinner;
+    els.rouletteDialog.close();
+    switchSet(next.id);
+    showToast(`已切换到 ${next.label}`);
+    document.querySelector(".stage-tabs").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function saveState() {
@@ -528,6 +637,18 @@
       els.select.append(option);
     });
     els.select.addEventListener("change", () => switchSet(els.select.value));
+    els.rouletteOpen.addEventListener("click", openRoulette);
+    els.rouletteClose.addEventListener("click", () => els.rouletteDialog.close());
+    els.rouletteSpin.addEventListener("click", spinRoulette);
+    els.rouletteRefresh.addEventListener("click", () => {
+      rouletteRotation = 0;
+      els.rouletteWheel.style.transition = "none";
+      els.rouletteWheel.style.transform = "rotate(0deg)";
+      pickRouletteItems();
+      requestAnimationFrame(() => { els.rouletteWheel.style.transition = ""; });
+    });
+    els.rouletteAccept.addEventListener("click", acceptRouletteResult);
+    els.rouletteDialog.addEventListener("close", () => clearTimeout(rouletteTimer));
     els.analysisFile.addEventListener("change", async () => {
       const file = els.analysisFile.files?.[0];
       if (!file) return;
