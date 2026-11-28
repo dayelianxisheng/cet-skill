@@ -6,20 +6,20 @@ const templates = [
     use: "适用于“如何改进、如何丰富、如何充分利用”等校园与社会建议题。",
     paragraphs: [
       { label: "第一段 · 引入问题", sentences: [
-        "Currently, [TOPIC] plays a significant role in [GENERAL AREA].",
-        "However, there is still considerable room for improvement in this respect.",
-        "To better address this issue, several practical and effective measures should be adopted."
+        { text: "Currently, [TOPIC] plays a significant role in [GENERAL AREA].", translation: "目前，[主题]在[相关领域]发挥着重要作用。" },
+        { text: "However, there is still considerable room for improvement in this respect.", translation: "然而，这方面仍有很大的改进空间。" },
+        { text: "To better address this issue, several practical and effective measures should be adopted.", translation: "为了更好地解决这一问题，应采取几项切实有效的措施。" }
       ]},
       { label: "第二段 · 三项建议", sentences: [
-        "Firstly, it is advisable to hold various activities and events related to [TOPIC].",
-        "By doing so, students can [BENEFIT A], [BENEFIT B], and [BENEFIT C].",
-        "Secondly, [RELATED COURSES, RESOURCES, OR FACILITIES] should be further improved and fully utilized.",
-        "This can help students [BENEFIT A], [BENEFIT B], and [BENEFIT C].",
-        "Finally, students are supposed to actively participate in relevant programs and social practices and apply what they have learned to real-life situations."
+        { text: "Firstly, it is advisable to hold various activities and events related to [TOPIC].", translation: "首先，建议举办各种与[主题]相关的活动。" },
+        { text: "By doing so, students can [BENEFIT A], [BENEFIT B], and [BENEFIT C].", translation: "这样一来，学生就能[获得好处 A]、[获得好处 B]和[获得好处 C]。" },
+        { text: "Secondly, [RELATED COURSES, RESOURCES, OR FACILITIES] should be further improved and fully utilized.", translation: "其次，应进一步完善并充分利用[相关课程、资源或设施]。" },
+        { text: "This can help students [BENEFIT A], [BENEFIT B], and [BENEFIT C].", translation: "这有助于学生[获得好处 A]、[获得好处 B]和[获得好处 C]。" },
+        { text: "Finally, students are supposed to actively participate in relevant programs and social practices.", translation: "最后，学生应积极参与相关项目和社会实践。" }
       ]},
       { label: "第三段 · 总结", sentences: [
-        "In conclusion, only through the joint efforts of universities and students can [TOPIC] be better promoted and developed.",
-        "If these measures are effectively implemented, students will certainly benefit from them in the long run."
+        { text: "In conclusion, only through the joint efforts of universities and students can [TOPIC] be better promoted and developed.", translation: "总之，只有高校和学生共同努力，才能更好地推广和发展[主题]。" },
+        { text: "If these measures are effectively implemented, students will certainly benefit from them in the long run.", translation: "如果这些措施得到有效落实，从长远来看，学生一定会从中受益。" }
       ]}
     ]
   },
@@ -30,19 +30,19 @@ const templates = [
     use: "适用于讨论某种能力、习惯、课程或活动的重要性。",
     paragraphs: [
       { label: "第一段 · 引入主题", sentences: [
-        "Currently, [TOPIC] plays a crucial role in our daily life, academic study, and future career.",
-        "However, some students overlook its importance.",
-        "To fully understand its value, it is essential to analyze its benefits from multiple perspectives."
+        { text: "Currently, [TOPIC] plays a crucial role in our daily life, academic study, and future career.", translation: "目前，[主题]对我们的日常生活、学业和未来职业发展都至关重要。" },
+        { text: "However, some students overlook its importance.", translation: "然而，有些学生忽视了它的重要性。" },
+        { text: "To fully understand its value, it is essential to analyze its benefits from multiple perspectives.", translation: "要充分理解它的价值，就有必要从多个角度分析它的益处。" }
       ]},
       { label: "第二段 · 说明好处", sentences: [
-        "To begin with, [TOPIC] enables students to obtain a variety of benefits, such as [BENEFIT A], [BENEFIT B], and [BENEFIT C].",
-        "Moreover, recent research findings indicate that students who [TOPIC-SPECIFIC ACTION] consistently achieve better outcomes in various aspects of personal and academic development.",
-        "Most importantly, in today's competitive society, [TOPIC] has become indispensable for students to adapt to future challenges, realize their full potential, and achieve sustainable success."
+        { text: "To begin with, [TOPIC] enables students to obtain a variety of benefits, such as [BENEFIT A], [BENEFIT B], and [BENEFIT C].", translation: "首先，[主题]能给学生带来多种益处，例如[好处 A]、[好处 B]和[好处 C]。" },
+        { text: "Moreover, recent research findings indicate that students who [TOPIC-SPECIFIC ACTION] consistently achieve better outcomes in various aspects of personal and academic development.", translation: "此外，近期研究表明，[采取与主题相关的行动]的学生在个人成长和学业发展的多个方面往往持续取得更好的成果。" },
+        { text: "Most importantly, in today's competitive society, [TOPIC] has become indispensable for students to adapt to future challenges, realize their full potential, and achieve sustainable success.", translation: "最重要的是，在当今竞争激烈的社会中，[主题]已成为学生应对未来挑战、充分发挥潜能并取得长久成功所不可缺少的条件。" }
       ]},
       { label: "第三段 · 态度与结论", sentences: [
-        "What is the right attitude we should take toward [TOPIC]?",
-        "The public should be taught how vital [TOPIC] is for students' comprehensive development.",
-        "Only in this way can we enjoy a bright future and realize our potential."
+        { text: "What is the right attitude we should take toward [TOPIC]?", translation: "我们应该以怎样的态度对待[主题]呢？" },
+        { text: "The public should be taught how vital [TOPIC] is for students' comprehensive development.", translation: "应让公众认识到[主题]对学生全面发展的重要性。" },
+        { text: "Only in this way can we enjoy a bright future and realize our potential.", translation: "只有这样，我们才能拥有光明的未来，并发挥自己的潜能。" }
       ]}
     ]
   },
@@ -53,17 +53,17 @@ const templates = [
     use: "适用于讲座、比赛、志愿活动等“介绍活动并说明意义”的题目。",
     paragraphs: [
       { label: "第一段 · 活动安排", sentences: [
-        "[ACTIVITY] is to be held by our university at [PLACE] at [TIME] on [DATE].",
-        "It aims to [PURPOSE].",
-        "It includes several sessions, such as [SESSION A], [SESSION B], and [SESSION C]."
+        { text: "[ACTIVITY] is to be held by our university at [PLACE] at [TIME] on [DATE].", translation: "我校将于[日期][时间]在[地点]举办[活动]。" },
+        { text: "It aims to [PURPOSE].", translation: "这项活动旨在[实现某个目的]。" },
+        { text: "It includes several sessions, such as [SESSION A], [SESSION B], and [SESSION C].", translation: "活动包含多个环节，例如[环节 A]、[环节 B]和[环节 C]。" }
       ]},
       { label: "第二段 · 活动意义", sentences: [
-        "To begin with, [ACTIVITY] enables students to obtain a variety of benefits, such as [BENEFIT A], [BENEFIT B], and [BENEFIT C].",
-        "Moreover, students who actively participate in it can achieve better outcomes in personal and academic development.",
-        "Most importantly, such activities help students adapt to future challenges and realize their full potential."
+        { text: "To begin with, [ACTIVITY] enables students to obtain a variety of benefits, such as [BENEFIT A], [BENEFIT B], and [BENEFIT C].", translation: "首先，[活动]能给学生带来多种益处，例如[好处 A]、[好处 B]和[好处 C]。" },
+        { text: "Moreover, students who actively participate in it can achieve better outcomes in personal and academic development.", translation: "此外，积极参与这项活动的学生能在个人成长和学业发展上取得更好的成果。" },
+        { text: "Most importantly, such activities help students adapt to future challenges and realize their full potential.", translation: "最重要的是，这类活动能帮助学生应对未来的挑战，并充分发挥潜能。" }
       ]},
       { label: "第三段 · 结论", sentences: [
-        "I firmly believe that everyone should actively participate in [ACTIVITY] to embrace a brighter and more promising future."
+        { text: "I firmly believe that everyone should actively participate in [ACTIVITY] to embrace a brighter and more promising future.", translation: "我坚信，每个人都应该积极参加[活动]，迎接更光明、更有希望的未来。" }
       ]}
     ]
   },
@@ -74,20 +74,20 @@ const templates = [
     use: "适用于申请、邀请、推荐或感谢，并需要解释理由的书信。",
     paragraphs: [
       { label: "第一段 · 写信目的", sentences: [
-        "Dear [TITLE OR NAME],",
-        "I am writing to [PURPOSE]."
+        { text: "Dear [TITLE OR NAME],", translation: "尊敬的[称谓或姓名]：" },
+        { text: "I am writing to [PURPOSE].", translation: "我写这封信是为了[说明写信目的]。" }
       ]},
       { label: "第二段 · 说明理由", sentences: [
-        "There are several reasons why I [ACTION].",
-        "To begin with, [TOPIC] enables students to obtain a variety of benefits, such as [BENEFIT A], [BENEFIT B], and [BENEFIT C].",
-        "Moreover, recent research findings indicate that students who [ACTION] consistently achieve better outcomes in various aspects of personal and academic development.",
-        "In today's rapidly evolving society, [TOPIC] has become indispensable for students to adapt to future challenges, realize their full potential, and achieve sustainable success.",
-        "Most importantly, [OTHER REQUIREMENT FROM THE PROMPT]."
+        { text: "There are several reasons why I [ACTION].", translation: "我之所以[采取某项行动]，有以下几个原因。" },
+        { text: "To begin with, [TOPIC] enables students to obtain a variety of benefits, such as [BENEFIT A], [BENEFIT B], and [BENEFIT C].", translation: "首先，[主题]能给学生带来多种益处，例如[好处 A]、[好处 B]和[好处 C]。" },
+        { text: "Moreover, recent research findings indicate that students who [ACTION] consistently achieve better outcomes in various aspects of personal and academic development.", translation: "此外，近期研究表明，[采取该行动]的学生在个人成长和学业发展的多个方面往往持续取得更好的成果。" },
+        { text: "In today's rapidly evolving society, [TOPIC] has become indispensable for students to adapt to future challenges, realize their full potential, and achieve sustainable success.", translation: "在当今快速变化的社会中，[主题]已成为学生应对未来挑战、充分发挥潜能并取得长久成功所不可缺少的条件。" },
+        { text: "Most importantly, [OTHER REQUIREMENT FROM THE PROMPT].", translation: "最重要的是，[补充题目要求的其他内容]。" }
       ]},
       { label: "第三段 · 结尾落款", sentences: [
-        "I sincerely hope that you can accept my [INVITATION, APPLICATION, RECOMMENDATION, REQUEST, OR SUGGESTIONS].",
-        "Yours sincerely,",
-        "[YOUR NAME]"
+        { text: "I sincerely hope that you can accept my [INVITATION, APPLICATION, RECOMMENDATION, REQUEST, OR SUGGESTIONS].", translation: "我真诚地希望您能接受我的[邀请、申请、推荐、请求或建议]。" },
+        { text: "Yours sincerely,", translation: "谨上（正式书信结束语）。" },
+        { text: "[YOUR NAME]", translation: "[你的姓名]" }
       ]}
     ]
   },
@@ -98,59 +98,117 @@ const templates = [
     use: "适用于图书馆、课外活动、医务室等校园服务改进建议。",
     paragraphs: [
       { label: "第一段 · 写信目的", sentences: [
-        "Dear Sir or Madam,",
-        "I am writing to make some useful suggestions about [TOPIC].",
-        "Currently, [TOPIC] plays a significant role in students' academic and personal development.",
-        "However, there is still considerable room for improvement in this respect.",
-        "To better address this issue, several practical and effective measures should be adopted."
+        { text: "Dear Sir or Madam,", translation: "尊敬的先生或女士：" },
+        { text: "I am writing to make some useful suggestions about [TOPIC].", translation: "我写信是想就[主题]提出一些有帮助的建议。" },
+        { text: "Currently, [TOPIC] plays a significant role in students' academic and personal development.", translation: "目前，[主题]对学生的学业发展和个人成长发挥着重要作用。" },
+        { text: "However, there is still considerable room for improvement in this respect.", translation: "然而，这方面仍有很大的改进空间。" },
+        { text: "To better address this issue, several practical and effective measures should be adopted.", translation: "为了更好地解决这一问题，应采取几项切实有效的措施。" }
       ]},
       { label: "第二段 · 提出建议", sentences: [
-        "Firstly, it is advisable to hold various activities and events related to [TOPIC].",
-        "By doing so, students can [BENEFIT A], [BENEFIT B], and [BENEFIT C].",
-        "Secondly, [RELATED RESOURCES OR FACILITIES] should be further improved and fully utilized.",
-        "This can help students [BENEFIT A], [BENEFIT B], and [BENEFIT C].",
-        "Finally, [SUBJECT] are supposed to [ACTION]."
+        { text: "Firstly, it is advisable to hold various activities and events related to [TOPIC].", translation: "首先，建议举办各种与[主题]相关的活动。" },
+        { text: "By doing so, students can [BENEFIT A], [BENEFIT B], and [BENEFIT C].", translation: "这样一来，学生就能[获得好处 A]、[获得好处 B]和[获得好处 C]。" },
+        { text: "Secondly, [RELATED RESOURCES OR FACILITIES] should be further improved and fully utilized.", translation: "其次，应进一步完善并充分利用[相关资源或设施]。" },
+        { text: "This can help students [BENEFIT A], [BENEFIT B], and [BENEFIT C].", translation: "这有助于学生[获得好处 A]、[获得好处 B]和[获得好处 C]。" },
+        { text: "Finally, [SUBJECT] are supposed to [ACTION].", translation: "最后，[行动主体]应该[采取某项行动]。" }
       ]},
       { label: "第三段 · 结尾落款", sentences: [
-        "I sincerely hope that you can accept my suggestions.",
-        "Yours sincerely,",
-        "[YOUR NAME]"
+        { text: "I sincerely hope that you can accept my suggestions.", translation: "我真诚地希望您能采纳我的建议。" },
+        { text: "Yours sincerely,", translation: "谨上（正式书信结束语）。" },
+        { text: "[YOUR NAME]", translation: "[你的姓名]" }
       ]}
     ]
   }
 ];
 
-const phrases = [
-  ["S", "save time, money, labor, and energy"],
-  ["S", "stay competitive in the job market"],
-  ["S", "solve complex problems effectively and creatively"],
-  ["M", "maintain physical and mental health"],
-  ["M", "maximize learning potential"],
-  ["M", "make life more convenient"],
-  ["I", "improve academic competitiveness"],
-  ["I", "identify personal interests and passions"],
-  ["L", "learn workplace skills"],
-  ["L", "learn from diverse perspectives"],
-  ["L", "leave a good impression on others"],
-  ["E", "enrich our spiritual life"],
-  ["E", "expand personal horizons and perspectives"],
-  ["B", "build good interpersonal relationships"],
-  ["B", "build professional networks"],
-  ["A", "acquire practical experience"],
-  ["R", "reduce stress and anxiety"],
-  ["R", "achieve sustainable development"]
+const phraseSlots = [
+  ["S", [
+    ["save time, money, labor and energy", "节省时间、金钱、人力和能源"],
+    ["save time", "节省时间"],
+    ["save money", "省钱"],
+    ["save labor", "节省人力"],
+    ["save energy", "节约能源"]
+  ]],
+  ["S", [["stay competitive in the job market", "在就业市场保持竞争力"]]],
+  ["S", [
+    ["solve complex problems effectively and creatively", "高效且有创意地解决复杂问题"],
+    ["solve complex problems effectively", "有效解决复杂问题"],
+    ["solve complex problems creatively", "创造性地解决复杂问题"]
+  ]],
+  ["M", [
+    ["maintain physical and mental health", "保持身心健康"],
+    ["maintain adaptability to changes", "保持适应变化的能力"],
+    ["maintain adaptability to diverse cultural environments", "保持适应不同文化环境的能力"]
+  ]],
+  ["M", [
+    ["maximize learning potential", "最大限度地发挥学习潜能"],
+    ["maximize personal potential", "最大限度地发挥个人潜能"],
+    ["maximize team efficiency", "最大限度地提高团队效率"]
+  ]],
+  ["M", [
+    ["make life more convenient", "让生活更便利"],
+    ["make their lives more convenient", "让他们的生活更便利"]
+  ]],
+  ["I", [
+    ["improve academic competitiveness", "提升学业竞争力"],
+    ["improve competitiveness in the job market", "提升就业竞争力"],
+    ["improve study or work efficiency", "提高学习或工作效率"],
+    ["improve concentration", "提高专注力"],
+    ["improve immunity", "增强免疫力"],
+    ["improve public health awareness", "提高公共卫生意识"],
+    ["improve communication skills", "提高沟通能力"],
+    ["improve problem-solving abilities in real situations", "提高在实际情境中解决问题的能力"],
+    ["improve language expression ability", "提高语言表达能力"],
+    ["improve critical and logical thinking", "提升批判性思维和逻辑思维能力"],
+    ["improve social responsibility", "增强社会责任感"],
+    ["improve people's living standards", "提高人们的生活水平"],
+    ["improve quality of life", "改善生活质量"]
+  ]],
+  ["I", [
+    ["identify personal interests and passions", "明确个人兴趣和热爱所在"],
+    ["identify personal strengths and interests", "发现个人优势和兴趣"]
+  ]],
+  ["L", [["learn workplace skills", "学习职场技能"]]],
+  ["L", [["learn from diverse perspectives", "从不同观点中学习"]]],
+  ["L", [["leave a good impression on others", "给他人留下好印象"]]],
+  ["E", [
+    ["enrich our spiritual life", "丰富我们的精神生活"],
+    ["enrich cultural diversity", "丰富文化的多样性"]
+  ]],
+  ["E", [["expand personal horizons and perspectives", "开阔个人眼界，拓宽看问题的角度"]]],
+  ["B", [
+    ["build good interpersonal relationships", "建立良好的人际关系"],
+    ["build good cooperative relationships", "建立良好的合作关系"],
+    ["build genuine self-confidence", "建立真正的自信"]
+  ]],
+  ["B", [
+    ["build professional networks", "拓展职业人脉"],
+    ["bring together individual strengths", "汇聚个人所长"]
+  ]],
+  ["A", [
+    ["acquire practical experience", "积累实践经验"],
+    ["acquire practical industry insights", "获得对行业实际运作的了解"],
+    ["acquire more opportunities", "获得更多机会"],
+    ["acquire more academic opportunities", "获得更多学业发展机会"],
+    ["acquire abundant academic resources", "获得丰富的学术资源"],
+    ["acquire teaching experience", "积累教学经验"],
+    ["acquire better prospects in both career and life", "获得更好的职业和人生发展前景"]
+  ]],
+  ["R", [
+    ["reduce stress and anxiety", "缓解压力和焦虑"],
+    ["reduce CO2 emissions", "减少二氧化碳排放"],
+    ["reduce carbon emissions", "减少碳排放"],
+    ["reduce stress effectively", "有效缓解压力"]
+  ]],
+  ["R", [
+    ["achieve sustainable development", "实现可持续发展"],
+    ["realize one's potential", "发挥自身潜能"],
+    ["realize our long-cherished dream of national rejuvenation", "实现我们期盼已久的民族复兴梦想"],
+    ["realize our long-cherished dream of national revitalization", "实现我们期盼已久的民族振兴梦想"],
+    ["realize our long-cherished dream of national revival", "实现我们期盼已久的民族复兴梦想"]
+  ]]
 ];
 
-const smilebarGroups = {
-  S: "Save · Stay · Solve",
-  M: "Maintain · Maximize · Make",
-  I: "Improve · Identify",
-  L: "Learn · Leave",
-  E: "Enrich · Expand",
-  B: "Build",
-  A: "Acquire",
-  R: "Reduce · Develop"
-};
+const phrases = phraseSlots.flatMap(([letter, entries]) => entries.map(([text, translation]) => ({ letter, text, translation })));
 
 const promptCategories = [
   ["观点讨论", "importance-essay"],
@@ -237,8 +295,16 @@ function normalizeForSpeech(text) {
   return text.replace(/\[([^\]]+)\]/g, "$1").replace(/\s+/g, " ").trim();
 }
 
+function maskPlaceholders(text) {
+  return text.replace(/\[[^\]]+\]/g, "[____]");
+}
+
+function replacePlaceholdersWithXx(text) {
+  return text.replace(/\[[^\]]+\]/g, "xx");
+}
+
 function getAllSentences(template = templates[currentTemplate]) {
-  return template.paragraphs.flatMap((p, pi) => p.sentences.map((text, si) => ({ text, pi, si })));
+  return template.paragraphs.flatMap((p, pi) => p.sentences.map(({ text }, si) => ({ text, pi, si })));
 }
 
 function renderNav() {
@@ -260,21 +326,27 @@ function renderTemplate() {
   paragraphsEl.innerHTML = template.paragraphs.map((p, pi) => `
     <article class="paragraph-card">
       <div class="paragraph-title"><strong>${p.label}</strong><button class="paragraph-play" data-pi="${pi}" type="button">朗读本段</button></div>
-      ${p.sentences.map((sentence, si) => {
+      ${p.sentences.map(({ text, translation }, si) => {
         globalNumber += 1;
         return `<div class="sentence" data-pi="${pi}" data-si="${si}">
           <span class="sentence-number">${String(globalNumber).padStart(2, "0")}</span>
-          <p>${sentence}</p>
+          <div class="sentence-content">
+            <p class="sentence-english" lang="en">${escapeHtml(text)}</p>
+            <details class="sentence-translation">
+              <summary>中文翻译</summary>
+              <p lang="zh-CN">${escapeHtml(translation)}</p>
+            </details>
+          </div>
           <button class="sentence-play" data-pi="${pi}" data-si="${si}" title="朗读本句" type="button">🔊</button>
         </div>`;
       }).join("")}
     </article>`).join("");
 
   paragraphsEl.querySelectorAll(".sentence-play").forEach(btn => btn.addEventListener("click", () => {
-    playQueue([{ text: template.paragraphs[btn.dataset.pi].sentences[btn.dataset.si], pi: Number(btn.dataset.pi), si: Number(btn.dataset.si) }]);
+    playQueue([{ text: template.paragraphs[btn.dataset.pi].sentences[btn.dataset.si].text, pi: Number(btn.dataset.pi), si: Number(btn.dataset.si) }]);
   }));
   paragraphsEl.querySelectorAll(".paragraph-play").forEach(btn => {
-    btn.addEventListener("click", () => playQueue(template.paragraphs[btn.dataset.pi].sentences.map((text, si) => ({ text, pi: Number(btn.dataset.pi), si }))));
+    btn.addEventListener("click", () => playQueue(template.paragraphs[btn.dataset.pi].sentences.map(({ text }, si) => ({ text, pi: Number(btn.dataset.pi), si }))));
   });
 }
 
@@ -282,7 +354,10 @@ function renderPracticeTargets() {
   const template = templates[currentTemplate];
   let options = [];
   if (practiceMode === "sentence") {
-    options = getAllSentences(template).map((x, i) => ({ value: `${x.pi}:${x.si}`, label: `第 ${i + 1} 句 · ${x.text.slice(0, 48)}${x.text.length > 48 ? "…" : ""}` }));
+    options = getAllSentences(template).map((x, i) => {
+      const masked = maskPlaceholders(x.text);
+      return { value: `${x.pi}:${x.si}`, label: `第 ${i + 1} 句 · ${masked.slice(0, 48)}${masked.length > 48 ? "…" : ""}` };
+    });
   } else if (practiceMode === "paragraph") {
     options = template.paragraphs.map((p, i) => ({ value: String(i), label: p.label }));
   } else {
@@ -293,14 +368,19 @@ function renderPracticeTargets() {
 }
 
 function getPracticeText() {
+  return replacePlaceholdersWithXx(getPracticeSourceText());
+}
+
+function getPracticeSourceText() {
   const template = templates[currentTemplate];
   const value = $("#practiceTarget").value;
   if (practiceMode === "sentence") {
     const [pi, si] = value.split(":").map(Number);
-    return template.paragraphs[pi].sentences[si];
+    return template.paragraphs[pi].sentences[si].text;
   }
-  if (practiceMode === "paragraph") return template.paragraphs[Number(value)].sentences.join(" ");
-  return template.paragraphs.map(p => p.sentences.join(" ")).join("\n\n");
+  const paragraphText = ({ sentences }) => sentences.map(({ text }) => text).join(" ");
+  if (practiceMode === "paragraph") return paragraphText(template.paragraphs[Number(value)]);
+  return template.paragraphs.map(paragraphText).join("\n\n");
 }
 
 function getPracticeKey() {
@@ -308,20 +388,42 @@ function getPracticeKey() {
 }
 
 function updateReference() {
-  $("#referenceText").textContent = getPracticeText();
+  $("#referenceText").textContent = maskPlaceholders(getPracticeSourceText());
   $("#typingInput").value = "";
   $("#result").hidden = true;
   updateTypingMeta();
 }
 
 function renderPhrases() {
-  $("#phraseGrid").innerHTML = Object.keys(smilebarGroups).map(letter => `
+  $("#smilebarPhraseCount").textContent = phrases.length;
+  const groups = new Map([..."SMILEBAR"].map(letter => [letter, new Map()]));
+  for (const { letter, text, translation } of phrases) {
+    const separator = text.indexOf(" ");
+    const verb = text.slice(0, separator);
+    const branches = groups.get(letter);
+    if (!branches.has(verb)) branches.set(verb, []);
+    branches.get(verb).push({ ending: text.slice(separator + 1), text, translation });
+  }
+
+  $("#phraseGrid").innerHTML = [...groups].map(([letter, branches]) => `
     <section class="phrase-group">
-      <header><b>${letter}</b><span>${smilebarGroups[letter]}</span></header>
-      <div class="phrase-list">
-        ${phrases.filter(([group]) => group === letter).map(([, text]) => `
-          <div class="phrase"><span>${text}</span><button type="button" data-text="${text.replace(/"/g, "&quot;")}" title="朗读本词块">🔊</button></div>`).join("")}
-      </div>
+      <header><h3>${letter}</h3></header>
+      <ul class="phrase-tree" role="list">
+        ${[...branches].map(([verb, entries]) => `
+          <li class="phrase-branch">
+            <strong class="phrase-verb" lang="en">${escapeHtml(verb)}</strong>
+            <ul class="phrase-leaves" role="list">
+              ${entries.map(({ ending, text, translation }) => `
+                <li class="phrase">
+                  <div class="phrase-copy">
+                    <span class="phrase-ending" lang="en">${escapeHtml(ending)}</span>
+                    <span class="phrase-translation" lang="zh-CN">${escapeHtml(translation)}</span>
+                  </div>
+                  <button type="button" data-text="${escapeHtml(text)}" aria-label="朗读 ${escapeHtml(text)}" title="朗读本词块">🔊</button>
+                </li>`).join("")}
+            </ul>
+          </li>`).join("")}
+      </ul>
     </section>`).join("");
   $("#phraseGrid").querySelectorAll("button").forEach(btn => btn.addEventListener("click", () => playQueue([{ text: btn.dataset.text }])));
 }
@@ -517,7 +619,7 @@ function updateTypingMeta() {
   const input = $("#typingInput").value;
   $("#wordCount").textContent = `${input.trim() ? input.trim().split(/\s+/).length : 0} words`;
   if (!input.trim()) return $("#liveAccuracy").textContent = "等待输入";
-  $("#liveAccuracy").textContent = `实时匹配 ${compareText(getPracticeText(), input).score}%`;
+  $("#liveAccuracy").textContent = `实时匹配 ${compareText(getPracticeText(), input).score}% · [] 用 xx`;
 }
 
 function checkAnswer() {
@@ -554,7 +656,7 @@ $("#playAllTemplates").addEventListener("click", () => {
   const items = templates.flatMap((t, ti) => getAllSentences(t).map(x => ({ ...x, templateIndex: ti })));
   playQueue(items);
 });
-$("#playAllPhrases").addEventListener("click", () => playQueue(phrases.map(([, text]) => ({ text }))));
+$("#playAllPhrases").addEventListener("click", () => playQueue(phrases.map(({ text }) => ({ text }))));
 $("#rate").addEventListener("input", e => $("#rateValue").textContent = `${Number(e.target.value).toFixed(2)}×`);
 window.addEventListener("beforeunload", stopAudio);
 

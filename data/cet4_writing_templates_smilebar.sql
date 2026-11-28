@@ -3,7 +3,7 @@
 --
 -- Extracted and normalized from:
 --   四级写作模版学生讲义(1)..pdf
---   4级记忆密码+建议..pdf
+--   4级记忆密码+建议(1).pdf (SMILEBAR, pages 1–2)
 --
 -- This file is standalone and idempotent. It does not modify existing CET
 -- question tables. Obvious source typos are normalized in usage_notes.
@@ -180,7 +180,7 @@ INSERT INTO smilebar_phrase_slots (
       'improve people''s living standards',
       'improve quality of life'
     ),
-    '按具体题目替换 improve 后的宾语。'
+    '按具体题目替换 improve 后的宾语。原文 public health consciousness 对应 public health awareness。'
   ),
   (
     'I', 2,
@@ -256,15 +256,20 @@ INSERT INTO smilebar_phrase_slots (
     'R', 1,
     'reduce stress and anxiety',
     '缓解压力和焦虑',
-    JSON_ARRAY('reduce carbon emissions', 'reduce stress effectively'),
+    JSON_ARRAY('reduce CO2 emissions', 'reduce carbon emissions', 'reduce stress effectively'),
     ''
   ),
   (
     'R', 2,
     'achieve sustainable development',
     '实现可持续发展',
-    JSON_ARRAY('realize one''s potential', 'realize our long-cherished dream of national rejuvenation'),
-    '原文 realizing a sustainable development 不够自然，已规范为 achieve sustainable development；民族复兴优先使用 national rejuvenation。'
+    JSON_ARRAY(
+      'realize one''s potential',
+      'realize our long-cherished dream of national rejuvenation',
+      'realize our long-cherished dream of national revitalization',
+      'realize our long-cherished dream of national revival'
+    ),
+    '原文 realizing a sustainable development 已规范为 achieve sustainable development。民族复兴优先使用 national rejuvenation，保留原讲义的两个替换说法。'
   ) AS new
 ON DUPLICATE KEY UPDATE
   canonical_phrase = new.canonical_phrase,

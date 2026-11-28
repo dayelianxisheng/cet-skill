@@ -156,6 +156,46 @@ def join_lines(lines: Iterable[str], paragraph_breaks: bool = False) -> str:
     return ("\n\n" if paragraph_breaks else " ").join(parts).strip()
 
 
+def join_indented_paragraphs(lines: Iterable[str]) -> str:
+    """Recover prose paragraphs from first-line indentation in layout PDF text.
+
+    The historical PDFs do not put blank lines between careful-reading
+    paragraphs.  Their first line is indented farther than wrapped lines,
+    however.  Page headers are removed earlier, so a shallow-indented line
+    after a page break remains a continuation rather than a false paragraph.
+    """
+    source = [line.rstrip() for line in lines if line.strip()]
+    if not source:
+        return ""
+    indents = [len(line) - len(line.lstrip()) for line in source]
+    continuation_indent = min(indents)
+    parts: list[str] = []
+    paragraph: list[str] = []
+
+    def flush() -> None:
+        if not paragraph:
+            return
+        text = " ".join(line.strip() for line in paragraph)
+        text = re.sub(r"(?<=[A-Za-z])-\s+(?=[a-z])", "-", text)
+        text = re.sub(r"\s+", " ", text).strip()
+        if text:
+            parts.append(text)
+        paragraph.clear()
+
+    for line, indent in zip(source, indents):
+        previous = " ".join(item.strip() for item in paragraph).rstrip()
+        starts_paragraph = (
+            bool(paragraph)
+            and indent >= continuation_indent + 3
+            and bool(re.search(r"[.!?][\"'”’)]?$", previous))
+        )
+        if starts_paragraph:
+            flush()
+        paragraph.append(line)
+    flush()
+    return "\n\n".join(parts)
+
+
 def find_part_indices(lines: list[str]) -> dict[str, int]:
     indices: dict[str, int] = {}
     for i, line in enumerate(lines):
@@ -412,8 +452,8 @@ def parse_reading(
         "matching",
         offset,
     )
-    careful1_content = join_lines(
-        strip_leading_directions(lines[matching_q_end:careful1_q_start]), paragraph_breaks=True
+    careful1_content = join_indented_paragraphs(
+        strip_leading_directions(lines[matching_q_end:careful1_q_start])
     )
     careful1_questions = parse_mcq_block(
         lines[careful1_q_start:passage2_start],
@@ -421,8 +461,8 @@ def parse_reading(
         "careful_reading",
         offset,
     )
-    careful2_content = join_lines(
-        strip_leading_directions(lines[passage2_start:careful2_q_start]), paragraph_breaks=True
+    careful2_content = join_indented_paragraphs(
+        strip_leading_directions(lines[passage2_start:careful2_q_start])
     )
     careful2_questions = parse_mcq_block(
         lines[careful2_q_start:],

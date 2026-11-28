@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="CET-4 仔细阅读定位与同义替换训练工具" />
+    <meta name="description" content="CET-4 仔细阅读定位训练工具" />
     <title>CET-4 仔细阅读定位训练</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=2014-2026-150-underlines" />
   </head>
   <body>
     <div class="app-shell">
@@ -59,13 +59,12 @@
           </div>
           <div class="reading-tip" id="readingTip">
             <span class="tip-icon">↗</span>
-            点击句子完成粗定位；划取文字保存为答案证据或同义替换。
+            点击原文句子完成定位，也可以划取答案证据。
           </div>
           <article id="articleBody" class="article-body" tabindex="0" aria-label="阅读文章全文"></article>
           <div id="selectionToolbar" class="selection-toolbar" hidden>
             <span id="selectionPreview"></span>
             <button id="saveSelectionButton" type="button">保存为本题证据</button>
-            <button id="pairSelectionButton" type="button" class="pair-selection-button" hidden>配成同义替换</button>
             <button id="cancelSelectionButton" class="selection-cancel" type="button" aria-label="取消">×</button>
           </div>
           <div class="legend">
@@ -81,16 +80,15 @@
             <div class="question-number-row">
               <span id="questionBadge" class="question-badge">Q46</span>
               <span id="questionStatus" class="status-pill">未开始</span>
+              <button id="clearStemButton" class="button button-small button-ghost clear-stem-button" type="button" disabled>清除题干划线</button>
             </div>
             <h2 id="questionStem" class="question-stem">正在载入题目…</h2>
-            <div id="questionSelectionToolbar" class="selection-toolbar question-selection-toolbar" hidden>
-              <span id="questionSelectionPreview"></span>
-              <button id="useAsLocatorButton" type="button">设为定位词</button>
-              <button id="useAsPhraseButton" type="button">用于同义配对</button>
-              <button id="cancelQuestionSelectionButton" class="selection-cancel" type="button" aria-label="取消">×</button>
-            </div>
             <details id="optionsDetails" class="options-details" open>
-              <summary>点击选择你的最终答案</summary>
+              <summary>查看选项与作答</summary>
+              <div class="option-mark-tools">
+                <span>拖选文字画线，点击字母作答。</span>
+                <button id="clearOptionMarksButton" class="button button-small button-ghost" type="button" disabled>清除选项划线</button>
+              </div>
               <ol id="optionsList" class="options-list"></ol>
             </details>
           </div>
@@ -99,10 +97,8 @@
             <section class="step-card" data-step="1">
               <div class="step-head">
                 <span class="step-index">01</span>
-                <div><h3>题干硬定位词</h3><p>直接在上方题干中划取文字，点击“设为定位词”。</p></div>
+                <div><h3>粗定位</h3><p>在题干拖选定位词画线，再点击左侧原文中的句子。</p></div>
               </div>
-              <div id="locatorChips" class="locator-chips empty-state">尚未划取定位词</div>
-              <button id="noLocatorButton" class="button button-small button-ghost no-locator-button" type="button">本题没有硬定位词</button>
               <div class="mouse-choice-row">
                 <span>粗定位句</span>
                 <button id="locatorSentenceButton" class="mouse-choice" type="button">点击左侧原文中的句子</button>
@@ -115,17 +111,6 @@
                 <div><h3>文章选择依据</h3><p>只划能够推出答案的最小证据范围，避免整段全划。</p></div>
               </div>
               <div id="evidenceList" class="evidence-list empty-state">还没有保存证据。请在左侧文章中选中文字。</div>
-            </section>
-
-            <section class="step-card" data-step="3">
-              <div class="step-head">
-                <span class="step-index">03</span>
-                <div><h3>同义替换配对</h3><p>先划题目表达，再划原文表达，点击“配成同义替换”。</p></div>
-              </div>
-              <div id="pairDraft" class="pair-draft empty-state">
-                在题干中划取表达，或点击选项右侧的“配对”按钮。
-              </div>
-              <div id="pairList" class="pair-list"></div>
             </section>
 
             <details class="optional-note">
@@ -154,6 +139,6 @@
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <script src="app.js" defer></script>
+    <script src="app.js?v=2014-2026-150-underlines" defer></script>
   </body>
 </html>

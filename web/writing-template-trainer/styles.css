@@ -107,7 +107,13 @@ input[type="range"] { display: block; width: 120px; margin-top: 9px; accent-colo
 .sentence { display: grid; grid-template-columns: 30px 1fr 36px; gap: 10px; align-items: start; padding: 15px 16px; border-top: 1px solid var(--line); }
 .sentence:first-of-type { border-top: 0; }
 .sentence-number { color: var(--muted); font-size: .78rem; font-variant-numeric: tabular-nums; padding-top: 3px; }
-.sentence p { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.08rem; line-height: 1.7; }
+.sentence-english { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.08rem; line-height: 1.7; }
+.sentence-translation { margin-top: 2px; font-size: .85rem; }
+.sentence-translation summary { width: fit-content; padding: 4px 2px; color: var(--accent); cursor: pointer; }
+.sentence-translation summary:hover { text-decoration: underline; }
+.sentence-translation summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+.sentence-translation p { margin: 3px 0 0; padding: 6px 10px; border-inline-start: 2px solid var(--accent); background: var(--accent-soft); }
+.sentence-translation:not([open]) p { display: none; }
 .sentence.speaking { background: #f4f8f5; }
 .sentence-play { border: 1px solid var(--line); width: 34px; height: 32px; border-radius: 5px; background: white; color: var(--accent); }
 
@@ -141,16 +147,26 @@ input[type="range"] { display: block; width: 120px; margin-top: 9px; accent-colo
 .empty-state { padding: 26px; text-align: center; color: var(--muted); background: var(--soft); }
 .smilebar-code { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; margin: 18px 0; }
 .smilebar-code span { display: grid; place-items: center; min-height: 38px; border: 1px solid var(--line); background: var(--soft); color: var(--accent); font-weight: 800; font-size: 1.05rem; }
-.phrase-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.phrase-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 12px; }
 .phrase-group { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
-.phrase-group header { display: flex; align-items: baseline; gap: 10px; padding: 9px 12px; background: var(--soft); border-bottom: 1px solid var(--line); }
-.phrase-group header b { color: var(--accent); font-size: 1.1rem; }
-.phrase-group header span { color: var(--muted); font-size: .78rem; }
-.phrase-list { display: grid; }
-.phrase { display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 9px 11px; border-top: 1px solid var(--line); }
-.phrase:first-child { border-top: 0; }
-.phrase span { font-family: Georgia, serif; }
-.phrase button { margin-left: auto; border: 0; background: transparent; color: var(--accent); }
+.phrase-group header { padding: 8px 14px; background: var(--soft); border-bottom: 1px solid var(--line); }
+.phrase-group h3 { margin: 0; color: var(--accent); font-size: 1.1rem; }
+.phrase-tree, .phrase-leaves { margin: 0; padding: 0; list-style: none; }
+.phrase-tree { padding: 10px 14px; font-family: Georgia, "Times New Roman", serif; }
+.phrase-branch + .phrase-branch { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+.phrase-verb { display: block; color: var(--accent); font-size: 1.08rem; }
+.phrase-leaves { margin-inline-start: .45rem; padding-inline-start: 1.15rem; }
+.phrase { position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: 4px; min-height: 32px; }
+.phrase::before, .phrase::after { content: ""; position: absolute; inset-inline-start: -1.15rem; border-color: var(--line); border-style: solid; }
+.phrase::before { inset-block: 0; border-width: 0; border-inline-start-width: 1px; }
+.phrase:last-child::before { inset-block-end: auto; height: 15px; }
+.phrase::after { inset-block-start: 15px; width: .8rem; border-width: 1px 0 0; }
+.phrase-copy { min-width: 0; overflow-wrap: anywhere; padding-block: 3px 7px; }
+.phrase-ending, .phrase-translation { display: block; }
+.phrase-translation { color: var(--muted); font: .82rem/1.45 "PingFang SC", "Microsoft YaHei", sans-serif; }
+.phrase button { flex: 0 0 32px; min-height: 32px; padding: 0; border: 0; border-radius: 4px; background: transparent; color: var(--accent); }
+.phrase button:hover { background: var(--accent-soft); }
+.phrase button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 
 .practice-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
 .practice-head p:last-child { margin: 4px 0 0; color: var(--muted); }
@@ -164,6 +180,11 @@ input[type="range"] { display: block; width: 120px; margin-top: 9px; accent-colo
 .recall-card { margin-top: 12px; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
 .reference { min-height: 72px; padding: 15px 16px; background: var(--soft); color: var(--accent); font-family: Georgia, serif; white-space: pre-wrap; }
 .reference.hidden-text { filter: blur(7px); user-select: none; }
+.placeholder-rule { display: flex; align-items: center; gap: 9px; padding: 9px 16px; border-top: 1px solid var(--line); background: #fff; color: var(--muted); font-size: .82rem; }
+.placeholder-rule span, .placeholder-rule strong { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+.placeholder-rule span { padding: 2px 7px; border-radius: 4px; background: var(--soft); color: var(--accent); }
+.placeholder-rule strong { color: var(--ink); }
+.placeholder-rule small { margin-left: auto; font-size: .78rem; }
 textarea { width: 100%; min-height: 180px; resize: vertical; border: 0; border-top: 1px solid var(--line); outline: none; padding: 16px; color: var(--ink); font-family: Georgia, serif; font-size: 1.05rem; line-height: 1.7; }
 textarea:focus { box-shadow: inset 0 0 0 2px var(--accent-soft); }
 .typing-meta { display: flex; justify-content: space-between; padding: 7px 14px; color: var(--muted); background: #fafafa; font-size: .8rem; }
@@ -186,6 +207,11 @@ footer { display: flex; justify-content: space-between; gap: 20px; max-width: 12
   #templateNav { grid-template-columns: repeat(2, 1fr); gap: 0 12px; }
   .control-panel, .template-head { align-items: flex-start; flex-direction: column; }
   .controls { flex-wrap: wrap; }
+}
+
+@media (max-width: 560px) {
+  .placeholder-rule { align-items: flex-start; flex-wrap: wrap; }
+  .placeholder-rule small { width: 100%; margin-left: 0; }
 }
 
 @media (max-width: 640px) {

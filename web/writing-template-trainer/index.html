@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#10251f">
   <meta name="description" content="CET-4 写作模板分句朗读与打字记忆训练">
   <title>CET-4 模板记忆训练</title>
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=windows-20261127">
 </head>
 <body>
   <header class="topbar">
@@ -118,7 +118,7 @@
             <div>
               <p class="eyebrow">SMILEBAR</p>
               <h2>好处词块记忆表</h2>
-              <p>按首字母记忆常用好处表达，写作时直接替换模板中的 <strong>[BENEFIT]</strong>。</p>
+              <p>先记动词，再记下面缩进的搭配。共 <strong id="smilebarPhraseCount"></strong> 条，可替换模板中的 <strong>[BENEFIT]</strong>。</p>
             </div>
             <button class="button secondary" id="playAllPhrases" type="button">朗读全部词块</button>
           </div>
@@ -133,7 +133,7 @@
             <div>
               <p class="eyebrow">ACTIVE RECALL</p>
               <h2>打字默写</h2>
-              <p>先听、再隐藏原文，凭记忆完整输入。</p>
+              <p>先听、再隐藏原文，凭记忆完整输入；所有方括号占位内容统一写成 xx。</p>
             </div>
             <div class="mode-switch" role="group" aria-label="练习范围">
               <button class="active" data-mode="sentence" type="button">单句</button>
@@ -152,7 +152,8 @@
 
           <div class="recall-card">
             <div class="reference" id="referenceText"></div>
-            <textarea id="typingInput" spellcheck="false" autocomplete="off" placeholder="在这里输入英文模板……"></textarea>
+            <div class="placeholder-rule"><span aria-hidden="true">[____]</span><strong>输入 xx</strong><small>每个方括号占位符只算一个 xx</small></div>
+            <textarea id="typingInput" spellcheck="false" autocomplete="off" placeholder="在这里输入英文模板，遇到 [____] 请写 xx……"></textarea>
             <div class="typing-meta">
               <span id="wordCount">0 words</span>
               <span id="liveAccuracy">等待输入</span>
@@ -176,6 +177,6 @@
   </footer>
 
   <audio id="remoteAudio" preload="none"></audio>
-  <script src="./app.js"></script>
+  <script src="./app.js?v=typing-xx-20261128"></script>
 </body>
 </html>
